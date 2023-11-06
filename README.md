@@ -1,7 +1,5 @@
 # Framalytics Package
 
-# Framalytics Package
-
 This repository contains the Framalytics package, an open-source project developed based on FRAM
 
 ## Structure
