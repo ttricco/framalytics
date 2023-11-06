@@ -1,3 +1,5 @@
 pandas
 networkx
 matplotlib
+numpy
+warnings
