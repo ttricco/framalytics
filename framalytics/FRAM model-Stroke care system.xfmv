@@ -1,0 +1,2806 @@
+<?xml version="1.0" standalone="yes"?>
+<FM Version="0,0,2,0">
+  <Functions colour_t0="-1" colour_t1="0" colour_t2="0.5" colour_t3="1" colour_t4="2" c_t0_value="0x40cfff" c_t2_value="0xffff00" c_t4_value="0xf00000" colour_p0="-1" colour_p1="0" colour_p2="0.5" colour_p3="1" colour_p4="2" c_p0_value="0x40cfff" c_p2_value="0xffff00" c_p4_value="0xf00000" tracer_t="" tracer_p="">
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="197.89999389648438" y="143.59999084472656" style="green" color="1555713" Kt="" Kp="">
+      <IDNr>0</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Do stroke assessment by a care paramedic</IDName>
+      <Description>The role of an advanced care paramedic in stroke care is to recognize and identify patients who might be suffering from a stroke and then to appropriately manage their initial treatments such as getting EVs, if there is any initial resuscitation that needs to happen. 
+We conduct a a simple fast exam. If their fast exam was positive, then we would move on to the race score, if they met that criteria. 
+We assess patients based on basic signs and symptoms of a stroke, such as neurological complaints, weakness, difficulty speaking, decreased level of consciousness, and so on.
+Assessment time=10-30 minutes</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="456.4" y="96.55" style="custom" color="65535" Kt="" Kp="">
+      <IDNr>1</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Transport the patient by ambulance</IDName>
+      <Description>Most of stroke patients arrive via ambulance.
+Transport time = 10 minutes</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="352.35" y="216.7" style="green" color="1555713" Kt="" Kp="">
+      <IDNr>2</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Gather patient information</IDName>
+      <Description>Gathering vital signs, getting hit, patient history from family</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="318.9" y="122.9" style="green" color="1555713" Kt="" Kp="">
+      <IDNr>3</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Relay patient information and Call the stroke alert to the stroke center</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="29.65" y="107.55" style="green" color="1555713" Kt="" Kp="">
+      <IDNr>4</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Receive a call through the dispatch system</IDName>
+      <Description>The call could be from a patient or their family members through the dispatch system. Calls are categorized in terms of certain signs and symptoms that will trigger the call.  It can be a potential stroke.
+Response time to the call=10 minutes</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="140" y="332.75" style="green" color="1555713" Kt="" Kp="">
+      <IDNr>5</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>To access a tablet</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="15.6" y="223.2" style="green" color="1555713" Kt="" Kp="">
+      <IDNr>6</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>To access a triage system</IDName>
+      <Description>An effective triage system on the phone must be in place to triage patients and categorize patients.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="49.75" y="316.9" style="green" color="1555713" Kt="" Kp="">
+      <IDNr>7</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Train staff</IDName>
+      <Description>We have to have the proper staff there, properly trained staff.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="242.6" y="304.7" style="green" color="1555713" Kt="" Kp="">
+      <IDNr>8</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>To access diagnostic and assessment tools</IDName>
+      <Description>There have to be these diagnostic and assessment tools such as the race score and the fast score in order to screen patients so that they get captured.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="107.55" y="237.7" style="green" color="1555713" Kt="" Kp="">
+      <IDNr>9</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>To access a dispatch system</IDName>
+      <Description>A centrilized dispatch system is required. 
+The centralized dispatch system that coordinates through a digital medium. We use the tablets currently. 
+We have the 911 system.  we don't have a province wide system so sometimes calls can come in through different points whether it be police or the fire department.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="13.4" y="20.2" style="green" color="1555713" Kt="" Kp="">
+      <IDNr>10</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Consider emergency medical responder guideline</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="131" y="60.1" style="green" color="1555713" Kt="" Kp="">
+      <IDNr>11</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Consider care paramedicine guideline</IDName>
+      <Description>Primary and advanced care paramedicine guidelines have different protocols for stroke assessment (race score form) and transport destination pathway.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="251.5" y="6.95" style="green" color="1555713" Kt="" Kp="">
+      <IDNr>12</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Consider Newfoundland and Labrador (NL) paramedicine regulation</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="800.05" y="183.15" style="custom" color="16711935" Kt="" Kp="">
+      <IDNr>13</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Assess the patient by a neurologist</IDName>
+      <Description>A neurologist is paged through paging system to visit a new patient in emergency department.
+Neurologists take care of all the neurology patients in hospital, which includes all of the patients admitted with stroke. They work with the stroke team, including physiotherapists, occupational therapists, speech language pathologists, clinical nutritionists, and social workers.
+Neurologists check patients' blood pressure, cholesterol, diabetes to optimize their medication. 
+Neurologists assess patients when they are admitted into emergency department. Based on the results of the CT scan, some patients would be eligible for TNK and some would be eligible for EVT. Sometimes the patient may get both, so they may get TNK and then go for EVT.
+ Patients will be admitted to acute care neurology ward or the ICU if they're quite unwell.
+Patients can skip the ICU and go to the inpatient/stroke unit if they don't receive tissue plasminogen activator (TPA). If patients are not a candidate for that drug and if they don't need to be closely monitored, so they don't go to ICU necessarily.
+They have access to patients' past medical history, including medication, blood work, and diagnostic imaging. 
+Patients who received treatment (TNK, TPA, or EVT) must repeat their CT scan when they are in stroke unit. It is done to make sure they are well.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="571.2000122070313" y="209.44998168945313" style="yellow" color="12236583" Kt="" Kp="">
+      <IDNr>14</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Admit the patient to emergency department (ED)</IDName>
+      <Description>Stroke patients would either enter the emergency department via a direct admission from another site, or via ambulance, or family caregiver. Patients are assigned to a neurologist if they are transferred to emrgency department via ambulance. Otherwise, they are assigned to either an emergency physician or a nurse practitioner. 
+The most common way is the code stroke is called by the paramedics and the first assessment done in the ED is by the neurology resident and subsequently the neurologist. If neurologists determine that there is no stroke, then neurologists hand them over to the ED physicians and they do their assessment.
+Patients may be directly transferred to stroke unit based on urgency, priority, and bed capacity if they are admitted with stroke from other hospitals. These patients already have the CT scan. 
+Patients' MCP number must be delivered to triage or registeration desk. Then, a neurologist is paged through paging system to visit a new patient.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="586.7999877929688" y="421.7999572753906" style="yellow" color="12236583" Kt="" Kp="">
+      <IDNr>15</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Assess the patient by a triage nurse</IDName>
+      <Description>Nurses in ED do their initial assessment of the patient and order CT scan and determin what kind of treatments patients are actually eligible for and then deliver relevant treatment. 
+Emergency nurses do a neurological assessment to identify what patients' deficits are. If there is a potential stroke they activate a code stroke.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="693.1000366210938" y="150.20001220703125" style="grey" color="8618883" Kt="" Kp="">
+      <IDNr>16</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Do a CT scan by medical imaging staff in radiology department</IDName>
+      <Description>Computed tomography (CT)
+
+Emergency department: Emergency physicions or emergency nurses usually arrange for a CT scan after neurological assessment for a potiential stroke patient. 
+Inpatient/stroke unit: Neurologists, nurse practitioners, residents arrange for a repeat scan after 24 to 48 hours to map the extent of the stroke that patients had.
+Once the patient arrives in medical imaging department, they go immediately to CT, they have their CTA and Angio. The radiologist meets them there in the department. 
+The results of a CT scan would be either stroke, no stroke, or bleeding. If it is stroke, the patient must go to the angio suite to remove the clot from their brain. If it is not stroke, they must go back to the emergency department. If it is bleeding, the patient must be transferred to neurosurgery ward.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1000" y="108.15" style="purple" color="9466048" Kt="" Kp="">
+      <IDNr>17</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Transfer the patient to ICU</IDName>
+      <Description>Intensive care unit (ICU)
+
+If patients are quite unwell, they are admitted to ICU from the emergency department. Patients usually spend the first 24 hours in ICU before they are admitted to the inpatient/stroke unit (or acute care unit). They should be monitored because they need frequent checks with their neural vital signs. Their heart rhythm and blood pressure are monitored closely. 
+Not all patients are admitted to ICU. Patients who received treatment (TNK, TPA, or EVT) need to be monitored. So, they are transferred to ICU. Patients who received treatment must repeat their CT scan when they are in ICU. If they are well/safe to move, they can go to the stroke unit. This is a collaborative decision between ICU doctors and the neurology team. If they are unwell, they must stay in ICU longer.
+Patients may stay in ICU for longer than 24 hours because there's no bed on the neurology floor, so they end up staying in ICU for 2,3,4 days waiting for a bed.
+We would require manpower, the angio suite availability, two interventional radiologists and anesthesia and anesthesia assistant. 
+The circulating nurse would give report to the ICU nurse who was in taking that patient. So it would be a verbal report. We would hand over our documentation, our special procedure record.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="925.45" y="236.3" style="purple" color="9466048" Kt="" Kp="">
+      <IDNr>18</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Call ICU resident/staff</IDName>
+      <Description>Intensive care unit (ICU)</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="645.5" y="7.6" style="yellow" color="12236583" Kt="" Kp="">
+      <IDNr>19</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Use standard operating procedures (SOP)</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="701.3" y="435.1" style="grey" color="8618883" Kt="" Kp="">
+      <IDNr>20</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>To access a CT scanner</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1942.9" y="425.85" Kt="" Kp="" style="red" color="15007744">
+      <IDNr>21</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Prepare for end of life</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1986.65" y="95.75" Kt="" Kp="" style="red" color="15007744">
+      <IDNr>22</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Go home with no support</IDName>
+      <Description>Patients usually go their home with no supports depending on their stroke. If they don't have many stroke deficits and they have adequate supports in community or they're independent, especially with their care needs, then they will go home. I will always offer an after stroke referral.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1970.769230769231" y="262.6153846153847" Kt="" Kp="" style="red" color="15007744">
+      <IDNr>23</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Go to outpatient rehabilitation center</IDName>
+      <Description>The Miller Center is the rehabilitation center in Newfoundland for stroke patients. Patients would go there if they required extra therapy.  If the patient is referred to the Miller Center, an application will be sent for them, including a medical section, a physiotherapy section, an occupational therapy section, etc. The Miller Center panel reviews them and determines if the patient is a candidate to be accepted for rehab or not.
+Patients sometimes go to the Miller Center. That is the hope for more inpatient rehabilitation and that is dependent upon their alpha FIM score.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1955.6" y="339.4" Kt="" Kp="" style="red" color="15007744">
+      <IDNr>24</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Go to a long-term care facility</IDName>
+      <Description>If patients are not appropriate for the Miller Center and cannot go home. Then social worker will do an assessment for care. So they will go to a long-term care as a level 3 or 4. 
+If someone needs more long-term care and then the medical team have to fill out a medical form where a general physical exam is documented on the sheet and that goes further application process for long-term care.
+With long term care (levels three and four), there are very few homes and and the wait list is substantially longer to get into.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1810.1" y="204.85" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>25</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Discharge the patient</IDName>
+      <Description>The multidisciplinary team decides to discharge patients based on their functioning ability. If they are are functioning well or even if they have mild deficits, they are discharged from hospital.
+Patients are discharged from hospital based on their alpha FIM score.  The multidisiplinary team calculates the score and determines where patients should go. The Alpha FIM score is calculated three times: admission day (in stroke unit), day 3, and day 7.  If it's really good on day three, then discharge planning should start. If there is room for improvement, they look at the day seven score and that's when discharge planning should start.
+If there is a moderate to severe deficit, patients cannot go home right away. They need rehabilitation.
+I guess on discharge, the patient will go home with a discharge summary from their whoever their provider is, whatever neurologists they're admitted under, and then the family doctor or nurse practitioner nowadays would monitor the patient and make sure that if they needed to be on Plavix or aspirin or other appropriate blood thinners, that they were continued for the appropriate level of time. 
+If the symptoms are severe and rehabilitation doesn't work and patients are not able to be looked after at home, then they would either require, a personal care home or long term care depending on the family situation and the patients care needs.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1876.3499755859375" y="88.76190476190477" Kt="" Kp="" style="red" color="15007744">
+      <IDNr>26</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Go to a personal care home</IDName>
+      <Description>Personal care home is a short stay program (pilot project) initiated by provincial government. 
+Clients/patients who have a little bit of discharge barriers, but if they made some gains in mobility or cognition, they could then return to their pre admission location.
+If patients are not appropriate for the Miller Center and cannot go home. Then social workers will do an assessment for care. So they go to a personal care home as a level one or two.
+If somebody is going to a personal care home, they need to be assigned a case manager.
+If patients' functioning ability increases in a personal care home, they may go home. They can either return home with home supports or they can return home with no supports if they don't have any care needs. If their functional ability decreases in the personal care home, they stay in the personal care home or they should go to a long-term care facility.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1446.85" y="423.45" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>27</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Monitor and assess the patient by a social worker</IDName>
+      <Description>I start monitoring patients at the point at which they are admitted to the hospital. And usually as soon as they come to the floor, the team will get a referral. I'm part of that team. So typically I'm not always involved with patients right away. It depends on how they've progressed post stroke, their deficits and their readiness for discharge. I monitor them until they're more prepared to go. 
+I coordinate and arrange family meetings for any patient who is going to be a more complex discharge. The purpose of this is to bring the patient and their families together to help determine the path for discharge. This allows the patient and family an opportunity to ask questions as needed and gather information so that they can make an informed decision.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1760.05" y="310.3" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>28</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Invite a family member</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1814.15" y="399.95" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>29</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Coordinate with a home support coordinator</IDName>
+      <Description>Socia workers take their assessment and coordinate with a home support coordinator.  Patients' needs/supports are determined based on the answers to these questions. 
+Do patients really need this much time for breathing? Do they really need this much time for toileting? What can we do to increase family support and minimize how much support we're providing?</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1446.55" y="240.7" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>30</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Assess the patient by a speech language pathologist</IDName>
+      <Description>Speech language pathologists assess patients' swallowing ability.
+They usually get an order from a neurologist/physician to start their work.
+Stroke best practice for swallowing says that patients' swallowing ability has to be assessed that ideally on the day of admission before they're given any medication or anything to eat or drink. Speech language pathologists would also follow the eastern health policies for care regulations.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1448.25" y="333.2" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>31</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Assess the patient by a dietitian</IDName>
+      <Description>Dietitians provide nutrition intervention and education to patients who have stroke. They provide patients with a modified diet if they have swallowing deficits. They also provide supplemental nutrition or education for prevention of stroke while they are discharged.
+Dietitians review stroke patients' charts and follow up with speech language pathologists before they calculate patients' nutrition needs.
+If dietitians' assessment shows that there is weight loss, they meet with the patient and provide them with supplements to increase the nutrition to get some weight back. If dietitians' assessment shows that patients don't need much intervention, dietitians don't see them at all until they are being discharged. In this scenario, patients are provided with education. 
+Patients sometimes get discharged without being seen by dietitians due to the shortcomings of dietitians.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1445.7" y="63.25" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>32</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Assess the patient by a physiotherapist</IDName>
+      <Description>PhysiotherapistsI would be involved in the Allied health team. 
+They receive the referral, do a chart review, talk about patients in the morning/daily rounds, and then start their assessment.
+They do a neurological physiotherapy exam with the patient that would include assessing their range of motion, their strength, eventually their balanced ambulation.
+Initial assessment (getting patients' past history, including how they were preadmission, what their baseline is for mobility, and their social history) is done once, but reassessment would be done constantly. Formal assessment is done once at the end of their journey before getting discharged from the stroke unit.
+They assess patients' physical ability to make sure they are a candidate for rehabilitation. They are involved in calculating alpha FIM score for each patient. 
+Physiotherapists can track patients and their referrals online via a Cognos system.  It's an online system that tries to capture the different units of the hospital.
+Canadian stroke best practices have different sections. Physiotherapists follow sections that highlight guidelines for stroke patient assessment. Patients must be assessed by an allied health member within 72 hours after they are admitted to stroke unit.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1444.95" y="153.55" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>33</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Assess the patient by a occupational therapist</IDName>
+      <Description>Occupational therapists do a detailed cognitive screening. They assess patients' cognitive ability to make sure they are a candidate for rehabilitation. They are involved in calculating alpha FIM score for each patient.
+Occupational therapists work with all patients in the neurology unit, including stroke patients, neural patients, and medicine patients.
+Occupational therapists do initial assessments with physiotherapy or an assistant. They need to chat with the medical team, look at patients' charts on Meditech to obtain some information before they actually go and see patients. 
+Occupational therapists also do overall assessments with physiotherapists. It includes a functional assessment. They look at all patients' activities of daily living, their transfer status, their cognitive and perceptual abilities, and their upper extremity.
+Occupational therapists also do a comprehensive assessment on pressure management with physiotherapists. 
+Families are sources of information for Occupational and physio therapists, if patients are cognitively impaired, and if they are too drowsy to participate in the subjective portion of the of the assessment.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1984.45" y="2.8" style="red" color="15007744" Kt="" Kp="">
+      <IDNr>34</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Go home with support</IDName>
+      <Description>Social workers do home care assessment in hospital (about an hour). And from that assessment they gather just information about the person's physical functioning, what their home looks like.  Then occupational therapy is involved because equipment is a huge piece. And the occupational therapist will take care of prescribing the equipment and send them home. 
+Social worker looks at the clients care needs if they have adequate supports when they go home. So I'll facilitate home supports and I do the assessments for that. Clients will either go home with home supports to the home supports program with Eastern Health or they will go home. Some will opt to private pay. So in those instances I'd give them a list of agencies and they would opt to private pay and would just pay per hour if they're not appropriate to go home. 
+If patients are going to go home with supports, they are assigned a case manager, so I will send a referral. Just simply an e-mail off to a consult. A general e-mail for community intake, and I'll notify them that this client is going home. They're going home under home supports and they need a case manager.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1302.55" y="209.6" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>35</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Hold stroke multi-disciplinary team rounds</IDName>
+      <Description>Anybody who is admitted with a stroke, we have our protocol that the stroke multi-disciplinary team (or allied health team) sees them.
+The stroke multi-disciplinary team (PT, OT, SLP, social worker, and dietition) and medical team (neurologists, residents, and nurse practitioners) take part in daily rounds. The team gets patients' information every morning. Then the team is able to keep track of how patients are progressing. Then they are also able to keep track of new patients.
+Neurologists get the input from everyone and tell the team about patients: what past medical history they have, how they are being treated, what is left to be treated, and are they medically still active.
+The stroke team gets referrals in daily/morning rounds in addition to the Meditech System. Some patients are in the Emergeency Department that have not necessarily been entered in the Meditech system yet. The stroke team gets referrals regarding these patients in morning rounds.
+The team discusses what the next step would be for patients with "well functioning" or "mild deficit". The team can discharge these patients. They determine patients' priority and what kind of goals to set for their stay, discharge, and rehabilitation potential. 
+The multidisciplinary team decides to discharge patients based on their functioning ability. If they are are functioning well or even if they have mild deficits, they are discharged from hospital.
+Stroke (or allied health) team members do a note daily on Meditech regarding each patient. They do face to face conversations with the medical/neurology team, which includes the nurse practitioner, residents, and neurologists (neurologists are not always available for face to face conversations). It's typically run by the neurology residents and nurse practitioners. And then we discuss patients’ progress every day in team rounds.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1076.75" y="187" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>36</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Admit the patient to the stroke/inpatient unit</IDName>
+      <Description>Inpatient unit=stroke unit=acute care unit. Stroke unit is situated in neurology unit.
+Patients admitted to stroke unit would be seen by medical team (either neurologists, residents, or nurse practitioners).
+Patients can be admitted from the emergency department and would go to the inpatient/stroke unit if they don't receive treatment like tissue plasminogen activator (TPA). If patients are not a candidate for that drug, they don't need to be closely monitored so they don't go to ICU necessarily. 
+Patients can also be admitted from the intensive care unit (ICU). They would go to the emergency department first, then they have kind of a stopover in ICU before getting into the inpatient unit.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1301.65" y="361.25" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>37</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Access to the Meditech System</IDName>
+      <Description>Meditech system includes past medical history of patients. for example, it includes Computed Tomography Angiography (CTA). 
+A list of the medication that patients have used is needed for change management is also available in the Meditech system.
+The stroke team get their referrals from Meditech System in addition to daily/morning rounds. The referrals come from either neurologists or nurse practitioners in the stroke unit. Referrals may also come from emergency  physicians.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1551.75" y="433.35" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>38</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Have access to the code of Ethics for social work</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1563.45" y="354.9" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>39</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Have access to Adult Protection Act</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1195.15" y="104.8" style="blue" color="108251" Kt="" Kp="">
+      <IDNr>40</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Assess the patient by a nurse practitioner</IDName>
+      <Description>A stroke nurse practitioner takes care of specifically the stroke patients. She usually provides secondary care to them.
+The health history and neurological assessment is completed by a nurse practitioner.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="456.75" y="202.15" Kt="" Kp="" style="custom" color="65535">
+      <IDNr>41</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Transfer a patient from other hospitals</IDName>
+      <Description>Patients could also be admitted to ED directly from other hospitals.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1308.9" y="90.6" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>42</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Assess the patient by a registered nurse</IDName>
+      <Description>This registered nurse works in acute care (or stroke) unit.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1110.35" y="426.4" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>43</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Access to Health-E NL system</IDName>
+      <Description>Healthy NL system includes patients' information like patients' medication list.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1297.35" y="2" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>44</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Follow the Canadian stroke best practices</IDName>
+      <Description>Canadian stroke best practices have different sections for different healthcare professionals (medical team and stroke team). 
+Example for pathologists: swallow needs to be done within (ideally) the first day patients need to be assessed by the rehab team within the first 48 hours. 
+Dietitians usually follow dietitian recommendations, stroke prevention recommendations, and nutrition best practices.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1196.2" y="10.2" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>45</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Follow the eastern health policies</IDName>
+      <Description>Example for pathologists: food related guidelines for eating with risk.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1199.5500000000002" y="310.849853515625" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>46</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Assess the patient by a neurology resident</IDName>
+      <Description/>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1668.4" y="392.3" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>47</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Follow the swallowing guidlines</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="998.7" y="295.1" style="purple" color="9466048" Kt="" Kp="">
+      <IDNr>48</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Assess/monitor the patient by an ICU nurse</IDName>
+      <Description>The ICU registered nurse checks patients' neurological vital signs frequently and starts with every half hour. Then they followed the guidelines that come with the protocol and help patients with personal care (e.g., helping them to use the washroom). After 24 hours, the registered nurse will assess patients' ambulation.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="825" y="451.35" style="grey" color="8618883" Kt="" Kp="">
+      <IDNr>49</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Check anesthesia availability</IDName>
+      <Description>Anesthesia is needed for EVT.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="925.5" y="10.2" style="grey" color="8618883" Kt="" Kp="">
+      <IDNr>50</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Follow thrombolytics protocol</IDName>
+      <Description>Thrombolysis is the breakdown of blood clots formed in blood vessels, using medication.
+Registered nurses follow Tenecteplase (TNK) and tissue plasminogen activator (TPA) protocol in ICU to know how frequently they need to check patients' vital signs and neural vital signs. TNK is a protein that can break up blood clots. TPA is also a clot-dissolving medicine.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1193.15" y="211.7" style="blue" color="108251" Kt="" Kp="">
+      <IDNr>51</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Do a physical exam</IDName>
+      <Description>Whoever (neurologists, nurse practitioners, or residents) sees the patient first, is required to arrange for the physical examination.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1082.2500976562499" y="25.29998474121095" style="blue" color="108251" Kt="" Kp="">
+      <IDNr>52</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Optimize patients' medication by a neurologist</IDName>
+      <Description>Neurologists check patients' blood pressure, cholesterol, diabetes to optimize their medication. They would prescribe patients antiplatelet agents, usually aspirin and Plavix, sometimes different ones or an anticoagulant If patients have atrial fibrillation.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="456.6" y="305.3" Kt="" Kp="" style="custom" color="65535">
+      <IDNr>53</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Transfer a patient by a family caregiver</IDName>
+      <Description>Patients could also go to ED by their caregivers.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1771.1" y="81.8" Kt="" Kp="">
+      <IDNr>54</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Send the discharge summary to patient's family doctor</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="584.0499877929688" y="95.19998931884766" style="yellow" color="12236583" Kt="" Kp="">
+      <IDNr>55</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Assess the patient by an emergency physician</IDName>
+      <Description>Emergency physicians do a neurological assessment to identify what patients' deficits are. If there is a potential stroke, they activate a code stroke.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1094.8" y="328.1" style="custom" color="8323327" Kt="" Kp="">
+      <IDNr>56</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Check bed availability</IDName>
+      <Description>Bed availability is a is a limiting factor.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="666.1" y="281.35" style="yellow" color="12236583" Kt="" Kp="">
+      <IDNr>57</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Activate a code stroke</IDName>
+      <Description>When the code stroke is activated, people at the CT scanner and the radiologist, they get the code stroke. When they get the code stroke they are ready to receive the patient in the CT scanner.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="841.1" y="343.3" style="grey" color="8618883" Kt="" Kp="">
+      <IDNr>58</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Transfer the patient to the angio suite to do EVT</IDName>
+      <Description>Endovascular Therapy (EVT)
+Once patients have had their CT to confirm a stroke, they come directly to the angio suite. Then, staff (in interventional radiology department) will remove the clot from their brain. The staff need a list of things to remove the clot from the patient's brain, such as catheter, wires, and needles. They get the patient history from the Meditec system.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1987.4807410606975" y="186.00766578087433" style="red" color="15007744" Kt="" Kp="">
+      <IDNr>59</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Go to inpatient rehabilitation center</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="995.9" y="448.25" style="custom" color="8323327" Kt="" Kp="">
+      <IDNr>60</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Follow bed assignment policy</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1711.2499511718752" y="3.759993743896487" style="blue" color="108251" Kt="" Kp="">
+      <IDNr>61</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Follow discharge policy</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1551.2" y="181.1" style="blue" color="108251" Kt="" Kp="">
+      <IDNr>62</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Access to electronic chart record system</IDName>
+      <Description>The electronic chart record system, which has access to any previous physio assessments that patients have had that are linked to their MCP.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1551.8" y="276.7" style="blue" color="108251" Kt="" Kp="">
+      <IDNr>63</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Access to Cognos system</IDName>
+      <Description>Cognos system, which is an additional way for physiotherapists to pick up some missed referrals.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1540.25" y="5.65" style="blue" color="108251" Kt="" Kp="">
+      <IDNr>64</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Follow safe patient/resident handling guidelines</IDName>
+      <Description>Safe patient/resident handling guidelines are used to make sure both physiotherapists and patients are safe when physiotherapists are going to do any handling things with patients.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1552" y="90.5" style="blue" color="108251" Kt="" Kp="">
+      <IDNr>65</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Follow early mobilization guidelines</IDName>
+      <Description>The focus of early mobilization guidelines is on sitting, standing, and walking activities.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="783.3307448167066" y="6.388467641977158" style="custom" color="8323135" Kt="" Kp="">
+      <IDNr>66</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Transfer the patient to neurosurgery ward</IDName>
+      <Description>Some patients are hospitalized in neurosurgery ward because of bleeding. However, they may get stroke when they are in this ward (it is very rare). Health care people call a code stroke, and the patient is transferred to radiology department to do a city scan.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="872.95" y="106.8" style="grey" color="8618883" Kt="" Kp="">
+      <IDNr>67</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Do TNK in CT scanner room (radiology department)</IDName>
+      <Description>Tenecteplase (TNK)
+TNK is a protein that can break up blood clots. It is a powerful blood-thinning medication administered to patients experiencing a stroke caused by a sudden blockage of an artery that supplies blood to the brain, or an acute ischemic stroke.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1674.55" y="227.1" style="blue" color="108251" Kt="" Kp="">
+      <IDNr>68</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Calculate Alpha FIM score</IDName>
+      <Description>Alpha FIM reflects patients' ability to participate in daily living and to return home to their previous baseline. It represents stroke patients' care needs at the point that the discharge planning becomes appropriate. 
+Alpha FIM score definitely does help social workers find what discharge planning options might be most appropriate for a patient.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1206" y="442.25" style="blue" color="108251" Kt="" Kp="">
+      <IDNr>69</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Access to the stroke order sheet</IDName>
+      <Description>The stroke order sheet is used to make sure that the activity orders are appropriate.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="920.75" y="371.65" style="purple" color="9466048" Kt="" Kp="">
+      <IDNr>70</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>Access to bed monitoring system</IDName>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="1677" y="125.00002441406252" style="blue" color="108251" Kt="" Kp="">
+      <IDNr>71</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Hold a family meeting</IDName>
+      <Description>A family meeting is held when patients are supposed to be discharged from the stroke unit. It happens when patients' functioning ability is well or they have mild deficit.</Description>
+    </Function>
+    <Function fnStyle="0" Tp="-1" Pp="-1" x="753.5000610351563" y="304.39996337890625" style="grey" color="8618883" Kt="" Kp="">
+      <IDNr>72</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>Assess the CT scan by a radiologist</IDName>
+      <Description>The CT scan should be assessed by either a radiology resident or a radiologist. Neurologists need an official report from either the radiology resident or the radiologist.</Description>
+    </Function>
+  </Functions>
+  <Controls>
+    <Control orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Emergency medical responder guideline</IDName>
+      <FunctionIDNr>4</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Care paramedicine guideline</IDName>
+      <FunctionIDNr>0</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Care paramedicine guideline</IDName>
+      <FunctionIDNr>3</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>4</IDNr>
+      <IDName>Care paramedicine guideline</IDName>
+      <FunctionIDNr>1</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>5</IDNr>
+      <IDName>Care paramedicine guideline</IDName>
+      <FunctionIDNr>2</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>6</IDNr>
+      <IDName>NL paramedicine regulation</IDName>
+      <FunctionIDNr>0</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>7</IDNr>
+      <IDName>NL paramedicine regulation</IDName>
+      <FunctionIDNr>3</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>8</IDNr>
+      <IDName>NL paramedicine regulation</IDName>
+      <FunctionIDNr>2</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>9</IDNr>
+      <IDName>NL paramedicine regulation</IDName>
+      <FunctionIDNr>1</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>0</IDNr>
+      <IDName>SOP</IDName>
+      <FunctionIDNr>17</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>0</IDNr>
+      <IDName>SOP</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>0</IDNr>
+      <IDName>SOP</IDName>
+      <FunctionIDNr>15</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>0</IDNr>
+      <IDName>SOP</IDName>
+      <FunctionIDNr>16</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>0</IDNr>
+      <IDName>SOP</IDName>
+      <FunctionIDNr>18</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>0</IDNr>
+      <IDName>The code of Ethics for social work</IDName>
+      <FunctionIDNr>27</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Adult Protection Act</IDName>
+      <FunctionIDNr>27</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Canadian stroke best practices</IDName>
+      <FunctionIDNr>30</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Eastern health policies</IDName>
+      <FunctionIDNr>30</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Eastern health policies</IDName>
+      <FunctionIDNr>42</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Canadian stroke best practices</IDName>
+      <FunctionIDNr>42</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Swallowing guidlines</IDName>
+      <FunctionIDNr>30</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>0</IDNr>
+      <IDName>TNK and TPA protocol</IDName>
+      <FunctionIDNr>48</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Canadian stroke best practices</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>0</IDNr>
+      <IDName>SOP</IDName>
+      <FunctionIDNr>55</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Canadian stroke best practices</IDName>
+      <FunctionIDNr>35</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Bed assignment policy</IDName>
+      <FunctionIDNr>56</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Discharge policy</IDName>
+      <FunctionIDNr>25</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Canadian stroke best practices</IDName>
+      <FunctionIDNr>32</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Safe patient/resident handling guidelines</IDName>
+      <FunctionIDNr>32</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Early mobilization guidelines</IDName>
+      <FunctionIDNr>32</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>4</IDNr>
+      <IDName>TNK and TPA protocol</IDName>
+      <FunctionIDNr>67</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>5</IDNr>
+      <IDName>Canadian stroke best practices</IDName>
+      <FunctionIDNr>31</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>6</IDNr>
+      <IDName>Canadian stroke best practices</IDName>
+      <FunctionIDNr>33</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>7</IDNr>
+      <IDName>Canadian stroke best practices</IDName>
+      <FunctionIDNr>46</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>8</IDNr>
+      <IDName>Canadian stroke best practices</IDName>
+      <FunctionIDNr>40</FunctionIDNr>
+    </Control>
+    <Control orphan="">
+      <IDNr>9</IDNr>
+      <IDName>Canadian stroke best practices</IDName>
+      <FunctionIDNr>17</FunctionIDNr>
+    </Control>
+  </Controls>
+  <Inputs>
+    <Input orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Relaying information to emergency department</IDName>
+      <FunctionIDNr>1</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Fast exam=positive
+race score&gt;= 5</IDName>
+      <FunctionIDNr>2</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Fast exam=positive
+race score&gt;= 5</IDName>
+      <FunctionIDNr>3</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>4</IDNr>
+      <IDName>Potential stroke</IDName>
+      <FunctionIDNr>0</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Transfer through ambulance</IDName>
+      <FunctionIDNr>14</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Arranging for a CT scan</IDName>
+      <FunctionIDNr>16</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Introducing the patient to a triage nurse</IDName>
+      <FunctionIDNr>15</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>ICU = informed</IDName>
+      <FunctionIDNr>17</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>A candidate for ICU</IDName>
+      <FunctionIDNr>18</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>End of life</IDName>
+      <FunctionIDNr>21</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Alpha FIM &gt; 80</IDName>
+      <FunctionIDNr>22</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Alpha FIM &gt; 80</IDName>
+      <FunctionIDNr>23</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Alpha FIM &lt; 40</IDName>
+      <FunctionIDNr>24</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Alpha FIM &gt; 80</IDName>
+      <FunctionIDNr>26</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Discharge</IDName>
+      <FunctionIDNr>25</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Alpha FIM &gt; 80</IDName>
+      <FunctionIDNr>34</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Coordinating with a home support coordinator</IDName>
+      <FunctionIDNr>29</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Asking a social worker to keep track of the patient</IDName>
+      <FunctionIDNr>27</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Asking a physiotherapist to keep track of the patient</IDName>
+      <FunctionIDNr>32</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Asking a occupational therapist to keep track of the patient</IDName>
+      <FunctionIDNr>33</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Assigning the patient to a nurse practitioner</IDName>
+      <FunctionIDNr>40</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Transferring the patient from ICU to stroke unit</IDName>
+      <FunctionIDNr>36</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>An order from the neurologist</IDName>
+      <FunctionIDNr>42</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Assigning the patient to a resident</IDName>
+      <FunctionIDNr>46</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>An order from the neurologist</IDName>
+      <FunctionIDNr>30</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Health history and neurological assessment</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Arranging physical exam</IDName>
+      <FunctionIDNr>51</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Transfer through other hospitals</IDName>
+      <FunctionIDNr>14</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Medication optimization/management</IDName>
+      <FunctionIDNr>52</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Discharge summary</IDName>
+      <FunctionIDNr>54</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Introducing the patient to an emergency physician</IDName>
+      <FunctionIDNr>55</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Activating a code stroke (ambulance)</IDName>
+      <FunctionIDNr>57</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Transfer through family caregivers</IDName>
+      <FunctionIDNr>14</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Asking a speech language pathologist to keep track of the patient</IDName>
+      <FunctionIDNr>30</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Asking a clinical nutritionist to keep track of the patient</IDName>
+      <FunctionIDNr>31</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Holding stroke team round</IDName>
+      <FunctionIDNr>35</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>EVT candidate</IDName>
+      <FunctionIDNr>58</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Clot was removed</IDName>
+      <FunctionIDNr>18</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>0</IDNr>
+      <IDName>60 &lt;= Alpha FIM &lt;= 80</IDName>
+      <FunctionIDNr>59</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Transfer the patient to stroke unit</IDName>
+      <FunctionIDNr>36</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Not EVT candidate</IDName>
+      <FunctionIDNr>36</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>4</IDNr>
+      <IDName>No stroke</IDName>
+      <FunctionIDNr>14</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>5</IDNr>
+      <IDName>Bleeding</IDName>
+      <FunctionIDNr>66</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>6</IDNr>
+      <IDName>TNK candidate</IDName>
+      <FunctionIDNr>67</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>7</IDNr>
+      <IDName>Calculating Alpha FIM score</IDName>
+      <FunctionIDNr>68</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>9</IDNr>
+      <IDName>Repeating the CT scan</IDName>
+      <FunctionIDNr>16</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>10</IDNr>
+      <IDName>Signs of stroke</IDName>
+      <FunctionIDNr>57</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>11</IDNr>
+      <IDName>Family meeting</IDName>
+      <FunctionIDNr>71</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>13</IDNr>
+      <IDName>Activating a code stroke</IDName>
+      <FunctionIDNr>57</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>14</IDNr>
+      <IDName>Code stroke</IDName>
+      <FunctionIDNr>16</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>15</IDNr>
+      <IDName>Code stroke</IDName>
+      <FunctionIDNr>72</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>17</IDNr>
+      <IDName>Assigning the patient to a neurologist (stroke unit)</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>18</IDNr>
+      <IDName>Code stroke</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>19</IDNr>
+      <IDName>Alpha FIM &gt; 80 (personal care home)</IDName>
+      <FunctionIDNr>34</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>20</IDNr>
+      <IDName>Alpha FIM &gt; 80 (personal care home)</IDName>
+      <FunctionIDNr>22</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>21</IDNr>
+      <IDName>Alpha FIM &lt; 40 (personal care home)</IDName>
+      <FunctionIDNr>24</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>22</IDNr>
+      <IDName>Assigning the patient to a neurologist from ED</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>23</IDNr>
+      <IDName>No stroke</IDName>
+      <FunctionIDNr>55</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>24</IDNr>
+      <IDName>TNK &amp; EVT candidate</IDName>
+      <FunctionIDNr>67</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>25</IDNr>
+      <IDName>TNK &amp; EVT candidate</IDName>
+      <FunctionIDNr>58</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>26</IDNr>
+      <IDName>Referral</IDName>
+      <FunctionIDNr>32</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>27</IDNr>
+      <IDName>Referral</IDName>
+      <FunctionIDNr>33</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>28</IDNr>
+      <IDName>Referral</IDName>
+      <FunctionIDNr>30</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>29</IDNr>
+      <IDName>Referral</IDName>
+      <FunctionIDNr>31</FunctionIDNr>
+    </Input>
+  </Inputs>
+  <Outputs>
+    <Output orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Fast exam=positive
+race score&gt;= 5</IDName>
+      <FunctionIDNr>0</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Relaying information to emergency department</IDName>
+      <FunctionIDNr>3</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Patient information (vital signs, getting hit, and patient history)</IDName>
+      <FunctionIDNr>2</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>4</IDNr>
+      <IDName>Potential stroke</IDName>
+      <FunctionIDNr>4</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>5</IDNr>
+      <IDName>Tablet</IDName>
+      <FunctionIDNr>5</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>6</IDNr>
+      <IDName>Triage system</IDName>
+      <FunctionIDNr>6</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>7</IDNr>
+      <IDName>Trained staff</IDName>
+      <FunctionIDNr>7</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>8</IDNr>
+      <IDName>Diagnostic and assessment tools: fast score and race score</IDName>
+      <FunctionIDNr>8</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>9</IDNr>
+      <IDName>Dispatch system</IDName>
+      <FunctionIDNr>9</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Emergency medical responder guideline</IDName>
+      <FunctionIDNr>10</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Care paramedicine guideline</IDName>
+      <FunctionIDNr>11</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>NL paramedicine regulation</IDName>
+      <FunctionIDNr>12</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>16</IDNr>
+      <IDName>Written report with the patient's chart</IDName>
+      <FunctionIDNr>1</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>17</IDNr>
+      <IDName>Race score/sheet</IDName>
+      <FunctionIDNr>1</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>ICU = informed</IDName>
+      <FunctionIDNr>18</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Introducing the patient to a triage nurse</IDName>
+      <FunctionIDNr>14</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Activating a code stroke</IDName>
+      <FunctionIDNr>15</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Anesthesia</IDName>
+      <FunctionIDNr>18</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Anesthesia assistant</IDName>
+      <FunctionIDNr>18</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Angio suite</IDName>
+      <FunctionIDNr>18</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>SOP</IDName>
+      <FunctionIDNr>19</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>CT scanner</IDName>
+      <FunctionIDNr>20</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>End of life</IDName>
+      <FunctionIDNr>25</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Alpha FIM &gt; 80</IDName>
+      <FunctionIDNr>25</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Alpha FIM &lt; 40</IDName>
+      <FunctionIDNr>25</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Discharge planning (discharge summary)</IDName>
+      <FunctionIDNr>27</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Discharge planner</IDName>
+      <FunctionIDNr>27</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Family member</IDName>
+      <FunctionIDNr>28</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Physiotherapist assessment</IDName>
+      <FunctionIDNr>32</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Social worker assessment</IDName>
+      <FunctionIDNr>27</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Occupational therapist assessment</IDName>
+      <FunctionIDNr>33</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Speech language pathologist assessment</IDName>
+      <FunctionIDNr>30</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Dietitian assessment</IDName>
+      <FunctionIDNr>31</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>5</IDNr>
+      <IDName>Alpha FIM &lt; 40</IDName>
+      <FunctionIDNr>25</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Coordinating with a home support coordinator</IDName>
+      <FunctionIDNr>27</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Time for toileting, bathing, ...</IDName>
+      <FunctionIDNr>29</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Asking a social worker to keep track of the patient</IDName>
+      <FunctionIDNr>35</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Asking a physiotherapist to keep track of the patient</IDName>
+      <FunctionIDNr>35</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Asking a occupational therapist to keep track of the patient</IDName>
+      <FunctionIDNr>35</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Patients' information</IDName>
+      <FunctionIDNr>37</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>The code of Ethics for social work</IDName>
+      <FunctionIDNr>38</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Adult Protection Act</IDName>
+      <FunctionIDNr>39</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Assigning the patient to a nurse practitioner</IDName>
+      <FunctionIDNr>36</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Transferring the patient from ICU to stroke unit</IDName>
+      <FunctionIDNr>17</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Transfer through other hospitals</IDName>
+      <FunctionIDNr>41</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Health history and neurological assessment</IDName>
+      <FunctionIDNr>40</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Registered nurse assessment</IDName>
+      <FunctionIDNr>42</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Health-E NL system</IDName>
+      <FunctionIDNr>43</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Canadian stroke best practices</IDName>
+      <FunctionIDNr>44</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Eastern health policies</IDName>
+      <FunctionIDNr>45</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Resident assessment</IDName>
+      <FunctionIDNr>46</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Swallowing guidlines</IDName>
+      <FunctionIDNr>47</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>An order from the neurologist</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Registered nurse (ICU) assessment</IDName>
+      <FunctionIDNr>48</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>1</IDNr>
+      <IDName>A candidate for ICU</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Anesthesia</IDName>
+      <FunctionIDNr>49</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>4</IDNr>
+      <IDName>ICU resident notification for ICU nurse</IDName>
+      <FunctionIDNr>18</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>TNK and TPA protocol</IDName>
+      <FunctionIDNr>50</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Arranging physical exam</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Physical exam result</IDName>
+      <FunctionIDNr>51</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>4</IDNr>
+      <IDName>Medication optimization/management</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>6</IDNr>
+      <IDName>Discharge summary</IDName>
+      <FunctionIDNr>25</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Introducing the patient to an emergency physician</IDName>
+      <FunctionIDNr>14</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Activating a code stroke</IDName>
+      <FunctionIDNr>55</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Available bed</IDName>
+      <FunctionIDNr>56</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Code stroke</IDName>
+      <FunctionIDNr>57</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Assigning the patient to a resident</IDName>
+      <FunctionIDNr>36</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Assigning the patient to a neurologist (stroke unit)</IDName>
+      <FunctionIDNr>36</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>91</IDNr>
+      <IDName>Transfer through ambulance</IDName>
+      <FunctionIDNr>1</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Transfer through family caregivers</IDName>
+      <FunctionIDNr>53</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Alpha FIM &gt; 80 (personal care home)</IDName>
+      <FunctionIDNr>26</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Arranging for a CT scan</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Asking a speech language pathologist to keep track of the patient</IDName>
+      <FunctionIDNr>35</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>4</IDNr>
+      <IDName>Asking a clinical nutritionist to keep track of the patient</IDName>
+      <FunctionIDNr>35</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Holding stroke team round</IDName>
+      <FunctionIDNr>36</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>5</IDNr>
+      <IDName>Family meeting</IDName>
+      <FunctionIDNr>35</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Arranging physical exam</IDName>
+      <FunctionIDNr>40</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Arranging physical exam</IDName>
+      <FunctionIDNr>46</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Clot was removed</IDName>
+      <FunctionIDNr>58</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Report to neurology team</IDName>
+      <FunctionIDNr>58</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>7</IDNr>
+      <IDName>60 &lt;= Alpha FIM &lt;= 80</IDName>
+      <FunctionIDNr>25</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>12</IDNr>
+      <IDName>Transfer the patient to stroke unit</IDName>
+      <FunctionIDNr>14</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>13</IDNr>
+      <IDName>EVT candidate</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>14</IDNr>
+      <IDName>Not EVT candidate</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Bed assignment policy</IDName>
+      <FunctionIDNr>60</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Discharge policy</IDName>
+      <FunctionIDNr>61</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Electronic chart record system</IDName>
+      <FunctionIDNr>62</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Cognos system</IDName>
+      <FunctionIDNr>63</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Safe patient/resident handling guidelines</IDName>
+      <FunctionIDNr>64</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>4</IDNr>
+      <IDName>Early mobilization guidelines</IDName>
+      <FunctionIDNr>65</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>8</IDNr>
+      <IDName>CTA</IDName>
+      <FunctionIDNr>16</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>12</IDNr>
+      <IDName>TNK candidate</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>13</IDNr>
+      <IDName>Bleeding</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>14</IDNr>
+      <IDName>No stroke</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>15</IDNr>
+      <IDName>Clot was removed</IDName>
+      <FunctionIDNr>67</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>16</IDNr>
+      <IDName>Report to neurology team</IDName>
+      <FunctionIDNr>67</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>17</IDNr>
+      <IDName>Referral</IDName>
+      <FunctionIDNr>37</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>18</IDNr>
+      <IDName>Alpha FIM score</IDName>
+      <FunctionIDNr>68</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>19</IDNr>
+      <IDName>Calculating Alpha FIM score</IDName>
+      <FunctionIDNr>32</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>20</IDNr>
+      <IDName>Calculating Alpha FIM score</IDName>
+      <FunctionIDNr>33</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>21</IDNr>
+      <IDName>Stroke order sheet</IDName>
+      <FunctionIDNr>69</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>23</IDNr>
+      <IDName>Repeating the CT scan</IDName>
+      <FunctionIDNr>17</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>24</IDNr>
+      <IDName>Repeating the CT scan</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Bed monitoring system</IDName>
+      <FunctionIDNr>70</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>26</IDNr>
+      <IDName>Signs of stroke</IDName>
+      <FunctionIDNr>66</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>27</IDNr>
+      <IDName>Discharge</IDName>
+      <FunctionIDNr>71</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>28</IDNr>
+      <IDName>Emergency physician's neurological assessment</IDName>
+      <FunctionIDNr>55</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>29</IDNr>
+      <IDName>Triage nurse's neurological assessment</IDName>
+      <FunctionIDNr>15</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>30</IDNr>
+      <IDName>Activating a code stroke (ambulance)</IDName>
+      <FunctionIDNr>1</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>31</IDNr>
+      <IDName>Activating a code stroke (ambulance)</IDName>
+      <FunctionIDNr>3</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>32</IDNr>
+      <IDName>Radiologists' report on the CT scan</IDName>
+      <FunctionIDNr>72</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>33</IDNr>
+      <IDName>Alpha FIM &lt; 40 (personal care home)</IDName>
+      <FunctionIDNr>26</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>34</IDNr>
+      <IDName>Assigning the patient to a neurologist from ED</IDName>
+      <FunctionIDNr>14</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>35</IDNr>
+      <IDName>TNK &amp; EVT candidate</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>36</IDNr>
+      <IDName>TNK candidate</IDName>
+      <FunctionIDNr>58</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>37</IDNr>
+      <IDName>EVT candidate</IDName>
+      <FunctionIDNr>67</FunctionIDNr>
+    </Output>
+  </Outputs>
+  <Preconditions>
+    <Precondition orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Triage system</IDName>
+      <FunctionIDNr>4</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Angio suite</IDName>
+      <FunctionIDNr>17</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Discharge planner</IDName>
+      <FunctionIDNr>25</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>0</IDNr>
+      <IDName>An order from the neurologist</IDName>
+      <FunctionIDNr>27</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Physiotherapist assessment</IDName>
+      <FunctionIDNr>27</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Occupational therapist assessment</IDName>
+      <FunctionIDNr>27</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Speech language pathologist assessment</IDName>
+      <FunctionIDNr>27</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>4</IDNr>
+      <IDName>Dietitian assessment</IDName>
+      <FunctionIDNr>27</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>0</IDNr>
+      <IDName>ICU resident notification for ICU nurse</IDName>
+      <FunctionIDNr>48</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Physical exam result</IDName>
+      <FunctionIDNr>52</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Available bed</IDName>
+      <FunctionIDNr>36</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Emergency physician's neurological assessment</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Available bed</IDName>
+      <FunctionIDNr>17</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Written report with the patient's chart</IDName>
+      <FunctionIDNr>14</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Race score/sheet</IDName>
+      <FunctionIDNr>14</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Physiotherapist assessment</IDName>
+      <FunctionIDNr>35</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Occupational therapist assessment</IDName>
+      <FunctionIDNr>35</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Speech language pathologist assessment</IDName>
+      <FunctionIDNr>35</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Dietitian assessment</IDName>
+      <FunctionIDNr>35</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>4</IDNr>
+      <IDName>Social worker assessment</IDName>
+      <FunctionIDNr>35</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Family member</IDName>
+      <FunctionIDNr>25</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Patients' information</IDName>
+      <FunctionIDNr>58</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Referral</IDName>
+      <FunctionIDNr>32</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Referral</IDName>
+      <FunctionIDNr>33</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>4</IDNr>
+      <IDName>Referral</IDName>
+      <FunctionIDNr>30</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>5</IDNr>
+      <IDName>Referral</IDName>
+      <FunctionIDNr>31</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>6</IDNr>
+      <IDName>Referral</IDName>
+      <FunctionIDNr>27</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>7</IDNr>
+      <IDName>Stroke order sheet</IDName>
+      <FunctionIDNr>33</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>8</IDNr>
+      <IDName>Family member</IDName>
+      <FunctionIDNr>71</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>9</IDNr>
+      <IDName>Radiologists' report on the CT scan</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Precondition>
+    <Precondition orphan="">
+      <IDNr>10</IDNr>
+      <IDName>Triage nurse's neurological assessment</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Precondition>
+  </Preconditions>
+  <Resources>
+    <Resource orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Patient information (vital signs, getting hit, and patient history)</IDName>
+      <FunctionIDNr>3</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Tablet</IDName>
+      <FunctionIDNr>4</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Trained staff</IDName>
+      <FunctionIDNr>4</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>4</IDNr>
+      <IDName>Diagnostic and assessment tools: fast score and race score</IDName>
+      <FunctionIDNr>0</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>5</IDNr>
+      <IDName>Dispatch system</IDName>
+      <FunctionIDNr>4</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Anesthesia assistant</IDName>
+      <FunctionIDNr>17</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>2</IDNr>
+      <IDName>CTA</IDName>
+      <FunctionIDNr>17</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>0</IDNr>
+      <IDName>CT scanner</IDName>
+      <FunctionIDNr>16</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Discharge planning (discharge summary)</IDName>
+      <FunctionIDNr>25</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Time for toileting, bathing, ...</IDName>
+      <FunctionIDNr>25</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Patients' information</IDName>
+      <FunctionIDNr>27</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Patients' information</IDName>
+      <FunctionIDNr>30</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Health-E NL system</IDName>
+      <FunctionIDNr>30</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Health-E NL system</IDName>
+      <FunctionIDNr>42</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Patients' information</IDName>
+      <FunctionIDNr>42</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Speech language pathologist assessment</IDName>
+      <FunctionIDNr>31</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Speech language pathologist assessment</IDName>
+      <FunctionIDNr>42</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Speech language pathologist assessment</IDName>
+      <FunctionIDNr>40</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Registered nurse assessment</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Speech language pathologist assessment</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Registered nurse (ICU) assessment</IDName>
+      <FunctionIDNr>17</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Patients' information</IDName>
+      <FunctionIDNr>48</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>4</IDNr>
+      <IDName>Patients' information</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Health-E NL system</IDName>
+      <FunctionIDNr>52</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Health history and neurological assessment</IDName>
+      <FunctionIDNr>37</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Registered nurse assessment</IDName>
+      <FunctionIDNr>37</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Physiotherapist assessment</IDName>
+      <FunctionIDNr>37</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Occupational therapist assessment</IDName>
+      <FunctionIDNr>37</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>4</IDNr>
+      <IDName>Speech language pathologist assessment</IDName>
+      <FunctionIDNr>37</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>5</IDNr>
+      <IDName>Dietitian assessment</IDName>
+      <FunctionIDNr>37</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>9</IDNr>
+      <IDName>Report to neurology team</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Patients' information</IDName>
+      <FunctionIDNr>32</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Health history and neurological assessment</IDName>
+      <FunctionIDNr>32</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Resident assessment</IDName>
+      <FunctionIDNr>32</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>4</IDNr>
+      <IDName>Electronic chart record system</IDName>
+      <FunctionIDNr>32</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>5</IDNr>
+      <IDName>Cognos system</IDName>
+      <FunctionIDNr>32</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>6</IDNr>
+      <IDName>Patients' information</IDName>
+      <FunctionIDNr>52</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>7</IDNr>
+      <IDName>Patients' information</IDName>
+      <FunctionIDNr>33</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>8</IDNr>
+      <IDName>Patients' information</IDName>
+      <FunctionIDNr>31</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>9</IDNr>
+      <IDName>Dietitian assessment</IDName>
+      <FunctionIDNr>68</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>10</IDNr>
+      <IDName>Speech language pathologist assessment</IDName>
+      <FunctionIDNr>68</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>12</IDNr>
+      <IDName>Physiotherapist assessment</IDName>
+      <FunctionIDNr>68</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>13</IDNr>
+      <IDName>Alpha FIM score</IDName>
+      <FunctionIDNr>25</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>14</IDNr>
+      <IDName>Patients' information</IDName>
+      <FunctionIDNr>46</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>15</IDNr>
+      <IDName>Patients' information</IDName>
+      <FunctionIDNr>40</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>16</IDNr>
+      <IDName>Patients' information</IDName>
+      <FunctionIDNr>17</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>17</IDNr>
+      <IDName>Bed monitoring system</IDName>
+      <FunctionIDNr>17</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>18</IDNr>
+      <IDName>Relaying information to emergency department</IDName>
+      <FunctionIDNr>14</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>19</IDNr>
+      <IDName>CTA</IDName>
+      <FunctionIDNr>13</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>20</IDNr>
+      <IDName>Physical exam result</IDName>
+      <FunctionIDNr>35</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>21</IDNr>
+      <IDName>CTA</IDName>
+      <FunctionIDNr>72</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>22</IDNr>
+      <IDName>Occupational therapist assessment</IDName>
+      <FunctionIDNr>68</FunctionIDNr>
+    </Resource>
+    <Resource orphan="">
+      <IDNr>23</IDNr>
+      <IDName>Anesthesia</IDName>
+      <FunctionIDNr>58</FunctionIDNr>
+    </Resource>
+  </Resources>
+  <Times/>
+  <Playbacks>
+    <Playback type="2">END</Playback>
+  </Playbacks>
+  <Aspects scaleFunction="1" scaleAspect="1" scaleZoom="1.15">
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="0" toFn="2">
+      <Name>0|Fast exam=positive
+race score&gt;= 5|2|I</Name>
+      <Curve>291.350|193.550|358.350|266.700|341.600|266.700|308.100|193.550|324.850|230.125</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="0" toFn="3">
+      <Name>0|Fast exam=positive
+race score&gt;= 5|3|I</Name>
+      <Curve>291.350|193.550|324.900|172.900|316.512|172.900|299.738|193.550|308.125|183.225</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="1" toFn="14">
+      <Name>1|Written report with the patient's chart|14|P</Name>
+      <Curve>549.900|146.550|599.200|297.400|574.550|297.400|562.225|146.550|568.388|221.975</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="1" toFn="14">
+      <Name>1|Race score/sheet|14|P</Name>
+      <Curve>549.900|146.550|599.200|297.400|574.550|297.400|562.225|146.550|568.388|221.975</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="1" toFn="14">
+      <Name>1|Transfer through ambulance|14|I</Name>
+      <Curve>549.900|146.550|577.200|259.400|570.375|259.400|556.725|146.550|563.550|202.975</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="1" toFn="57">
+      <Name>1|Activating a code stroke (ambulance)|57|I</Name>
+      <Curve>549.900|146.550|672.100|331.350|641.550|331.350|580.450|146.550|611.000|238.950</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="2" toFn="3">
+      <Name>2|Patient information (vital signs, getting hit, and patient history)|3|R</Name>
+      <Curve>445.850|266.700|390.400|210.900|438.125|210.900|465.850|238.800|451.988|224.850</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="3" toFn="1">
+      <Name>3|Relaying information to emergency department|1|I</Name>
+      <Curve>412.400|172.900|462.400|146.550|449.900|146.550|424.900|172.900|437.400|159.725</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="3" toFn="14">
+      <Name>3|Relaying information to emergency department|14|R</Name>
+      <Curve>412.400|172.900|642.700|297.400|642.700|317.400|432.400|317.400|585.125|317.400</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="3" toFn="57">
+      <Name>3|Activating a code stroke (ambulance)|57|I</Name>
+      <Curve>412.400|172.900|672.100|331.350|607.175|331.350|477.325|172.900|542.250|252.125</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="4" toFn="0">
+      <Name>4|Potential stroke|0|I</Name>
+      <Curve>123.150|157.550|203.850|193.550|183.675|193.550|143.325|157.550|163.500|175.550</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="5" toFn="4">
+      <Name>5|Tablet|4|R</Name>
+      <Curve>233.500|382.750|101.150|195.550|187.325|195.550|253.500|289.150|220.412|242.350</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="6" toFn="4">
+      <Name>6|Triage system|4|P</Name>
+      <Curve>109.100|273.200|57.650|195.550|37.650|214.963|129.100|214.963|83.375|214.963</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="7" toFn="4">
+      <Name>7|Trained staff|4|R</Name>
+      <Curve>143.250|366.900|101.150|195.550|142.200|195.550|163.250|281.225|152.725|238.387</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="8" toFn="0">
+      <Name>8|Diagnostic and assessment tools: fast score and race score|0|R</Name>
+      <Curve>336.100|354.700|269.350|231.550|322.725|231.550|356.100|293.125|339.413|262.337</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="9" toFn="4">
+      <Name>9|Dispatch system|4|R</Name>
+      <Curve>201.050|287.700|101.150|195.550|171.100|195.550|221.050|241.625|196.075|218.588</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="10" toFn="4">
+      <Name>10|Emergency medical responder guideline|4|C</Name>
+      <Curve>106.900|70.200|101.150|119.550|101.150|94.875|104.025|70.200|102.588|82.537</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="11" toFn="0">
+      <Name>11|Care paramedicine guideline|0|C</Name>
+      <Curve>224.500|110.100|269.350|155.550|269.350|132.825|246.925|110.100|258.138|121.463</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="11" toFn="1">
+      <Name>11|Care paramedicine guideline|1|C</Name>
+      <Curve>224.500|110.100|527.900|108.550|527.900|88.550|244.500|88.550|452.050|88.550</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="11" toFn="2">
+      <Name>11|Care paramedicine guideline|2|C</Name>
+      <Curve>224.500|110.100|423.850|228.700|423.850|169.400|324.175|110.100|374.013|139.750</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="11" toFn="3">
+      <Name>11|Care paramedicine guideline|3|C</Name>
+      <Curve>224.500|110.100|390.400|134.900|390.400|122.500|307.450|110.100|348.925|116.300</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="12" toFn="0">
+      <Name>12|NL paramedicine regulation|0|C</Name>
+      <Curve>345.000|56.950|269.350|155.550|327.175|155.550|365.000|106.250|346.087|130.900</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="12" toFn="1">
+      <Name>12|NL paramedicine regulation|1|C</Name>
+      <Curve>345.000|56.950|527.900|108.550|527.900|82.750|436.450|56.950|482.175|69.850</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="12" toFn="2">
+      <Name>12|NL paramedicine regulation|2|C</Name>
+      <Curve>345.000|56.950|423.850|228.700|423.850|142.825|384.425|56.950|404.138|99.887</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="12" toFn="3">
+      <Name>12|NL paramedicine regulation|3|C</Name>
+      <Curve>345.000|56.950|390.400|134.900|390.400|95.925|367.700|56.950|379.050|76.438</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="27">
+      <Name>13|An order from the neurologist|27|P</Name>
+      <Curve>893.550|233.150|1474.850|511.450|1184.200|511.450|1038.875|233.150|1111.537|372.300</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="30">
+      <Name>13|An order from the neurologist|30|I</Name>
+      <Curve>893.550|233.150|1452.550|290.700|1312.800|290.700|1033.300|233.150|1173.050|261.925</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="42">
+      <Name>13|An order from the neurologist|42|I</Name>
+      <Curve>893.550|233.150|1314.900|140.600|1209.563|140.600|998.888|233.150|1104.225|186.875</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="18">
+      <Name>13|A candidate for ICU|18|I</Name>
+      <Curve>893.550|233.150|931.450|286.300|921.975|286.300|903.025|233.150|912.500|259.725</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="51">
+      <Name>13|Arranging physical exam|51|I</Name>
+      <Curve>893.550|233.150|1199.150|261.700|1122.750|261.700|969.950|233.150|1046.350|247.425</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="52">
+      <Name>13|Medication optimization/management|52|I</Name>
+      <Curve>893.550|233.150|1088.250|75.250|1039.575|75.250|942.225|233.150|990.900|154.200</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="16">
+      <Name>13|Arranging for a CT scan|16|I</Name>
+      <Curve>893.550|233.150|699.100|200.200|679.100|216.675|913.550|216.675|796.325|216.675</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="58">
+      <Name>13|EVT candidate|58|I</Name>
+      <Curve>893.550|233.150|847.100|393.300|827.100|333.244|913.550|293.206|870.325|313.225</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="36">
+      <Name>13|Not EVT candidate|36|I</Name>
+      <Curve>893.550|233.150|1082.750|237.000|1035.450|237.000|940.850|233.150|988.150|235.075</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="67">
+      <Name>13|TNK candidate|67|I</Name>
+      <Curve>893.550|233.150|878.950|156.800|882.600|156.800|889.900|233.150|886.250|194.975</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="66">
+      <Name>13|Bleeding|66|I</Name>
+      <Curve>893.550|233.150|789.300|56.350|769.300|122.650|913.550|166.850|841.425|144.750</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="14">
+      <Name>13|No stroke|14|I</Name>
+      <Curve>893.550|233.150|577.200|259.400|557.200|246.275|913.550|246.275|735.375|246.275</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="55">
+      <Name>13|No stroke|55|I</Name>
+      <Curve>893.550|233.150|590.000|145.150|570.000|189.150|913.550|189.150|741.775|189.150</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="16">
+      <Name>13|Repeating the CT scan|16|I</Name>
+      <Curve>893.550|233.150|699.100|200.200|679.100|216.675|913.550|216.675|796.325|216.675</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="58">
+      <Name>13|TNK &amp; EVT candidate|58|I</Name>
+      <Curve>893.550|233.150|847.100|393.300|827.100|333.244|913.550|293.206|870.325|313.225</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="13" toFn="67">
+      <Name>13|TNK &amp; EVT candidate|67|I</Name>
+      <Curve>893.550|233.150|878.950|156.800|882.600|156.800|889.900|233.150|886.250|194.975</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="14" toFn="15">
+      <Name>14|Introducing the patient to a triage nurse|15|I</Name>
+      <Curve>664.700|259.400|592.750|471.750|572.750|392.119|684.700|339.031|628.725|365.575</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="14" toFn="55">
+      <Name>14|Introducing the patient to an emergency physician|55|I</Name>
+      <Curve>664.700|259.400|590.000|145.150|570.000|202.275|684.700|202.275|627.350|202.275</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="14" toFn="36">
+      <Name>14|Transfer the patient to stroke unit|36|I</Name>
+      <Curve>664.700|259.400|1082.750|237.000|978.237|237.000|769.213|259.400|873.725|248.200</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="14" toFn="13">
+      <Name>14|Assigning the patient to a neurologist from ED|13|I</Name>
+      <Curve>664.700|259.400|806.050|233.150|770.712|233.150|700.038|259.400|735.375|246.275</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="15" toFn="57">
+      <Name>15|Activating a code stroke|57|I</Name>
+      <Curve>680.250|471.750|672.100|331.350|674.138|331.350|678.212|471.750|676.175|401.550</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="15" toFn="13">
+      <Name>15|Triage nurse's neurological assessment|13|P</Name>
+      <Curve>680.250|471.750|828.050|271.150|791.100|371.450|717.200|471.750|754.150|421.600</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="16" toFn="13">
+      <Name>16|CTA|13|R</Name>
+      <Curve>786.600|200.200|871.550|271.150|871.550|291.150|806.600|291.150|850.313|291.150</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="16" toFn="17">
+      <Name>16|CTA|17|R</Name>
+      <Curve>786.600|200.200|1071.500|196.150|1071.500|216.150|806.600|216.150|1000.275|216.150</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="16" toFn="72">
+      <Name>16|CTA|72|R</Name>
+      <Curve>786.600|200.200|825.000|392.350|825.000|412.350|806.600|412.350|815.400|412.350</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="17" toFn="36">
+      <Name>17|Transferring the patient from ICU to stroke unit|36|I</Name>
+      <Curve>1093.500|158.150|1082.750|237.000|1085.438|237.000|1090.813|158.150|1088.125|197.575</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="17" toFn="16">
+      <Name>17|Repeating the CT scan|16|I</Name>
+      <Curve>1093.500|158.150|699.100|200.200|679.100|179.175|1113.500|179.175|896.300|179.175</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="18" toFn="17">
+      <Name>18|ICU = informed|17|I</Name>
+      <Curve>1018.950|286.300|1006.000|158.150|1009.237|158.150|1015.713|286.300|1012.475|222.225</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="18" toFn="58">
+      <Name>18|Anesthesia|58|R</Name>
+      <Curve>1018.950|286.300|912.600|431.300|985.775|431.300|1038.950|358.800|1012.363|395.050</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="18" toFn="17">
+      <Name>18|Anesthesia assistant|17|R</Name>
+      <Curve>1018.950|286.300|1071.500|196.150|1071.500|241.225|1045.225|286.300|1058.362|263.763</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="18" toFn="17">
+      <Name>18|Angio suite|17|P</Name>
+      <Curve>1018.950|286.300|1028.000|196.150|1025.737|241.225|1021.213|286.300|1023.475|263.763</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="18" toFn="48">
+      <Name>18|ICU resident notification for ICU nurse|48|P</Name>
+      <Curve>1018.950|286.300|1026.700|383.100|1022.825|383.100|1020.888|286.300|1021.856|334.700</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="19" toFn="13">
+      <Name>19|SOP|13|C</Name>
+      <Curve>739.000|57.600|871.550|195.150|871.550|126.375|805.275|57.600|838.412|91.987</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="19" toFn="15">
+      <Name>19|SOP|15|C</Name>
+      <Curve>739.000|57.600|658.250|433.750|718.625|433.750|759.000|245.675|738.813|339.712</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="19" toFn="16">
+      <Name>19|SOP|16|C</Name>
+      <Curve>739.000|57.600|764.600|162.200|764.600|109.900|751.800|57.600|758.200|83.750</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="19" toFn="17">
+      <Name>19|SOP|17|C</Name>
+      <Curve>739.000|57.600|1071.500|120.150|1071.500|88.875|905.250|57.600|988.375|73.238</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="19" toFn="18">
+      <Name>19|SOP|18|C</Name>
+      <Curve>739.000|57.600|996.950|248.300|996.950|152.950|867.975|57.600|932.463|105.275</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="19" toFn="55">
+      <Name>19|SOP|55|C</Name>
+      <Curve>739.000|57.600|655.500|107.150|717.250|107.150|759.000|82.375|738.125|94.763</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="20" toFn="16">
+      <Name>20|CT scanner|16|R</Name>
+      <Curve>794.800|485.100|764.600|238.200|799.700|238.200|814.800|361.650|807.250|299.925</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="25" toFn="21">
+      <Name>25|End of life|21|I</Name>
+      <Curve>1903.600|254.850|1948.900|475.850|1937.575|475.850|1914.925|254.850|1926.250|365.350</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="25" toFn="22">
+      <Name>25|Alpha FIM &gt; 80|22|I</Name>
+      <Curve>1903.600|254.850|1992.650|145.750|1970.388|145.750|1925.862|254.850|1948.125|200.300</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="25" toFn="23">
+      <Name>25|Alpha FIM &gt; 80|23|I</Name>
+      <Curve>1903.600|254.850|1976.750|312.600|1958.463|312.600|1921.887|254.850|1940.175|283.725</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="25" toFn="26">
+      <Name>25|Alpha FIM &gt; 80|26|I</Name>
+      <Curve>1903.600|254.850|1882.300|138.750|1862.300|196.800|1923.600|196.800|1892.950|196.800</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="25" toFn="34">
+      <Name>25|Alpha FIM &gt; 80|34|I</Name>
+      <Curve>1903.600|254.850|1990.450|52.800|1968.737|52.800|1925.313|254.850|1947.025|153.825</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="25" toFn="24">
+      <Name>25|Alpha FIM &lt; 40|24|I</Name>
+      <Curve>1903.600|254.850|1961.600|389.400|1947.100|389.400|1918.100|254.850|1932.600|322.125</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="25" toFn="54">
+      <Name>25|Discharge summary|54|I</Name>
+      <Curve>1903.600|254.850|1777.100|131.800|1757.100|177.944|1923.600|208.706|1840.350|193.325</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="25" toFn="59">
+      <Name>25|60 &lt;= Alpha FIM &lt;= 80|59|I</Name>
+      <Curve>1903.600|254.850|1993.450|236.000|1970.987|236.000|1926.063|254.850|1948.525|245.425</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="26" toFn="22">
+      <Name>26|Alpha FIM &gt; 80 (personal care home)|22|I</Name>
+      <Curve>1969.800|138.750|1992.650|145.750|1986.938|145.750|1975.513|138.750|1981.225|142.250</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="26" toFn="34">
+      <Name>26|Alpha FIM &gt; 80 (personal care home)|34|I</Name>
+      <Curve>1969.800|138.750|1990.450|52.800|1985.287|52.800|1974.963|138.750|1980.125|95.775</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="26" toFn="24">
+      <Name>26|Alpha FIM &lt; 40 (personal care home)|24|I</Name>
+      <Curve>1969.800|138.750|1961.600|389.400|1963.650|389.400|1967.750|138.750|1965.700|264.075</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="27" toFn="25">
+      <Name>27|Discharge planning (discharge summary)|25|R</Name>
+      <Curve>1540.350|473.450|1881.600|292.850|1881.600|383.150|1710.975|473.450|1796.287|428.300</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="27" toFn="25">
+      <Name>27|Discharge planner|25|P</Name>
+      <Curve>1540.350|473.450|1838.100|292.850|1763.662|383.150|1614.787|473.450|1689.225|428.300</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="27" toFn="35">
+      <Name>27|Social worker assessment|35|P</Name>
+      <Curve>1540.350|473.450|1330.550|297.600|1310.550|319.581|1560.350|363.544|1435.450|341.563</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="27" toFn="29">
+      <Name>27|Coordinating with a home support coordinator|29|I</Name>
+      <Curve>1540.350|473.450|1820.150|449.950|1750.200|449.950|1610.300|473.450|1680.250|461.700</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="28" toFn="25">
+      <Name>28|Family member|25|P</Name>
+      <Curve>1853.550|360.300|1838.100|292.850|1818.100|309.713|1873.550|309.713|1845.825|309.713</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="28" toFn="71">
+      <Name>28|Family member|71|P</Name>
+      <Curve>1853.550|360.300|1705.000|213.000|1685.000|231.412|1873.550|268.238|1779.275|249.825</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="29" toFn="25">
+      <Name>29|Time for toileting, bathing, ...|25|R</Name>
+      <Curve>1907.650|449.950|1881.600|292.850|1914.625|292.850|1927.650|371.400|1921.138|332.125</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="30" toFn="13">
+      <Name>30|Speech language pathologist assessment|13|R</Name>
+      <Curve>1540.050|290.700|871.550|271.150|1225.800|271.150|1560.050|280.925|1392.925|276.037</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="30" toFn="27">
+      <Name>30|Speech language pathologist assessment|27|P</Name>
+      <Curve>1540.050|290.700|1474.850|511.450|1474.850|531.450|1560.050|531.450|1491.150|531.450</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="30" toFn="31">
+      <Name>30|Speech language pathologist assessment|31|R</Name>
+      <Curve>1540.050|290.700|1519.750|421.200|1549.900|421.200|1560.050|355.950|1554.975|388.575</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="30" toFn="35">
+      <Name>30|Speech language pathologist assessment|35|P</Name>
+      <Curve>1540.050|290.700|1330.550|297.600|1330.550|317.600|1560.050|317.600|1382.925|317.600</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="30" toFn="37">
+      <Name>30|Speech language pathologist assessment|37|R</Name>
+      <Curve>1540.050|290.700|1373.150|449.250|1476.600|449.250|1560.050|369.975|1518.325|409.613</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="30" toFn="40">
+      <Name>30|Speech language pathologist assessment|40|R</Name>
+      <Curve>1540.050|290.700|1266.650|192.800|1423.350|192.800|1560.050|241.750|1491.700|217.275</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="30" toFn="42">
+      <Name>30|Speech language pathologist assessment|42|R</Name>
+      <Curve>1540.050|290.700|1380.400|178.600|1480.225|178.600|1560.050|234.650|1520.138|206.625</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="30" toFn="68">
+      <Name>30|Speech language pathologist assessment|68|R</Name>
+      <Curve>1540.050|290.700|1746.050|315.100|1746.050|335.100|1560.050|335.100|1694.550|335.100</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="31" toFn="27">
+      <Name>31|Dietitian assessment|27|P</Name>
+      <Curve>1541.750|383.200|1474.850|511.450|1474.850|531.450|1561.750|531.450|1491.575|531.450</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="31" toFn="35">
+      <Name>31|Dietitian assessment|35|P</Name>
+      <Curve>1541.750|383.200|1330.550|297.600|1310.550|319.000|1561.750|319.000|1436.150|319.000</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="31" toFn="37">
+      <Name>31|Dietitian assessment|37|R</Name>
+      <Curve>1541.750|383.200|1373.150|449.250|1477.450|449.250|1561.750|416.225|1519.600|432.738</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="31" toFn="68">
+      <Name>31|Dietitian assessment|68|R</Name>
+      <Curve>1541.750|383.200|1746.050|315.100|1746.050|349.150|1643.900|383.200|1694.975|366.175</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="32" toFn="27">
+      <Name>32|Physiotherapist assessment|27|P</Name>
+      <Curve>1539.200|113.250|1474.850|511.450|1474.850|531.450|1559.200|531.450|1490.938|531.450</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="32" toFn="35">
+      <Name>32|Physiotherapist assessment|35|P</Name>
+      <Curve>1539.200|113.250|1330.550|297.600|1330.550|317.600|1559.200|317.600|1382.713|317.600</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="32" toFn="37">
+      <Name>32|Physiotherapist assessment|37|R</Name>
+      <Curve>1539.200|113.250|1373.150|449.250|1476.175|449.250|1559.200|281.250|1517.688|365.250</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="32" toFn="68">
+      <Name>32|Physiotherapist assessment|68|R</Name>
+      <Curve>1539.200|113.250|1746.050|315.100|1746.050|335.100|1559.200|335.100|1694.338|335.100</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="32" toFn="68">
+      <Name>32|Calculating Alpha FIM score|68|I</Name>
+      <Curve>1539.200|113.250|1680.550|277.100|1645.213|277.100|1574.537|113.250|1609.875|195.175</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="33" toFn="27">
+      <Name>33|Occupational therapist assessment|27|P</Name>
+      <Curve>1538.450|203.550|1474.850|511.450|1474.850|531.450|1558.450|531.450|1490.750|531.450</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="33" toFn="35">
+      <Name>33|Occupational therapist assessment|35|P</Name>
+      <Curve>1538.450|203.550|1330.550|297.600|1330.550|317.600|1558.450|317.600|1382.525|317.600</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="33" toFn="37">
+      <Name>33|Occupational therapist assessment|37|R</Name>
+      <Curve>1538.450|203.550|1373.150|449.250|1475.800|449.250|1558.450|326.400|1517.125|387.825</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="33" toFn="68">
+      <Name>33|Occupational therapist assessment|68|R</Name>
+      <Curve>1538.450|203.550|1746.050|315.100|1746.050|335.100|1558.450|335.100|1694.150|335.100</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="33" toFn="68">
+      <Name>33|Calculating Alpha FIM score|68|I</Name>
+      <Curve>1538.450|203.550|1680.550|277.100|1645.025|277.100|1573.975|203.550|1609.500|240.325</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="35" toFn="27">
+      <Name>35|Asking a social worker to keep track of the patient|27|I</Name>
+      <Curve>1396.050|259.600|1452.850|473.450|1438.650|473.450|1410.250|259.600|1424.450|366.525</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="35" toFn="32">
+      <Name>35|Asking a physiotherapist to keep track of the patient|32|I</Name>
+      <Curve>1396.050|259.600|1451.700|113.250|1437.787|113.250|1409.963|259.600|1423.875|186.425</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="35" toFn="33">
+      <Name>35|Asking a occupational therapist to keep track of the patient|33|I</Name>
+      <Curve>1396.050|259.600|1450.950|203.550|1437.225|203.550|1409.775|259.600|1423.500|231.575</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="35" toFn="30">
+      <Name>35|Asking a speech language pathologist to keep track of the patient|30|I</Name>
+      <Curve>1396.050|259.600|1452.550|290.700|1438.425|290.700|1410.175|259.600|1424.300|275.150</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="35" toFn="31">
+      <Name>35|Asking a clinical nutritionist to keep track of the patient|31|I</Name>
+      <Curve>1396.050|259.600|1454.250|383.200|1439.700|383.200|1410.600|259.600|1425.150|321.400</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="35" toFn="71">
+      <Name>35|Family meeting|71|I</Name>
+      <Curve>1396.050|259.600|1683.000|175.000|1611.263|175.000|1467.787|259.600|1539.525|217.300</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="36" toFn="40">
+      <Name>36|Assigning the patient to a nurse practitioner|40|I</Name>
+      <Curve>1170.250|237.000|1201.150|154.800|1193.425|154.800|1177.975|237.000|1185.700|195.900</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="36" toFn="46">
+      <Name>36|Assigning the patient to a resident|46|I</Name>
+      <Curve>1170.250|237.000|1205.550|360.800|1196.725|360.800|1179.075|237.000|1187.900|298.900</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="36" toFn="13">
+      <Name>36|Assigning the patient to a neurologist (stroke unit)|13|I</Name>
+      <Curve>1170.250|237.000|806.050|233.150|786.050|235.075|1190.250|235.075|988.150|235.075</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="36" toFn="35">
+      <Name>36|Holding stroke team round|35|I</Name>
+      <Curve>1170.250|237.000|1308.550|259.600|1273.975|259.600|1204.825|237.000|1239.400|248.300</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="13">
+      <Name>37|Patients' information|13|R</Name>
+      <Curve>1395.150|411.250|871.550|271.150|1153.350|271.150|1415.150|341.200|1284.250|306.175</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="17">
+      <Name>37|Patients' information|17|R</Name>
+      <Curve>1395.150|411.250|1071.500|196.150|1253.325|196.150|1415.150|303.700|1334.238|249.925</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="27">
+      <Name>37|Patients' information|27|R</Name>
+      <Curve>1395.150|411.250|1518.350|511.450|1518.350|531.450|1415.150|531.450|1487.550|531.450</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="30">
+      <Name>37|Patients' information|30|R</Name>
+      <Curve>1395.150|411.250|1518.050|328.700|1518.050|369.975|1456.600|411.250|1487.325|390.613</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="31">
+      <Name>37|Patients' information|31|R</Name>
+      <Curve>1395.150|411.250|1519.750|421.200|1519.750|441.200|1415.150|441.200|1488.600|441.200</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="32">
+      <Name>37|Patients' information|32|R</Name>
+      <Curve>1395.150|411.250|1517.200|151.250|1517.200|281.250|1456.175|411.250|1486.688|346.250</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="33">
+      <Name>37|Patients' information|33|R</Name>
+      <Curve>1395.150|411.250|1516.450|241.550|1516.450|326.400|1455.800|411.250|1486.125|368.825</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="40">
+      <Name>37|Patients' information|40|R</Name>
+      <Curve>1395.150|411.250|1266.650|192.800|1350.900|192.800|1415.150|302.025|1383.025|247.413</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="42">
+      <Name>37|Patients' information|42|R</Name>
+      <Curve>1395.150|411.250|1380.400|178.600|1407.775|178.600|1415.150|294.925|1411.463|236.762</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="46">
+      <Name>37|Patients' information|46|R</Name>
+      <Curve>1395.150|411.250|1271.050|398.800|1353.100|398.800|1415.150|405.025|1384.125|401.913</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="48">
+      <Name>37|Patients' information|48|R</Name>
+      <Curve>1395.150|411.250|1070.200|383.100|1252.675|383.100|1415.150|397.175|1333.913|390.138</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="52">
+      <Name>37|Patients' information|52|R</Name>
+      <Curve>1395.150|411.250|1153.750|113.250|1294.450|113.250|1415.150|262.250|1354.800|187.750</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="58">
+      <Name>37|Patients' information|58|P</Name>
+      <Curve>1395.150|411.250|869.100|431.300|869.100|451.300|1415.150|451.300|1000.613|451.300</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="27">
+      <Name>37|Referral|27|P</Name>
+      <Curve>1395.150|411.250|1474.850|511.450|1435.000|511.450|1415.075|411.250|1425.037|461.350</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="30">
+      <Name>37|Referral|30|I</Name>
+      <Curve>1395.150|411.250|1452.550|290.700|1438.200|290.700|1409.500|411.250|1423.850|350.975</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="30">
+      <Name>37|Referral|30|P</Name>
+      <Curve>1395.150|411.250|1474.550|328.700|1454.700|369.975|1415.000|411.250|1434.850|390.613</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="31">
+      <Name>37|Referral|31|I</Name>
+      <Curve>1395.150|411.250|1454.250|383.200|1439.475|383.200|1409.925|411.250|1424.700|397.225</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="31">
+      <Name>37|Referral|31|P</Name>
+      <Curve>1395.150|411.250|1476.250|421.200|1435.700|421.200|1415.425|411.250|1425.563|416.225</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="32">
+      <Name>37|Referral|32|I</Name>
+      <Curve>1395.150|411.250|1451.700|113.250|1437.563|113.250|1409.288|411.250|1423.425|262.250</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="32">
+      <Name>37|Referral|32|P</Name>
+      <Curve>1395.150|411.250|1473.700|151.250|1454.063|281.250|1414.788|411.250|1434.425|346.250</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="33">
+      <Name>37|Referral|33|I</Name>
+      <Curve>1395.150|411.250|1450.950|203.550|1437.000|203.550|1409.100|411.250|1423.050|307.400</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="37" toFn="33">
+      <Name>37|Referral|33|P</Name>
+      <Curve>1395.150|411.250|1472.950|241.550|1453.500|326.400|1414.600|411.250|1434.050|368.825</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="38" toFn="27">
+      <Name>38|The code of Ethics for social work|27|C</Name>
+      <Curve>1645.250|483.350|1518.350|435.450|1601.800|435.450|1665.250|459.400|1633.525|447.425</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="39" toFn="27">
+      <Name>39|Adult Protection Act|27|C</Name>
+      <Curve>1656.950|404.900|1518.350|435.450|1607.650|435.450|1676.950|420.175|1642.300|427.813</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="40" toFn="13">
+      <Name>40|Health history and neurological assessment|13|I</Name>
+      <Curve>1288.650|154.800|806.050|233.150|786.050|193.975|1308.650|193.975|1047.350|193.975</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="40" toFn="32">
+      <Name>40|Health history and neurological assessment|32|R</Name>
+      <Curve>1288.650|154.800|1517.200|151.250|1517.200|171.250|1308.650|171.250|1460.063|171.250</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="40" toFn="37">
+      <Name>40|Health history and neurological assessment|37|R</Name>
+      <Curve>1288.650|154.800|1373.150|449.250|1373.150|469.250|1308.650|469.250|1352.025|469.250</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="40" toFn="51">
+      <Name>40|Arranging physical exam|51|I</Name>
+      <Curve>1288.650|154.800|1199.150|261.700|1179.150|208.250|1308.650|208.250|1243.900|208.250</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="41" toFn="14">
+      <Name>41|Transfer through other hospitals|14|I</Name>
+      <Curve>550.250|252.150|577.200|259.400|570.463|259.400|556.987|252.150|563.725|255.775</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="42" toFn="13">
+      <Name>42|Registered nurse assessment|13|R</Name>
+      <Curve>1402.400|140.600|871.550|271.150|1156.975|271.150|1422.400|205.875|1289.688|238.512</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="42" toFn="37">
+      <Name>42|Registered nurse assessment|37|R</Name>
+      <Curve>1402.400|140.600|1373.150|449.250|1407.775|449.250|1422.400|294.925|1415.088|372.087</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="43" toFn="30">
+      <Name>43|Health-E NL system|30|R</Name>
+      <Curve>1203.850|476.400|1518.050|328.700|1518.050|402.550|1360.950|476.400|1439.500|439.475</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="43" toFn="42">
+      <Name>43|Health-E NL system|42|R</Name>
+      <Curve>1203.850|476.400|1380.400|178.600|1380.400|327.500|1292.125|476.400|1336.263|401.950</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="43" toFn="52">
+      <Name>43|Health-E NL system|52|R</Name>
+      <Curve>1203.850|476.400|1153.750|113.250|1198.800|113.250|1223.850|294.825|1211.325|204.037</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="44" toFn="13">
+      <Name>44|Canadian stroke best practices|13|C</Name>
+      <Curve>1390.850|52.000|871.550|195.150|1151.200|195.150|1410.850|123.575|1281.025|159.363</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="44" toFn="17">
+      <Name>44|Canadian stroke best practices|17|C</Name>
+      <Curve>1390.850|52.000|1071.500|120.150|1251.175|120.150|1410.850|86.075|1331.012|103.113</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="44" toFn="30">
+      <Name>44|Canadian stroke best practices|30|C</Name>
+      <Curve>1390.850|52.000|1518.050|252.700|1518.050|152.350|1454.450|52.000|1486.250|102.175</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="44" toFn="31">
+      <Name>44|Canadian stroke best practices|31|C</Name>
+      <Curve>1390.850|52.000|1519.750|345.200|1519.750|198.600|1455.300|52.000|1487.525|125.300</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="44" toFn="32">
+      <Name>44|Canadian stroke best practices|32|C</Name>
+      <Curve>1390.850|52.000|1517.200|75.250|1517.200|63.625|1454.025|52.000|1485.612|57.813</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="44" toFn="33">
+      <Name>44|Canadian stroke best practices|33|C</Name>
+      <Curve>1390.850|52.000|1516.450|165.550|1516.450|108.775|1453.650|52.000|1485.050|80.388</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="44" toFn="35">
+      <Name>44|Canadian stroke best practices|35|C</Name>
+      <Curve>1390.850|52.000|1374.050|221.600|1402.450|221.600|1410.850|136.800|1406.650|179.200</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="44" toFn="40">
+      <Name>44|Canadian stroke best practices|40|C</Name>
+      <Curve>1390.850|52.000|1266.650|116.800|1348.750|116.800|1410.850|84.400|1379.800|100.600</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="44" toFn="42">
+      <Name>44|Canadian stroke best practices|42|C</Name>
+      <Curve>1390.850|52.000|1380.400|102.600|1405.625|102.600|1410.850|77.300|1408.237|89.950</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="44" toFn="46">
+      <Name>44|Canadian stroke best practices|46|C</Name>
+      <Curve>1390.850|52.000|1271.050|322.800|1350.950|322.800|1410.850|187.400|1380.900|255.100</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="45" toFn="30">
+      <Name>45|Eastern health policies|30|C</Name>
+      <Curve>1289.700|60.200|1518.050|252.700|1518.050|156.450|1403.875|60.200|1460.963|108.325</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="45" toFn="42">
+      <Name>45|Eastern health policies|42|C</Name>
+      <Curve>1289.700|60.200|1380.400|102.600|1380.400|81.400|1335.050|60.200|1357.725|70.800</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="46" toFn="32">
+      <Name>46|Resident assessment|32|R</Name>
+      <Curve>1293.050|360.800|1517.200|151.250|1517.200|256.025|1405.125|360.800|1461.162|308.413</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="46" toFn="51">
+      <Name>46|Arranging physical exam|51|I</Name>
+      <Curve>1293.050|360.800|1199.150|261.700|1179.150|311.250|1313.050|311.250|1246.100|311.250</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="47" toFn="30">
+      <Name>47|Swallowing guidlines|30|C</Name>
+      <Curve>1761.900|442.300|1518.050|252.700|1659.975|252.700|1781.900|347.500|1720.938|300.100</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="48" toFn="17">
+      <Name>48|Registered nurse (ICU) assessment|17|R</Name>
+      <Curve>1092.200|345.100|1071.500|196.150|1101.850|196.150|1112.200|270.625|1107.025|233.388</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="49" toFn="58">
+      <Name>49|Anesthesia|58|R</Name>
+      <Curve>918.500|501.350|912.600|431.300|912.600|466.325|915.550|501.350|914.075|483.838</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="50" toFn="48">
+      <Name>50|TNK and TPA protocol|48|C</Name>
+      <Curve>1019.000|60.200|1070.200|307.100|1070.200|183.650|1044.600|60.200|1057.400|121.925</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="50" toFn="67">
+      <Name>50|TNK and TPA protocol|67|C</Name>
+      <Curve>1019.000|60.200|944.450|118.800|1001.725|118.800|1039.000|89.500|1020.362|104.150</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="51" toFn="35">
+      <Name>51|Physical exam result|35|R</Name>
+      <Curve>1286.650|261.700|1374.050|297.600|1374.050|317.600|1306.650|317.600|1352.200|317.600</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="51" toFn="52">
+      <Name>51|Physical exam result|52|P</Name>
+      <Curve>1286.650|261.700|1110.250|113.250|1090.250|131.806|1306.650|168.919|1198.450|150.363</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="53" toFn="14">
+      <Name>53|Transfer through family caregivers|14|I</Name>
+      <Curve>550.100|355.300|577.200|259.400|570.425|259.400|556.875|355.300|563.650|307.350</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="55" toFn="57">
+      <Name>55|Activating a code stroke|57|I</Name>
+      <Curve>677.500|145.150|672.100|331.350|673.450|331.350|676.150|145.150|674.800|238.250</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="55" toFn="13">
+      <Name>55|Emergency physician's neurological assessment|13|P</Name>
+      <Curve>677.500|145.150|828.050|271.150|752.775|271.150|715.138|145.150|733.956|208.150</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="56" toFn="17">
+      <Name>56|Available bed|17|P</Name>
+      <Curve>1188.300|378.100|1028.000|196.150|1008.000|218.894|1208.300|264.381|1108.150|241.638</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="56" toFn="36">
+      <Name>56|Available bed|36|P</Name>
+      <Curve>1188.300|378.100|1104.750|275.000|1084.750|300.775|1208.300|300.775|1146.525|300.775</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="57" toFn="13">
+      <Name>57|Code stroke|13|I</Name>
+      <Curve>759.600|331.350|806.050|233.150|794.438|233.150|771.212|331.350|782.825|282.250</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="57" toFn="16">
+      <Name>57|Code stroke|16|I</Name>
+      <Curve>759.600|331.350|699.100|200.200|679.100|249.381|779.600|282.169|729.350|265.775</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="57" toFn="72">
+      <Name>57|Code stroke|72|I</Name>
+      <Curve>759.600|331.350|759.500|354.350|759.525|354.350|759.575|331.350|759.550|342.850</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="58" toFn="18">
+      <Name>58|Clot was removed|18|I</Name>
+      <Curve>934.600|393.300|931.450|286.300|932.238|286.300|933.813|393.300|933.025|339.800</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="58" toFn="13">
+      <Name>58|Report to neurology team|13|R</Name>
+      <Curve>934.600|393.300|871.550|271.150|923.075|271.150|954.600|332.225|938.837|301.688</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="58" toFn="67">
+      <Name>58|TNK candidate|67|I</Name>
+      <Curve>934.600|393.300|878.950|156.800|858.950|245.488|954.600|304.613|906.775|275.050</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="60" toFn="56">
+      <Name>60|Bed assignment policy|56|C</Name>
+      <Curve>1089.400|498.250|1166.300|340.100|1166.300|320.100|1109.400|320.100|1147.075|320.100</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="61" toFn="25">
+      <Name>61|Discharge policy|25|C</Name>
+      <Curve>1804.700|53.750|1881.600|216.850|1881.600|135.300|1843.150|53.750|1862.375|94.525</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="62" toFn="32">
+      <Name>62|Electronic chart record system|32|R</Name>
+      <Curve>1644.700|231.100|1517.200|151.250|1600.950|151.250|1664.700|191.175|1632.825|171.213</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="63" toFn="32">
+      <Name>63|Cognos system|32|R</Name>
+      <Curve>1645.300|326.700|1517.200|151.250|1601.250|151.250|1665.300|238.975|1633.275|195.113</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="64" toFn="32">
+      <Name>64|Safe patient/resident handling guidelines|32|C</Name>
+      <Curve>1633.750|55.650|1517.200|75.250|1595.475|75.250|1653.750|65.450|1624.612|70.350</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="65" toFn="32">
+      <Name>65|Early mobilization guidelines|32|C</Name>
+      <Curve>1645.500|140.500|1517.200|75.250|1601.350|75.250|1665.500|107.875|1633.425|91.563</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="66" toFn="57">
+      <Name>66|Signs of stroke|57|I</Name>
+      <Curve>876.800|56.350|672.100|331.350|652.100|228.225|896.800|159.475|774.450|193.850</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="67" toFn="18">
+      <Name>67|Clot was removed|18|I</Name>
+      <Curve>966.450|156.800|931.450|286.300|911.450|237.738|986.450|205.363|948.950|221.550</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="67" toFn="13">
+      <Name>67|Report to neurology team|13|R</Name>
+      <Curve>966.450|156.800|871.550|271.150|939.000|271.150|986.450|213.975|962.725|242.563</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="67" toFn="58">
+      <Name>67|EVT candidate|58|I</Name>
+      <Curve>966.450|156.800|847.100|393.300|827.100|304.613|986.450|245.488|906.775|275.050</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="68" toFn="25">
+      <Name>68|Alpha FIM score|25|R</Name>
+      <Curve>1768.050|277.100|1881.600|292.850|1881.600|312.850|1788.050|312.850|1853.212|312.850</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="69" toFn="33">
+      <Name>69|Stroke order sheet|33|P</Name>
+      <Curve>1299.500|492.250|1472.950|241.550|1429.588|366.900|1342.862|492.250|1386.225|429.575</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="70" toFn="17">
+      <Name>70|Bed monitoring system|17|R</Name>
+      <Curve>1014.250|421.650|1071.500|196.150|1071.500|308.900|1042.875|421.650|1057.188|365.275</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="71" toFn="25">
+      <Name>71|Discharge|25|I</Name>
+      <Curve>1770.500|175.000|1816.100|254.850|1804.700|254.850|1781.900|175.000|1793.300|214.925</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="72" toFn="13">
+      <Name>72|Radiologists' report on the CT scan|13|P</Name>
+      <Curve>847.000|354.350|828.050|271.150|808.050|291.950|867.000|291.950|837.525|291.950</Curve>
+    </Aspect>
+  </Aspects>
+</FM>
