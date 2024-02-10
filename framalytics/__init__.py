@@ -1,2 +1,2 @@
 from .read_xfmv import read_xfmv
-from .visualize import plot_data
+from .visualize import visualize_network
