@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 def parse_xfmv(filename):
     # Parse the XML file
-    tree = ET.parse('FRAM model-Stroke care system.xfmv')
+    tree = ET.parse(filename)
     root = tree.getroot()
 
     # Extract data from Function elements
