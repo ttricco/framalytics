@@ -27,14 +27,14 @@ class Visualizer:
             matplotlib.use(backend)
 
         # Sets visual dimensions for plot. (Hard coded currently).
-        px = 1 / plt.rcParams['figure.dpi']  # pixel in inches
+        #px = 1 / plt.rcParams['figure.dpi']  # pixel in inches
 
         # plt.figure(figsize=(2433 * px, 657 * px), dpi=150)
 
         # Creates the figure dimensions and size.
-        plt.figure(figsize=(self.figsize_x * px, self.figsize_y * px), dpi=self.dpi)
-        plt.gca().invert_yaxis()
-        plt.axis("off")
+        #plt.figure(figsize=(self.figsize_x * px, self.figsize_y * px), dpi=self.dpi)
+        #plt.gca().invert_yaxis()
+        #plt.axis("off")
 
     def function_nodes(self):
         # Gets FRAM data in tuple form.
@@ -95,6 +95,19 @@ class Visualizer:
             # If a function/node does not have both an input and output, the face color is very light grey.
             else:
                 node_facecolors.append('#F3F3F3')
+
+
+
+        plot_x_border = (max(self.node_x_coords) - min(self.node_x_coords) + 100)/100
+        plot_y_border = (max(self.node_y_coords) - min(self.node_y_coords) + 100)/100
+
+        #px = 1   # For FnStyle = 1
+        px = 1.18  # For FnStyle = 0
+
+        # Creates the figure dimensions and size.
+        plt.figure(figsize=(plot_x_border*px, plot_y_border*px), dpi=self.dpi)
+        plt.gca().invert_yaxis()
+        plt.axis("off")
 
         # Plots nodes.
         plt.scatter(self.node_x_coords, self.node_y_coords, label=node_labels, marker='H', s=1500, facecolors=node_facecolors, edgecolors=node_colors, lw=node_lw, zorder=3)
@@ -200,9 +213,11 @@ class Visualizer:
 
 def main():
     test = Visualizer("FRAM model-Stroke care system.xfmv", 2433, 657, 150,'WebAgg')
-    # test = Visualizer("Cup Noodles.xfmv", 1200, 600, 150)
+    #test = Visualizer("Cup Noodles.xfmv",backend="WebAgg")
+    #test = Visualizer("prepare_work_example.xfmv",backend="WebAgg")
+    #test = Visualizer("leave_harbor_example.xfmv",backend="WebAgg")
 
-    # Does all the work to produce the fram visual, and displays it.
+    # Does all the work to produce the FRAM visual, and displays it.
     test.generate()
 
 
