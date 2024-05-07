@@ -1,6 +1,6 @@
 from read_xfmv import *
-from xfmv_parser import *
-import networkx as nx
+#from xfmv_parser import *
+#import networkx as nx
 import matplotlib
 import textwrap
 from matplotlib.bezier import BezierSegment
@@ -17,6 +17,7 @@ class Visualizer:
         self.figsize_x = figsize_x  # Controls x-dimension of plot display
         self.figsize_y = figsize_y  # Controls y-dimension of plot display
         self.dpi = dpi  # Controls size of plot display.
+        self.figure = None
 
         self.fram_data = None
         self.node_x_coords = []
@@ -105,9 +106,10 @@ class Visualizer:
         px = 1.18  # For FnStyle = 0
 
         # Creates the figure dimensions and size.
-        plt.figure(figsize=(plot_x_border*px, plot_y_border*px), dpi=self.dpi)
+        self.figure = plt.figure(figsize=(plot_x_border*px, plot_y_border*px), dpi=self.dpi)
         plt.gca().invert_yaxis()
         plt.axis("off")
+
 
         # Plots nodes.
         plt.scatter(self.node_x_coords, self.node_y_coords, label=node_labels, marker='H', s=1500, facecolors=node_facecolors, edgecolors=node_colors, lw=node_lw, zorder=3)
@@ -176,6 +178,11 @@ class Visualizer:
             wrapped_label = textwrap.fill(label, break_long_words=False, width=1)
             plt.annotate(wrapped_label, (x, y), ha='center', va='center', fontsize=3.5)
 
+
+
+
+
+
     def bezier_curves(self):
 
         for i in self.fram_data[2].Curve:
@@ -201,26 +208,157 @@ class Visualizer:
 
             plt.plot(x_pts, y_pts, zorder=1, color='#999999', lw=1)
 
+
+
+
     def generate(self):
         self.function_nodes()
         self.aspects()
         self.bezier_curves()
-        plt.show()
 
     def display(self):
         plt.show()
 
 
+    def generate_function_output_paths(self, output_function, input_function=None):
+        """
+
+        :param output_function: Output functionID number
+        :param input_function: Input functionID number (Optional)
+        :return:
+        """
+        #fram_data[0] = Function data
+        #fram_data[1] = Function inputs?
+        #fram_data[2] = Aspect connections (lines)
+
+
+        if(input_function == None):
+            for index, row in self.fram_data[2].iterrows():
+
+                if ((row.outputFn == None) and (row.toFn == None)):
+                    name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
+
+                    if (name_split[0] == output_function):
+                        self.bezier_curve_single(row.Curve)
+                else:
+                    if (row.outputFn == output_function):
+                        self.bezier_curve_single(row.Curve)
+
+        else:
+            for index, row in self.fram_data[2].iterrows():
+                if ((row.outputFn == None) and (row.toFn == None)):
+                    name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
+
+                    if ((name_split[0] == output_function) and (name_split[2] == input_function)):
+                        self.bezier_curve_single(row.Curve)
+                else:
+                    if((row.outputFn == output_function) and (row.toFn == input_function)):
+                        self.bezier_curve_single(row.Curve)
+
+
+
+    def generate_full_path_from_function(self,output_function):
+        """
+        Generates the full path of a starting function from itself, to the end.
+        This shows all the connections a function impacts.
+
+        :param output_function: The string value IDNr for the starting function.
+
+        :return: None. Results are displayed in a plot when called.
+        """
+        functions_in_path = []
+        already_pathed = []
+        current_function = output_function
+
+        for index, row in self.fram_data[2].iterrows():
+
+            # In the case the instance does not store the output and toFn Values, they seem to be stored in the name.
+            if((row.outputFn == None) and (row.toFn == None)):
+                name_split = row.Name.split("|") # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
+                if(name_split[0] == current_function):
+                    functions_in_path.append(name_split[2])
+                    self.bezier_curve_single(row.Curve)
+
+            # For our Stroke Care System, this is used.
+            else:
+                if (row.outputFn == current_function):
+                    functions_in_path.append(row.toFn)
+                    self.bezier_curve_single(row.Curve)
+
+        # Add this function to the path link, so that we don't repeat paths.
+        already_pathed.append(current_function)
+
+        #While all paths have not been searched
+        while(len(functions_in_path) != 0):
+            print(len(functions_in_path))
+            current_function = functions_in_path.pop()
+            if(current_function in already_pathed):
+                continue
+
+            for index, row in self.fram_data[2].iterrows():
+                if ((row.outputFn == None) and (row.toFn == None)):
+                    name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
+                    if (name_split[0] == current_function):
+                        functions_in_path.append(name_split[2])
+                        self.bezier_curve_single(row.Curve)
+
+                    # For our Stroke Care System, this is used.
+                else:
+                    if (row.outputFn == current_function):
+                        functions_in_path.append(row.toFn)
+                        self.bezier_curve_single(row.Curve)
+
+            already_pathed.append(current_function)
+
+    def bezier_curve_single(self,curve):
+        """
+        :param curve: The curve string between two aspects which is given by the parser.
+
+        :return: None. It plots the bezier curve of the given curve string.
+        """
+        # Curve coordinates
+        a = curve.split("|")
+
+        # Must be in this order!
+        control_points = [(float(a[2]), float(a[3])), (float(a[4]), float(a[5])), (float(a[8]), float(a[9])),
+                          (float(a[6]), float(a[7])), (float(a[0]), float(a[1]))]
+
+        bezier_segment = BezierSegment(control_points)
+
+        x_pts = []
+        y_pts = []
+
+        for j in range(0, 101):
+            x, y = bezier_segment.point_at_t(j / 100)
+            x_pts.append(x)
+            y_pts.append(y)
+
+        for j in range(len(x_pts)):
+            x_pts[j] = x_pts[j] - 48
+
+        for j in range(len(y_pts)):
+            y_pts[j] = y_pts[j] - 50
+
+        plt.plot(x_pts, y_pts, zorder=2, color='green', lw=1)
+
+
+
+
 def main():
-    test = Visualizer("FRAM model-Stroke care system.xfmv", 2433, 657, 150,'WebAgg')
+    test = Visualizer("FRAM model-Stroke care system.xfmv", backend='WebAgg', dpi=175)
+    #test = Visualizer("FRAM model-Stroke care system.xfmv")
     #test = Visualizer("Cup Noodles.xfmv",backend="WebAgg")
     #test = Visualizer("prepare_work_example.xfmv",backend="WebAgg")
     #test = Visualizer("leave_harbor_example.xfmv",backend="WebAgg")
 
     # Does all the work to produce the FRAM visual, and displays it.
-    test.generate()
+    test.generate()  # Generates the default model without modifications from the user.
+    test.generate_function_output_paths("1","14")  # Highlights the output paths of a specific function given its Function#.
+    #test.generate_full_path_from_function("1")
+    test.display()  # Displays the graph
 
 
 if __name__ == "__main__":
     main()
+
 
