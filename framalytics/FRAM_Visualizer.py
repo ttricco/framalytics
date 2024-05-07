@@ -1,4 +1,5 @@
-from read_xfmv import *
+#from read_xfmv import *
+from xfmv_parser import *
 #from xfmv_parser import *
 #import networkx as nx
 import matplotlib
@@ -39,7 +40,7 @@ class Visualizer:
 
     def function_nodes(self):
         # Gets FRAM data in tuple form.
-        self.fram_data = read_xfmv(self.file)
+        self.fram_data = parse_xfmv(self.file)
 
         # X,Y coordinates of Nodes and the color and labels.
         self.node_x_coords = []
