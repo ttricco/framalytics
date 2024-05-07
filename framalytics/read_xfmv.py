@@ -1,6 +1,5 @@
 # framalytics/read_xfmv.py
 from xfmv_parser import parse_xfmv
-from visualize import visualize_network
 import pandas as pd
 
 def read_xfmv(filename):
@@ -32,5 +31,4 @@ def preprocess_data(df_function, filtered_df):
     return merged_df_exporter, merged_df_importer
 
 
-def visualize(f):
-    visualize_network(f)
+
