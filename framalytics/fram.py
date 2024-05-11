@@ -135,18 +135,24 @@ class FRAM:
 
 
 def main():
+    # Initializes the Fram model by giving the associated ".xfmv" file.
+
     test = FRAM("FRAM model-Stroke care system.xfmv")
     #test = FRAM("Cup Noodles.xfmv")
     #test = FRAM("prepare_work_example.xfmv")
     #test = FRAM("leave_harbor_example.xfmv")
 
-    # Does all the work to produce the FRAM visual, and displays it.
-    #test.visualize("WebAgg")
-    #test.show_function_outputs("1")
-    #test.show_full_path_from_function("1")
-    #test.display()  # Displays the graph
+    # Shows this is a FRAM object as desired
+    # print(test)
 
-    # Testing functions
+    # Shows that the fram.py displays the FRAM model by calling the functions of the FRAM_Visualizer.py
+
+    test.visualize("WebAgg")  # Displays the default FRAM model as desired.
+    # test.show_function_outputs("1")  # Shows the output connections of a specific function based on the function IDNr.
+    # test.show_full_path_from_function("1")  # Shows the entire path associated with a starting function (using IDNr).
+    test.display()  # Displays the model.
+
+    # Calls for testing functions
 
     # test.get_functions()
     # test.find_function(id="1")

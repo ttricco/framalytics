@@ -2,8 +2,6 @@ from xfmv_parser import *
 import matplotlib
 import textwrap
 from matplotlib.bezier import BezierSegment
-
-#matplotlib.use('WebAgg')
 import matplotlib.pyplot as plt
 
 
@@ -219,7 +217,8 @@ class Visualizer:
 
 
     def generate(self, function_data, input_data, aspect_data):
-        """Generates the default FRAM model using the data given from the FRAM class
+        """
+        Generates the default FRAM model using the data given from the FRAM class
 
         :param function_data: Function Data given by FRAM class (automatic).
         :param input_data: Input Aspect Data given by FRAM class (automatic).
