@@ -3,9 +3,15 @@ from FRAM_Visualizer import *
 class FRAM:
 
     def __init__(self, filename):
+        """
+        Initializer for the FRAM class. This focuses on reading and storing all data from a given .xfmv file.
+        Additionally, it is also used to call methods and functions from the FRAM_Visualizer class.
+
+        :param filename: The name of the .xfmv file being used.
+        """
         self.filename = filename  # Name of ".xfmv" file.
 
-        fram_data = parse_xfmv(filename)  # Gets all information from .xfmv file
+        fram_data = parse_xfmv(filename)  # Gets all information from the .xfmv file
 
         self.function_data = fram_data[0]  # Function information (Hexagon nodes)
         self.input_data = fram_data[1]  # Input information for input aspect of a function
@@ -13,7 +19,7 @@ class FRAM:
 
         self.fram_model = None  # Stores the default FRAM model for alterations before displaying.
 
-        self.given_data = None  # Given data from to user to run through the FRAM (Not implemented)
+        self.given_data = None  # Given data from to user to run through the FRAM (Not implemented, pandas?)
 
         self.functions_by_id = {}  # Stores all functions in a dictionary. IDNr is the key, IDName is the value.
         self.functions_by_name = {}  # Stores all functions in a dictionary. IDName is the key, IDNr is the value.
@@ -51,10 +57,30 @@ class FRAM:
         return self.aspect_data
 
     def get_functions(self):
-        print(self.functions)
-        return self.functions
+        """
+        Prints and returns the dictionary of functions inwhich the keys are the functionID's and the values
+        are the function names.
+
+        :return: A dictionary of functions (keys = ID, values = name).
+        """
+        print(self.functions_by_id)
+        return self.functions_by_id
 
     def find_function(self, id=None, name=None):
+        """
+        Returns a functionID or name depending on the parameter given.
+
+        If the id of a function is given, the name is returned.
+        If the name of a function is given, the id is returned.
+
+        Only one of two parameters should be given, if both are given, the function returns nothing.
+
+        :param id: The IDNr of a function
+        :param name: The name of a function.
+
+        :return: The IDNr or Name of a function depending on which parameter is given.
+
+        """
         if ((id != None) and (name != None)):
             print("Only one of two parameters should be used.")
             return None
@@ -119,6 +145,15 @@ def main():
     #test.show_function_outputs("1")
     #test.show_full_path_from_function("1")
     #test.display()  # Displays the graph
+
+    # Testing functions
+
+    # test.get_functions()
+    # test.find_function(id="1")
+    # test.find_function(name="Transport the patient by ambulance")
+    # print(test.get_function_data())
+    # print(test.get_input_data())
+    # print(test.get_aspect_data())
 
 
 if __name__ == "__main__":
