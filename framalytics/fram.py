@@ -23,10 +23,14 @@ class FRAM:
 
         self.functions_by_id = {}  # Stores all functions in a dictionary. IDNr is the key, IDName is the value.
         self.functions_by_name = {}  # Stores all functions in a dictionary. IDName is the key, IDNr is the value.
+        self.connections = {}  # Stores the connections between two aspects and the number of times it's traversed.
 
         for index, row in self.function_data.iterrows():
             self.functions_by_id.update({row.IDNr: row.IDName})
             self.functions_by_name.update({row.IDName: row.IDNr})
+
+        for index, row in self.aspect_data.iterrows():
+            self.connections.update({row.Name: 0})
 
 
     def get_function_data(self):
@@ -65,6 +69,17 @@ class FRAM:
         """
         print(self.functions_by_id)
         return self.functions_by_id
+
+    def get_connections(self):
+        """
+        Returns a list of all connections and the number of times that connection has been traversed.
+
+        :return: Dictionary of aspect connections (bezier curves).
+        """
+        for connection in self.connections.items():
+            print(connection)
+        return self.connections
+
 
     def find_function(self, id=None, name=None):
         """
@@ -133,12 +148,79 @@ class FRAM:
         self.fram_model.generate_full_path_from_function(self.aspect_data, functionID)
 
 
+    def generate_connection_traversal_count(self, output_function):
+        """
+        Generates the number of times each connection is traversed.
+
+        :param output_function: FunctionID of starting function
+
+        :return: None.
+        """
+
+        functions_in_path = []
+        already_pathed = []
+        current_function = output_function
+
+        for index, row in self.aspect_data.iterrows():
+            # In the case the instance does not store the output and toFn Values, they seem to be stored in the name.
+            if ((row.outputFn == None) and (row.toFn == None)):
+                name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
+                if (name_split[0] == current_function):
+                    functions_in_path.append(name_split[2])
+
+                    connection_count = self.connections.get(row.Name)
+                    connection_count += 1
+                    self.connections.update({row.Name: connection_count})
+
+
+            # For our Stroke Care System, this is used.
+            else:
+                if (row.outputFn == current_function):
+                    functions_in_path.append(row.toFn)
+
+                    connection_count = self.connections.get(row.Name)
+                    connection_count += 1
+                    self.connections.update({row.Name: connection_count})
+
+        # Add this function to the path link, so that we don't repeat paths.
+        already_pathed.append(current_function)
+
+        # While all paths have not been searched
+        while (len(functions_in_path) != 0):
+            current_function = functions_in_path.pop()
+            if (current_function in already_pathed):
+                continue
+
+            for index, row in self.aspect_data.iterrows():
+                if ((row.outputFn == None) and (row.toFn == None)):
+                    name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
+                    if (name_split[0] == current_function):
+                        functions_in_path.append(name_split[2])
+
+                        connection_count = self.connections.get(row.Name)
+                        connection_count += 1
+                        self.connections.update({row.Name: connection_count})
+
+                    # For our Stroke Care System, this is used.
+                else:
+                    if (row.outputFn == current_function):
+                        functions_in_path.append(row.toFn)
+
+                        connection_count = self.connections.get(row.Name)
+                        connection_count += 1
+                        self.connections.update({row.Name: connection_count})
+
+            already_pathed.append(current_function)
+
+            self.connections = dict(sorted(self.connections.items(), key=lambda item: item[1]))
+
+
 
 def main():
     # Initializes the Fram model by giving the associated ".xfmv" file.
 
-    test = FRAM("FRAM model-Stroke care system.xfmv")
-    #test = FRAM("Cup Noodles.xfmv")
+    #test = FRAM("FRAM model-Stroke care system.xfmv")
+    test = FRAM("Cup Noodles.xfmv")
     #test = FRAM("prepare_work_example.xfmv")
     #test = FRAM("leave_harbor_example.xfmv")
 
@@ -148,8 +230,15 @@ def main():
     # Shows that the fram.py displays the FRAM model by calling the functions of the FRAM_Visualizer.py
 
     test.visualize("WebAgg")  # Displays the default FRAM model as desired.
-    # test.show_function_outputs("1")  # Shows the output connections of a specific function based on the function IDNr.
-    # test.show_full_path_from_function("1")  # Shows the entire path associated with a starting function (using IDNr).
+
+    #test.show_function_outputs("0")  # Shows the output connections of a specific function based on the function IDNr.
+    test.show_full_path_from_function("1")  # Shows the entire path associated with a starting function (using IDNr).
+    test.get_connections()  # Shows all connections between aspects and the number of times it's been traversed.
+
+    print("\n\n\n\n")
+
+    test.generate_connection_traversal_count("1") # Shows how many times a connection is traversed.
+    test.get_connections()
     test.display()  # Displays the model.
 
     # Calls for testing functions
