@@ -1,5 +1,6 @@
 import unittest
 from framalytics.xfmv_parser import parse_xfmv
+import pandas as pd
 
 class TestParseXFMV(unittest.TestCase):
     def test_parse(self):
