@@ -328,7 +328,8 @@ class Visualizer:
 
             already_pathed.append(current_function)
 
-    def bezier_curve_single(self,curve):
+
+    def bezier_curve_single(self,curve,color = None):
         """
         :param curve: The curve string between two aspects which is given by the parser.
 
@@ -358,4 +359,10 @@ class Visualizer:
         for j in range(len(y_pts)):
             y_pts[j] = y_pts[j] - 50
 
-        plt.plot(x_pts, y_pts, zorder=2, color='green', lw=1)
+        if (color == None):
+            plt.plot(x_pts, y_pts, zorder=2, color='green', lw=1)
+
+        else:
+            plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
+
+
