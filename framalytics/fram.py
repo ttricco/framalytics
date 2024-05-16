@@ -1,4 +1,5 @@
 from FRAM_Visualizer import *
+import pandas as pd
 
 class FRAM:
 
@@ -15,7 +16,7 @@ class FRAM:
 
         self.function_data = fram_data[0]  # Function information (Hexagon nodes)
         self.input_data = fram_data[1]  # Input information for input aspect of a function
-        self.aspect_data = fram_data[2]  # Aspect connection data (bezier curves)
+        self._aspect_data = fram_data[2]  # Aspect connection data (bezier curves)
 
         self.fram_model = None  # Stores the default FRAM model for alterations before displaying.
 
@@ -29,7 +30,7 @@ class FRAM:
             self.functions_by_id.update({row.IDNr: row.IDName})
             self.functions_by_name.update({row.IDName: row.IDNr})
 
-        for index, row in self.aspect_data.iterrows():
+        for index, row in self._aspect_data.iterrows():
             self.connections.update({row.Name: 0})
 
 
@@ -58,7 +59,7 @@ class FRAM:
         :return: A list of aspect connection data. Each index is a different connection between two aspects.
         """
 
-        return self.aspect_data
+        return self._aspect_data
 
     def get_functions(self):
         """
@@ -119,7 +120,7 @@ class FRAM:
     def visualize(self,backend=None):
         """Visualizes the model"""
         self.fram_model = Visualizer(backend=backend, dpi=150)
-        self.fram_model.generate(self.function_data, self.input_data, self.aspect_data)
+        self.fram_model.generate(self.function_data, self.input_data, self._aspect_data)
 
     def display(self):
         plt.show()
@@ -134,7 +135,7 @@ class FRAM:
         :return: None. Highlights paths when the model is displayed.
         """
 
-        self.fram_model.generate_function_output_paths(self.aspect_data, functionID)
+        self.fram_model.generate_function_output_paths(self._aspect_data, functionID)
 
     def show_full_path_from_function(self, functionID):
         """
@@ -145,7 +146,7 @@ class FRAM:
         :return: None. Highlights paths when the model is displayed.
         """
 
-        self.fram_model.generate_full_path_from_function(self.aspect_data, functionID)
+        self.fram_model.generate_full_path_from_function(self._aspect_data, functionID)
 
 
     def generate_connection_traversal_count(self, output_function):
@@ -161,7 +162,7 @@ class FRAM:
         already_pathed = []
         current_function = output_function
 
-        for index, row in self.aspect_data.iterrows():
+        for index, row in self._aspect_data.iterrows():
             # In the case the instance does not store the output and toFn Values, they seem to be stored in the name.
             if ((row.outputFn == None) and (row.toFn == None)):
                 name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
@@ -191,7 +192,7 @@ class FRAM:
             if (current_function in already_pathed):
                 continue
 
-            for index, row in self.aspect_data.iterrows():
+            for index, row in self._aspect_data.iterrows():
                 if ((row.outputFn == None) and (row.toFn == None)):
                     name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
                     if (name_split[0] == current_function):
@@ -216,6 +217,71 @@ class FRAM:
 
 
 
+    def highlight_data(self, data):
+        """
+        Highlights the connections of all bezier curves which data instances traverse.
+        The color of the connection indicates the intensity of its usage.
+
+        :param data: A dataframe where the columns are function names, and rows are instances.
+        The values of each column should be 0 (absent) or 1 (present)
+
+        :return: None. A highlighted FRAM model.
+        """
+        total_instances = len(data)  # Total number of rows / instances from the dataframe.
+
+        for i in self.get_connections():
+            # Stores current connection name
+            connection_default = i
+
+            # Splits connection to get information
+            connection = i.split("|")
+
+            # Get output and input function ID's
+            outputFn = connection[0]
+            toFn = connection[2]
+
+            # Stores the names of the functions.
+            outputFn_name = self.functions_by_id.get(outputFn)
+            toFn_name = self.functions_by_id.get(toFn)
+
+            # Begins iterating through the dataframe to find the number of times a path is traversed
+            # This is based on if both functions in an instance have a value of 1.
+            for row in range(len(data[outputFn_name])):
+                outputFn_data_value = data[outputFn_name][row]
+                toFn_data_value = data[toFn_name][row]
+
+                if ((outputFn_data_value == 1) and (toFn_data_value == 1)):
+                    connection_value = self.connections.get(connection_default)
+                    connection_value += 1
+                    self.connections.update({connection_default: connection_value})
+
+        # Begins updating the FRAM model so that connections are color coded based on the intensity of the connections use.
+        for connection in self.connections:
+            value = self.connections.get(connection)
+
+            color = "grey"
+            if(value == 0):
+                color = "grey"
+
+            elif(value <= int(total_instances*0.25)):
+                color = "green"
+
+            elif(value <= int(total_instances*0.5)):
+                color = "yellow"
+
+            elif(value <= int(total_instances*0.75)):
+                color = "orange"
+
+            elif(value <= total_instances):
+                color = "red"
+
+            for index, row in self._aspect_data.iterrows():
+                if (row.Name == connection):
+                    self.fram_model.bezier_curve_single(row.Curve,color)
+
+
+
+
 def main():
     # Initializes the Fram model by giving the associated ".xfmv" file.
 
@@ -233,22 +299,25 @@ def main():
 
     #test.show_function_outputs("0")  # Shows the output connections of a specific function based on the function IDNr.
     test.show_full_path_from_function("1")  # Shows the entire path associated with a starting function (using IDNr).
-    test.get_connections()  # Shows all connections between aspects and the number of times it's been traversed.
+    #test.get_connections()  # Shows all connections between aspects and the number of times it's been traversed.
 
-    print("\n\n\n\n")
+    #print("\n\n\n\n")
 
-    test.generate_connection_traversal_count("1") # Shows how many times a connection is traversed.
-    test.get_connections()
+    #test.generate_connection_traversal_count("1") # Shows how many times a connection is traversed.
+    #test.get_connections()
     test.display()  # Displays the model.
 
     # Calls for testing functions
 
-    # test.get_functions()
+    #test.get_functions()
     # test.find_function(id="1")
     # test.find_function(name="Transport the patient by ambulance")
     # print(test.get_function_data())
     # print(test.get_input_data())
     # print(test.get_aspect_data())
+
+    #test.highlight_data(data)
+    #test.display()
 
 
 if __name__ == "__main__":
