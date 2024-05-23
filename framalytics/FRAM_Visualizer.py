@@ -332,6 +332,7 @@ class Visualizer:
     def bezier_curve_single(self,curve,color = None):
         """
         :param curve: The curve string between two aspects which is given by the parser.
+        :param color: The color that the curve will display.
 
         :return: None. It plots the bezier curve of the given curve string.
         """
