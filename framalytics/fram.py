@@ -1,5 +1,4 @@
 from FRAM_Visualizer import *
-import pandas as pd
 
 class FRAM:
 
@@ -77,10 +76,12 @@ class FRAM:
 
         :return: Dictionary of aspect connections (bezier curves).
         """
-        for connection in self.connections.items():
-            print(connection)
+
         return self.connections
 
+    def print_connections(self):
+        for connection in self.connections.items():
+            print(connection)
 
     def find_function(self, id=None, name=None):
         """
@@ -123,6 +124,11 @@ class FRAM:
         self.fram_model.generate(self._function_data, self._input_data, self._aspect_data)
 
     def display(self):
+        """
+        Simply displays the current FRAM Model plot.
+
+        :return: None. Displays the FRAM plot.
+        """
         plt.show()
 
 
@@ -149,13 +155,18 @@ class FRAM:
         self.fram_model.generate_full_path_from_function(self._aspect_data, functionID)
 
 
-    def highlight_data(self, data):
+    def highlight_data(self, data, appearance = "Pure"):
         """
         Highlights the connections of all bezier curves which data instances traverse.
         The color of the connection indicates the intensity of its usage.
 
         :param data: A dataframe where the columns are function names, and rows are instances.
         The values of each column should be 0 (absent) or 1 (present)
+
+        :param appearance: Determines the appearance the paths will take on when highlighted. "Pure" is for pure
+        color. "Traced" is similar to pure color, but traced in a black outline. "Expand" will have a black line,
+        but the outline of this black line will be the highlighted color, and will be wider or narrower depending on
+        how much that path is traversed.
 
         :return: None. A highlighted FRAM model.
         """
@@ -204,16 +215,42 @@ class FRAM:
 
             for index, row in self._aspect_data.iterrows():
                 if (row.Name == connection):
-                    self.fram_model.bezier_curve_single(row.Curve, color)
+                    self.fram_model.bezier_curve_single(row.Curve, color, appearance, value)
 
 
+    def list_of_connections(self):
+        """
+        Prints a list in which all indexes are also a list of two values. These values are the function names
+        of a connection. For example: [[OutputFn_name, toFn_name], OutputFn_name, toFn_name]].
+
+        :return: None. Prints all connections, in which the values are function names.
+        """
+        all_connections = []
+        for i in self.get_connections():
+            # Stores current connection name
+            connection_default = i
+
+            # Splits connection to get information
+            connection = i.split("|")
+
+            # Get output and input function ID's
+            outputFn = connection[0]
+            toFn = connection[2]
+
+            # Stores the names of the functions.
+            outputFn_name = self.functions_by_id.get(outputFn)
+            toFn_name = self.functions_by_id.get(toFn)
+
+            all_connections.append([outputFn_name, toFn_name])
+
+        print(all_connections)
 
 
 def main():
     # Initializes the Fram model by giving the associated ".xfmv" file.
 
-    #test = FRAM("FRAM model-Stroke care system.xfmv")
-    test = FRAM("Cup Noodles.xfmv")
+    test = FRAM("FRAM model-Stroke care system.xfmv")
+    #test = FRAM("Cup Noodles.xfmv")
     #test = FRAM("prepare_work_example.xfmv")
     #test = FRAM("leave_harbor_example.xfmv")
 
@@ -240,6 +277,8 @@ def main():
     #print(test.get_function_data())
     #print(test.get_input_data())
     #print(test.get_aspect_data())
+
+
 
 
 if __name__ == "__main__":
