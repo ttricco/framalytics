@@ -366,22 +366,26 @@ class Visualizer:
         for j in range(len(y_pts)):
             y_pts[j] = y_pts[j] - 50
 
+        appearance = highlighting_appearance.lower()  # Makes string lowercase to avoid needing proper casing.
+
         # Paths are purely color, no outline.
-        if (highlighting_appearance == "Pure"):
+        if (appearance == "pure"):
             plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
 
         # Similar to pure color, but with a black outline.
-        elif (highlighting_appearance == "Traced"):
+        elif (appearance == "traced"):
             plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
             plt.plot(x_pts, y_pts, zorder=1, color='black', lw=2)
 
         # A black line, but with the highlighted color being the outline.
         # This outline expands or contracts depending on the value of "expand_value".
         # This is usually between 0 - > 1.0 and is automated by the fram.py.
-        elif (highlighting_appearance == "Expand"):
+        elif (appearance == "expand"):
             plt.plot(x_pts, y_pts, zorder=2, color='black', lw=1)
             plt.plot(x_pts, y_pts, zorder=1, color= color, lw=(2+expand_value))
 
+        else:
+            print("Error! Appearance type not recognized")
 
 
 

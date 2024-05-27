@@ -119,7 +119,12 @@ class FRAM:
 
 
     def visualize(self,backend=None):
-        """Visualizes the model"""
+        """
+        Visualizes the model by calling to the Visualizer class of FRAM_Visualizer.py. This generates the default model.
+
+        :return: None. Generates the FRAM model.
+        """
+
         self.fram_model = Visualizer(backend=backend, dpi=150)
         self.fram_model.generate(self._function_data, self._input_data, self._aspect_data)
 
@@ -160,7 +165,7 @@ class FRAM:
         Highlights the connections of all bezier curves which data instances traverse.
         The color of the connection indicates the intensity of its usage.
 
-        :param data: A dataframe where the columns are function names, and rows are instances.
+        :param data: A pandas dataframe where the columns are function names and rows are instances.
         The values of each column should be 0 (absent) or 1 (present)
 
         :param appearance: Determines the appearance the paths will take on when highlighted. "Pure" is for pure
@@ -215,7 +220,7 @@ class FRAM:
 
             for index, row in self._aspect_data.iterrows():
                 if (row.Name == connection):
-                    self.fram_model.bezier_curve_single(row.Curve, color, appearance, value)
+                    self.fram_model.bezier_curve_single(row.Curve, color, appearance, (value/total_instances)*4)
 
 
     def list_of_connections(self):
@@ -278,7 +283,9 @@ def main():
     #print(test.get_input_data())
     #print(test.get_aspect_data())
 
-
+    #data = pd.read_csv("Insert CSV File.csv")
+    #test.highlight_data(data,"expand")
+    #test.display()
 
 
 if __name__ == "__main__":
