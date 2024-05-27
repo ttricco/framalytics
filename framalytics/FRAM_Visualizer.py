@@ -103,9 +103,9 @@ class Visualizer:
         plt.gca().invert_yaxis()
         plt.axis("off")
 
-        # Plots function (Hexagon) nodes.
+        # Plots function (Hexagon) nodes. (The second plot provides the black outline around the nodes).
         plt.scatter(self.node_x_coords, self.node_y_coords, label=node_labels, marker='H', s=1500, facecolors=node_facecolors, edgecolors=node_colors, lw=node_lw, zorder=3)
-
+        plt.scatter(self.node_x_coords, self.node_y_coords, label=node_labels, marker='H', s=1600, facecolors=node_facecolors, edgecolors='black', lw=node_lw, zorder=2)
         # Makes multi-line labels
         for index, row in functions.iterrows():
             wrapped_label = textwrap.fill(row.IDName, width=13)
@@ -329,9 +329,16 @@ class Visualizer:
             already_pathed.append(current_function)
 
 
-    def bezier_curve_single(self,curve,color = None):
+    def bezier_curve_single(self,curve,color = "green", highlighting_appearance = "Pure", expand_value = 0):
         """
         :param curve: The curve string between two aspects which is given by the parser.
+
+        :param color: The color that the curve will display.
+
+        :param highlighting_appearance: Determines the appearance the paths will take on when highlighted. "Pure" is for
+        pure color. "Traced" is similar to pure color, but traced in a black outline. "Expand" will have a black line,
+        but the outline of this line will be the highlighted color, and will be wider or narrower depending on
+        how much that path is traversed.
 
         :return: None. It plots the bezier curve of the given curve string.
         """
@@ -359,10 +366,29 @@ class Visualizer:
         for j in range(len(y_pts)):
             y_pts[j] = y_pts[j] - 50
 
-        if (color == None):
-            plt.plot(x_pts, y_pts, zorder=2, color='green', lw=1)
+        appearance = highlighting_appearance.lower()  # Makes string lowercase to avoid needing proper casing.
+
+        # Paths are purely color, no outline.
+        if (appearance == "pure"):
+            plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
+
+        # Similar to pure color, but with a black outline.
+        elif (appearance == "traced"):
+            plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
+            plt.plot(x_pts, y_pts, zorder=1, color='black', lw=2)
+
+        # A black line, but with the highlighted color being the outline.
+        # This outline expands or contracts depending on the value of "expand_value".
+        # This is usually between 0 - > 1.0 and is automated by the fram.py.
+        elif (appearance == "expand"):
+            plt.plot(x_pts, y_pts, zorder=2, color='black', lw=1)
+            plt.plot(x_pts, y_pts, zorder=1, color= color, lw=(2+expand_value))
 
         else:
-            plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
+            print("Error! Appearance type not recognized")
+
+
+
+
 
 
