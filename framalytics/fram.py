@@ -10,6 +10,7 @@ class FRAM:
         :param filename: The name of the .xfmv file being used.
         """
         self.filename = filename  # Name of ".xfmv" file.
+        self.backend = None
 
         fram_data = parse_xfmv(filename)  # Gets all information from the .xfmv file
 
@@ -125,6 +126,7 @@ class FRAM:
         :return: None. Generates the FRAM model.
         """
 
+        self.backend = backend
         self.fram_model = Visualizer(backend=backend, dpi=150)
         self.fram_model.generate(self._function_data, self._input_data, self._aspect_data)
 
@@ -175,6 +177,11 @@ class FRAM:
 
         :return: None. A highlighted FRAM model.
         """
+        plt.close(1) # Closes and clears old figure
+
+        # Makes new figure without the Bezier curves being produced.
+        self.fram_model.generate(self._function_data, self._input_data, self._aspect_data, False)
+
         total_instances = len(data)  # Total number of rows / instances from the dataframe.
 
         for i in self.get_connections():
@@ -283,9 +290,9 @@ def main():
     #print(test.get_input_data())
     #print(test.get_aspect_data())
 
-    #data = pd.read_csv("Insert CSV File.csv")
-    #test.highlight_data(data,"expand")
-    #test.display()
+    data = pd.read_csv("Insert .CSV File")
+    test.highlight_data(data,"Traced")
+    test.display()
 
 
 if __name__ == "__main__":

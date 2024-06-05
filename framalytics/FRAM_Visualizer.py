@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 
 
+
 class Visualizer:
 
     def __init__(self, figsize_x=1200, figsize_y=600, dpi=150, backend=None):
@@ -95,8 +96,20 @@ class Visualizer:
         plot_y_border = (max(self.node_y_coords) - min(self.node_y_coords) + 100)/100
 
         # Determines if aspects will be attached at the edges of a function, or by a distance.
-        #px = 1   # For FnStyle = 1
-        px = 1.18  # For FnStyle = 0
+        style = functions.iloc[0]["fnStyle"]
+        px = 1.18  # Default (fnStyle = 0)
+
+        if (style == "0"):
+            px = 1.18  # For FnStyle = 0
+
+        elif (style == "1"):
+            px = 1.0  # For FnStyle = 1
+
+        else:
+            px = 1.18  # For circumstances where there is no style.
+
+
+
 
         # Creates the figure dimensions and size.
         self.figure = plt.figure(figsize=(plot_x_border*px, plot_y_border*px), dpi=self.dpi)
@@ -216,19 +229,23 @@ class Visualizer:
 
 
 
-    def generate(self, function_data, input_data, aspect_data):
+    def generate(self, function_data, input_data, aspect_data,curves = True):
         """
         Generates the default FRAM model using the data given from the FRAM class
 
         :param function_data: Function Data given by FRAM class (automatic).
         :param input_data: Input Aspect Data given by FRAM class (automatic).
         :param aspect_data: Aspect Data given by FRAM class (automatic).
+        :param curves: Determines if the bezier curves are drawn or not.
 
         :return: None. Plots the default FRAM model which is displayed when called by "display()".
         """
         self.function_nodes(function_data, aspect_data)
         self.aspects()
-        self.bezier_curves(aspect_data)
+
+        # If curves == True, then we plot the bezier curves, otherwise, we don't.
+        if(curves == True):
+            self.bezier_curves(aspect_data)
 
     def display(self):
         """
@@ -370,12 +387,19 @@ class Visualizer:
 
         # Paths are purely color, no outline.
         if (appearance == "pure"):
-            plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
+            if (color == 'grey'):
+                plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1, linestyle='--')
+            else:
+                plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1,)
 
         # Similar to pure color, but with a black outline.
         elif (appearance == "traced"):
-            plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
-            plt.plot(x_pts, y_pts, zorder=1, color='black', lw=2)
+            if (color == "grey"):
+                plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1, linestyle='--')
+                #plt.plot(x_pts, y_pts, zorder=1, color='black', lw=2, linestyle='--' )
+            else:
+                plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
+                plt.plot(x_pts, y_pts, zorder=1, color='black', lw=2,)
 
         # A black line, but with the highlighted color being the outline.
         # This outline expands or contracts depending on the value of "expand_value".
