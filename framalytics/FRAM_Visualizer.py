@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 
 
+
 class Visualizer:
 
     def __init__(self, figsize_x=1200, figsize_y=600, dpi=150, backend=None):
@@ -95,17 +96,29 @@ class Visualizer:
         plot_y_border = (max(self.node_y_coords) - min(self.node_y_coords) + 100)/100
 
         # Determines if aspects will be attached at the edges of a function, or by a distance.
-        #px = 1   # For FnStyle = 1
-        px = 1.18  # For FnStyle = 0
+        style = functions.iloc[0]["fnStyle"]
+        px = 1.18  # Default (fnStyle = 0)
+
+        if (style == "0"):
+            px = 1.18  # For FnStyle = 0
+
+        elif (style == "1"):
+            px = 1.0  # For FnStyle = 1
+
+        else:
+            px = 1.18  # For circumstances where there is no style.
+
+
+
 
         # Creates the figure dimensions and size.
         self.figure = plt.figure(figsize=(plot_x_border*px, plot_y_border*px), dpi=self.dpi)
         plt.gca().invert_yaxis()
         plt.axis("off")
 
-        # Plots function (Hexagon) nodes.
+        # Plots function (Hexagon) nodes. (The second plot provides the black outline around the nodes).
         plt.scatter(self.node_x_coords, self.node_y_coords, label=node_labels, marker='H', s=1500, facecolors=node_facecolors, edgecolors=node_colors, lw=node_lw, zorder=3)
-
+        plt.scatter(self.node_x_coords, self.node_y_coords, label=node_labels, marker='H', s=1600, facecolors=node_facecolors, edgecolors='black', lw=node_lw, zorder=2)
         # Makes multi-line labels
         for index, row in functions.iterrows():
             wrapped_label = textwrap.fill(row.IDName, width=13)
@@ -216,19 +229,23 @@ class Visualizer:
 
 
 
-    def generate(self, function_data, input_data, aspect_data):
+    def generate(self, function_data, input_data, aspect_data,curves = True):
         """
         Generates the default FRAM model using the data given from the FRAM class
 
         :param function_data: Function Data given by FRAM class (automatic).
         :param input_data: Input Aspect Data given by FRAM class (automatic).
         :param aspect_data: Aspect Data given by FRAM class (automatic).
+        :param curves: Determines if the bezier curves are drawn or not.
 
         :return: None. Plots the default FRAM model which is displayed when called by "display()".
         """
         self.function_nodes(function_data, aspect_data)
         self.aspects()
-        self.bezier_curves(aspect_data)
+
+        # If curves == True, then we plot the bezier curves, otherwise, we don't.
+        if(curves == True):
+            self.bezier_curves(aspect_data)
 
     def display(self):
         """
@@ -328,9 +345,17 @@ class Visualizer:
 
             already_pathed.append(current_function)
 
-    def bezier_curve_single(self,curve):
+
+    def bezier_curve_single(self,curve,color = "green", highlighting_appearance = "Pure", expand_value = 0):
         """
         :param curve: The curve string between two aspects which is given by the parser.
+
+        :param color: The color that the curve will display.
+
+        :param highlighting_appearance: Determines the appearance the paths will take on when highlighted. "Pure" is for
+        pure color. "Traced" is similar to pure color, but traced in a black outline. "Expand" will have a black line,
+        but the outline of this line will be the highlighted color, and will be wider or narrower depending on
+        how much that path is traversed.
 
         :return: None. It plots the bezier curve of the given curve string.
         """
@@ -358,4 +383,36 @@ class Visualizer:
         for j in range(len(y_pts)):
             y_pts[j] = y_pts[j] - 50
 
-        plt.plot(x_pts, y_pts, zorder=2, color='green', lw=1)
+        appearance = highlighting_appearance.lower()  # Makes string lowercase to avoid needing proper casing.
+
+        # Paths are purely color, no outline.
+        if (appearance == "pure"):
+            if (color == 'grey'):
+                plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1, linestyle='--')
+            else:
+                plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1,)
+
+        # Similar to pure color, but with a black outline.
+        elif (appearance == "traced"):
+            if (color == "grey"):
+                plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1, linestyle='--')
+                #plt.plot(x_pts, y_pts, zorder=1, color='black', lw=2, linestyle='--' )
+            else:
+                plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
+                plt.plot(x_pts, y_pts, zorder=1, color='black', lw=2,)
+
+        # A black line, but with the highlighted color being the outline.
+        # This outline expands or contracts depending on the value of "expand_value".
+        # This is usually between 0 - > 1.0 and is automated by the fram.py.
+        elif (appearance == "expand"):
+            plt.plot(x_pts, y_pts, zorder=2, color='black', lw=1)
+            plt.plot(x_pts, y_pts, zorder=1, color= color, lw=(2+expand_value))
+
+        else:
+            print("Error! Appearance type not recognized")
+
+
+
+
+
+

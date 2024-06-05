@@ -17,6 +17,7 @@ def parse_xfmv(filename):
         'y': function_elem.attrib.get('y', None),
         'style': function_elem.attrib.get('style', None),
         'color': function_elem.attrib.get('color', None),
+        'fnStyle': function_elem.attrib.get('fnStyle', None),
         }
         function_data.append(element_data)
 
