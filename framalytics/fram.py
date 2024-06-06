@@ -261,8 +261,8 @@ class FRAM:
 def main():
     # Initializes the Fram model by giving the associated ".xfmv" file.
 
-    test = FRAM("FRAM model-Stroke care system.xfmv")
-    #test = FRAM("Cup Noodles.xfmv")
+    #test = FRAM("FRAM model-Stroke care system.xfmv")
+    test = FRAM("Cup Noodles.xfmv")
     #test = FRAM("prepare_work_example.xfmv")
     #test = FRAM("leave_harbor_example.xfmv")
 
@@ -290,8 +290,8 @@ def main():
     #print(test.get_input_data())
     #print(test.get_aspect_data())
 
-    data = pd.read_csv("Insert .CSV File")
-    test.highlight_data(data,"Traced")
+    #data = pd.read_csv("Insert .CSV file or path to .CSV file")
+    #test.highlight_data(data,"Traced")
     test.display()
 
 
