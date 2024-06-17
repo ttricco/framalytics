@@ -384,7 +384,7 @@ class FRAM:
 
         self.fram_model.generate_full_path_from_function(self._aspect_data, functionID)
 
-    def highlight_data(self, data, column_type= "functions", appearance="Pure"):
+    def highlight_data(self, data, column_type = "functions", appearance="Pure"):
         """
         Highlights the connections of all bezier curves which data instances traverse.
         The color of the connection indicates the intensity of its usage.
@@ -494,8 +494,8 @@ class FRAM:
 def main():
     # Initializes the Fram model by giving the associated ".xfmv" file.
 
-    test = FRAM("FRAM model-Stroke care system.xfmv")
-    #test = FRAM("Cup Noodles.xfmv")
+    #test = FRAM("FRAM model-Stroke care system.xfmv")
+    test = FRAM("Cup Noodles.xfmv")
     #test = FRAM("prepare_work_example.xfmv")
     #test = FRAM("leave_harbor_example.xfmv")
 
@@ -512,23 +512,23 @@ def main():
 
     # Calls for testing functions
 
-    # test.get_functions()  #Prints and returns a dictionary of all functions (key=FunctionID,value=Function Name)
+    #print(test.get_functions())  # Returns a dictionary of all functions (key=FunctionID,value=Function Name)
 
-    # test.number_of_edges()  #Prints and returns the total number of edges/connections/lines/bezier curves.
-    # test.number_of_functions()  #Prints and returns the total number of functions.
+    #test.number_of_edges()  #Prints and returns the total number of edges/connections/lines/bezier curves.
+    #test.number_of_functions()  #Prints and returns the total number of functions.
 
     # test.print_connections()  #Prints all connections neatly, row by row.
     # test.print_functions()  #Prints all functions neatly, row by row.
 
-    # test.get_function_id(name="Activate a code stroke") #Prints and returns the functionID of a given function name.
-    # test.get_function_name(id="57") #Prints and returns the name of a function for the given function ID.
+    #print(test.get_function_id(name="Activate a code stroke"))  #Prints and returns the functionID of a given function name.
+    #print(test.get_function_name(id="57"))  # Prints and returns the name of a function for the given function ID.
 
-    # print(test.get_function_inputs(name="Do stroke assessment by a care paramedic"))
-    # print(test.get_function_outputs(name="Do stroke assessment by a care paramedic"))
-    # print(test.get_function_preconditions(name="Receive a call through the dispatch system"))
-    # print(test.get_function_resources(name="Receive a call through the dispatch system"))
-    # print(test.get_function_controls(name="Transport the patient by ambulance"))
-    # print(test.get_function_times(name="To wait until tender"))
+    #print(test.get_function_inputs(name="Do stroke assessment by a care paramedic"))
+    #print(test.get_function_outputs(name="Do stroke assessment by a care paramedic"))
+    #print(test.get_function_preconditions(name="Receive a call through the dispatch system"))
+    #print(test.get_function_resources(name="Receive a call through the dispatch system"))
+    #print(test.get_function_controls(name="Transport the patient by ambulance"))
+    #print(test.get_function_times(name="To wait until tender"))
 
     # print(test.get_function_metadata())
     # print(test.get_input_data())
@@ -537,9 +537,8 @@ def main():
     # print(test.function_list)  # Prints a list of all function names
     # print(test.connections_list)  # Prints a list of all connection names
 
-
-    #data = pd.read_csv("Insert dataframe.csv or directory to .csv file")
-    #test.highlight_data(data,"Functions","Traced")
+    # data = pd.read_csv("Insert dataframe.csv or directory to .csv file")
+    # test.highlight_data(data,"Functions","Traced")
     #test.display()
 
 
