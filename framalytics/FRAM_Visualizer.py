@@ -260,8 +260,8 @@ class Visualizer:
         """
         Highlights the output paths of a function based on the given FunctionID.
 
-        :param output_function: Output functionID number
-        :param input_function: Input functionID number (Optional)
+        :param output_function: Output functionID number. (Integer).
+        :param input_function: Input functionID number (Optional) (Integer).
 
         :return: None. Highlights a functions outputs on the model.
         """
@@ -272,10 +272,10 @@ class Visualizer:
                 if ((row.outputFn == None) and (row.toFn == None)):
                     name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
 
-                    if (name_split[0] == output_function):
+                    if (int(name_split[0]) == output_function):
                         self.bezier_curve_single(row.Curve)
                 else:
-                    if (row.outputFn == output_function):
+                    if (int(row.outputFn) == output_function):
                         self.bezier_curve_single(row.Curve)
 
         else:
@@ -283,10 +283,10 @@ class Visualizer:
                 if ((row.outputFn == None) and (row.toFn == None)):
                     name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
 
-                    if ((name_split[0] == output_function) and (name_split[2] == input_function)):
+                    if ((int(name_split[0]) == output_function) and (int(name_split[2]) == input_function)):
                         self.bezier_curve_single(row.Curve)
                 else:
-                    if((row.outputFn == output_function) and (row.toFn == input_function)):
+                    if((int(row.outputFn) == output_function) and (int(row.toFn) == input_function)):
                         self.bezier_curve_single(row.Curve)
 
 
@@ -296,7 +296,7 @@ class Visualizer:
         Generates the full path of a starting function from itself, to the end.
         This shows all the connections a function impacts.
 
-        :param output_function: The string value IDNr for the starting function.
+        :param output_function: The integer value IDNr for the starting function.
 
         :return: None. Results are displayed in a plot when called.
         """
@@ -311,18 +311,18 @@ class Visualizer:
             # In the case the instance does not store the output and toFn Values, they seem to be stored in the name.
             if((row.outputFn == None) and (row.toFn == None)):
                 name_split = row.Name.split("|") # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
-                if(name_split[0] == current_function):
-                    functions_in_path.append(name_split[2])
+                if(int(name_split[0]) == current_function):
+                    functions_in_path.append(int(name_split[2]))
                     self.bezier_curve_single(row.Curve)
 
             # For our Stroke Care System, this is used.
             else:
-                if (row.outputFn == current_function):
-                    functions_in_path.append(row.toFn)
+                if (int(row.outputFn) == current_function):
+                    functions_in_path.append(int(row.toFn))
                     self.bezier_curve_single(row.Curve)
 
         # Add this function to the path link, so that we don't repeat paths.
-        already_pathed.append(current_function)
+        already_pathed.append(int(current_function))
 
         #While all paths have not been searched
         while(len(functions_in_path) != 0):
@@ -333,14 +333,14 @@ class Visualizer:
             for index, row in aspect_data.iterrows():
                 if ((row.outputFn == None) and (row.toFn == None)):
                     name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
-                    if (name_split[0] == current_function):
-                        functions_in_path.append(name_split[2])
+                    if (int(name_split[0]) == current_function):
+                        functions_in_path.append(int(name_split[2]))
                         self.bezier_curve_single(row.Curve)
 
                     # For our Stroke Care System, this is used.
                 else:
-                    if (row.outputFn == current_function):
-                        functions_in_path.append(row.toFn)
+                    if (int(row.outputFn) == current_function):
+                        functions_in_path.append(int(row.toFn))
                         self.bezier_curve_single(row.Curve)
 
             already_pathed.append(current_function)
@@ -388,14 +388,14 @@ class Visualizer:
         # Paths are purely color, no outline.
         if (appearance == "pure"):
             if (color == 'grey'):
-                plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1, linestyle='--')
+                plt.plot(x_pts, y_pts, zorder=0, color=color, lw=1, linestyle='--')
             else:
                 plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
 
         # Similar to pure color, but with a black outline.
         elif (appearance == "traced"):
             if (color == "grey"):
-                plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1, linestyle='--')
+                plt.plot(x_pts, y_pts, zorder=0, color=color, lw=1, linestyle='--')
             else:
                 plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
                 plt.plot(x_pts, y_pts, zorder=1, color='black', lw=2)
@@ -405,7 +405,7 @@ class Visualizer:
         # This is usually between 0 - > 1.0 and is automated by the fram.py.
         elif (appearance == "expand"):
             if (color == "grey"):
-                plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1, linestyle='--')
+                plt.plot(x_pts, y_pts, zorder=0, color=color, lw=1, linestyle='--')
             else:
                 plt.plot(x_pts, y_pts, zorder=2, color='black', lw=1)
                 plt.plot(x_pts, y_pts, zorder=1, color= color, lw=(2+expand_value))

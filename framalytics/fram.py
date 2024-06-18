@@ -1,5 +1,6 @@
 from FRAM_Visualizer import *
 
+
 class FRAM:
 
     def __init__(self, filename):
@@ -30,14 +31,13 @@ class FRAM:
         self.function_list = []  # Stores all function names
 
         for index, row in self._function_data.iterrows():
-            self.functions_by_id.update({row.IDNr: row.IDName})
-            self.functions_by_name.update({row.IDName: row.IDNr})
+            self.functions_by_id.update({int(row.IDNr): row.IDName})
+            self.functions_by_name.update({row.IDName: int(row.IDNr)})
             self.function_list.append(row.IDName)
 
         for index, row in self._aspect_data.iterrows():
             self.connections.update({row.Name: 0})
             self.connections_list.append(row.Name)
-
 
     def get_function_metadata(self):
         """
@@ -86,7 +86,7 @@ class FRAM:
 
     def number_of_edges(self):
         """
-        Prints and returns the number of edges (connections) in a FRAM model.
+        Returns the number of edges (connections) in a FRAM model.
 
         :return: The number of edges (connections/lines) in a FRAM model.
         """
@@ -94,18 +94,16 @@ class FRAM:
         # the total number of edges.
         number_of_edges = len(self.connections.items())
 
-        print(number_of_edges)
         return number_of_edges
 
     def number_of_functions(self):
         """
-        Prints and returns the number of functions (Hexagon nodes) in a FRAM model.
+        Returns the number of functions (Hexagon nodes) in a FRAM model.
 
         :return: The total number of features in a FRAM model.
         """
 
         number_of_functions = len(self.functions_by_id.items())
-        print(number_of_functions)
         return number_of_functions
 
     def print_connections(self):
@@ -137,39 +135,50 @@ class FRAM:
 
         :return: The FunctionID that corresponds to the given function name.
         """
+        if isinstance(name, str) == False:
+            raise Exception("Invalid input. A string value should be used.")
 
         function_id = self.functions_by_name.get(name)
-        #print(name, ": ", function_id)
         return function_id
 
     def get_function_name(self, id=None):
         """
         Given the functions ID, returns the corresponding functions name.
 
-        :param id: The ID of the function we want the name of.
+        :param id: The ID (integer) of the function we want the name of.
 
         :return: The name of the function for the corresponding given ID.
         """
+        if isinstance(id, int) == False:
+            raise Exception("Invalid input. A integer value should be used.")
 
         function_name = self.functions_by_id.get(id)
-        #print(id, ": ", function_name)
         return function_name
 
-    def get_function_inputs(self, name=None, id=None):
+    def get_function_inputs(self, function=None):
         """
         Gets a dictionary of key/value pairs that consist of the functions that serve as inputs to the input aspect
         of the desired function.
 
-        :param name: The name of the desired function we want the inputs for. (Used to find the function ID)
-        :param id: The id of the desired function we want the inputs for.
+        :param function: The ID (integer) or name (string) of the desired function.
         :return: A dictionary consisting of the functions that serve as inputs to the input aspect of the function.
         """
 
         all_connections = self.get_connections()  # Gets all connections
 
-        # If the id was not given for the function, find it using the name.
-        if id == None:
-            id = self.get_function_id(name)
+        # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
+
+        # If the function value given is a string. We consider the value is the function name and get the associated ID.
+        if isinstance(function, str):
+            id = self.get_function_id(function)
+
+        # If the function value is an integer. We consider that the value is the function ID and use it accordingly.
+        elif isinstance(function, int):
+            id = function
+
+        # Otherwise, all other value types are considered invalid and an error/exception is raised.
+        else:
+            raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
 
         function_inputs = {}  # This will store all the functions inputs in a dictionary {key=id, value = name}
 
@@ -177,33 +186,42 @@ class FRAM:
 
         for connection in all_connections.keys():
             seperated_connection = connection.split("|")
-            outputfn = seperated_connection[0]
-            tofn = seperated_connection[2]
+            outputfn = int(seperated_connection[0])  # Stored ID and user given ID are integers.
+            tofn = int(seperated_connection[2])  # Stored ID and user given ID are integers.
             aspect = seperated_connection[3]
 
         # If the connection links to the input aspect of the desired function, add the output_function id and name
         # to the dictionary of inputs.
-            if((tofn == id) and (aspect == "I")):
+            if (tofn == id) and (aspect == "I"):
                 outputfn_name = self.get_function_name(outputfn)
-                function_inputs.update({outputfn:outputfn_name})
+                function_inputs.update({outputfn: outputfn_name})
 
         return function_inputs
 
-    def get_function_outputs(self, name=None, id=None):
+    def get_function_outputs(self, function=None):
         """
         Gets a dictionary of key/value pairs that consist of the functions that use the output aspect of the desired
         function.
 
-        :param name: The name of the desired function we want the outputs for. (Used to find the function ID)
-        :param id: The id of the desired function we want the outputs for.
+        :param function: The ID (integer) or name (String) of the desired function.
         :return: A dictionary consisting of the functions that use the desired functions output aspect.
         """
 
         all_connections = self.get_connections()  # Gets all connections
 
-        # If the id was not given for the function, find it using the name.
-        if id == None:
-            id = self.get_function_id(name)
+        # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
+
+        # If the function value given is a string. We consider the value is the function name and get the associated ID.
+        if isinstance(function, str):
+            id = self.get_function_id(function)
+
+        # If the function value is an integer. We consider that the value is the function ID and use it accordingly.
+        elif isinstance(function, int):
+            id = function
+
+        # Otherwise, all other value types are considered invalid and an error/exception is raised.
+        else:
+            raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
 
         # This will store all the functions that use the desired function outputs aspect in a dictionary.
         # {key=id, value = name}
@@ -212,8 +230,8 @@ class FRAM:
         # For every connection, we separate it into 4 parts. [output_function, name, to_function(input), aspect]
         for connection in all_connections.keys():
             seperated_connection = connection.split("|")
-            outputfn = seperated_connection[0]
-            tofn = seperated_connection[2]
+            outputfn = int(seperated_connection[0])  # Stored ID and user given ID are integers.
+            tofn = int(seperated_connection[2])  # Stored ID and user given ID are integers.
             aspect = seperated_connection[3]
 
             # If the connection uses the desired function as the output fn (means it uses it's output aspect), we
@@ -224,126 +242,165 @@ class FRAM:
 
         return function_outputs
 
-    def get_function_preconditions(self, name=None, id=None):
+    def get_function_preconditions(self, function=None):
         """
         Gets a dictionary of key/value pairs that consist of the functions that serve as preconditions to the
         precondition aspect of the desired function.
 
-        :param name: The name of the desired function we want the preconditions for. (Used to find the function ID)
-        :param id: The id of the desired function we want the preconditions for.
+        :param function: The ID (integer) or name (String) of the desired function.
         :return: A dictionary consisting of the functions that serve as preconditions to the precondition aspect of the
         function.
         """
 
         all_connections = self.get_connections()  # Gets all connections
 
-        # If the id was not given for the function, find it using the name.
-        if id == None:
-            id = self.get_function_id(name)
+        # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
+
+        # If the function value given is a string. We consider the value is the function name and get the associated ID.
+        if isinstance(function, str):
+            id = self.get_function_id(function)
+
+        # If the function value is an integer. We consider that the value is the function ID and use it accordingly.
+        elif isinstance(function, int):
+            id = function
+
+        # Otherwise, all other value types are considered invalid and an error/exception is raised.
+        else:
+            raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
 
         # This will store all the functions preconditions in a dictionary {key=id, value = name}
         function_preconditions = {}
 
         for connection in all_connections.keys():
             seperated_connection = connection.split("|")
-            outputfn = seperated_connection[0]
-            tofn = seperated_connection[2]
+            outputfn = int(seperated_connection[0])  # Stored ID and user given ID are integers.
+            tofn = int(seperated_connection[2])  # Stored ID and user given ID are integers.
             aspect = seperated_connection[3]
 
-            if((tofn == id) and (aspect == "P")):
+            if (tofn == id) and (aspect == "P"):
                 outputfn_name = self.get_function_name(outputfn)
-                function_preconditions.update({outputfn:outputfn_name})
+                function_preconditions.update({outputfn: outputfn_name})
 
         return function_preconditions
 
-    def get_function_resources(self, name=None, id=None):
+    def get_function_resources(self, function=None):
         """
         Gets a dictionary of key/value pairs that consist of the functions that serve as resources to the
         resource aspect of the desired function.
 
-        :param name: The name of the desired function we want the resources for. (Used to find the function ID)
-        :param id: The id of the desired function we want the resources for.
+        :param function: The ID (integer) or name (String) of the desired function.
         :return: A dictionary consisting of the functions that serve as resources to the resource aspect of the function.
         """
 
         all_connections = self.get_connections()  # Gets all connections
 
-        # If the id was not given for the function, find it using the name.
-        if id == None:
-            id = self.get_function_id(name)
+        # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
+
+        # If the function value given is a string. We consider the value is the function name and get the associated ID.
+        if isinstance(function, str):
+            id = self.get_function_id(function)
+
+        # If the function value is an integer. We consider that the value is the function ID and use it accordingly.
+        elif isinstance(function, int):
+            id = function
+
+        # Otherwise, all other value types are considered invalid and an error/exception is raised.
+        else:
+            raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
 
         function_resources = {}  # This will store all the functions resources in a dictionary {key=id, value = name}
+
         for connection in all_connections.keys():
             seperated_connection = connection.split("|")
-            outputfn = seperated_connection[0]
-            tofn = seperated_connection[2]
+            outputfn = int(seperated_connection[0])  # Stored ID and user given ID are integers.
+            tofn = int(seperated_connection[2])  # Stored ID and user given ID are integers.
             aspect = seperated_connection[3]
 
-            if((tofn == id) and (aspect == "R")):
+            if (tofn == id) and (aspect == "R"):
                 outputfn_name = self.get_function_name(outputfn)
-                function_resources.update({outputfn:outputfn_name})
+                function_resources.update({outputfn: outputfn_name})
 
         return function_resources
 
-    def get_function_controls(self, name=None, id=None):
+    def get_function_controls(self, function=None):
         """
         Gets a dictionary of key/value pairs that consist of the functions that serve as controls to the
         time aspect of the desired function.
 
-        :param name: The name of the desired function we want the controls for. (Used to find the function ID)
-        :param id: The id of the desired function we want the controls for.
+        :param function: The ID (integer) or name (String) of the desired function.
         :return: A dictionary consisting of the functions that serve as controls to the control aspect of the function.
         """
 
         all_connections = self.get_connections()  # Gets all connections
 
-        # If the id was not given for the function, find it using the name.
-        if id == None:
-            id = self.get_function_id(name)
+        # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
+
+        # If the function value given is a string. We consider the value is the function name and get the associated ID.
+        if isinstance(function, str):
+            id = self.get_function_id(function)
+
+        # If the function value is an integer. We consider that the value is the function ID and use it accordingly.
+        elif isinstance(function, int):
+            id = function
+
+        # Otherwise, all other value types are considered invalid and an error/exception is raised.
+        else:
+            raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
 
         function_controls = {}  # This will store all the functions controls in a dictionary {key=id, value = name}
+
         for connection in all_connections.keys():
             seperated_connection = connection.split("|")
-            outputfn = seperated_connection[0]
-            tofn = seperated_connection[2]
+            outputfn = int(seperated_connection[0])  # Stored ID and user given ID are integers.
+            tofn = int(seperated_connection[2])  # Stored ID and user given ID are integers.
             aspect = seperated_connection[3]
 
-            if((tofn == id) and (aspect == "C")):
+            if (tofn == id) and (aspect == "C"):
                 outputfn_name = self.get_function_name(outputfn)
-                function_controls.update({outputfn:outputfn_name})
+                function_controls.update({outputfn: outputfn_name})
 
         return function_controls
 
-    def get_function_times(self, name=None, id=None):
+    def get_function_times(self, function=None):
         """
         Gets a dictionary of key/value pairs that consist of the functions that serve as times to the
         time aspect of the desired function.
 
-        :param name: The name of the desired function we want the times for. (Used to find the function ID)
-        :param id: The id of the desired function we want the times for.
+        :param function: The ID (integer) or name (String) of the desired function.
         :return: A dictionary consisting of the functions that serve as times to the time aspect of the function.
         """
 
         all_connections = self.get_connections()  # Gets all connections
 
-        # If the id was not given for the function, find it using the name.
-        if id == None:
-            id = self.get_function_id(name)
+        # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
+
+        # If the function value given is a string. We consider the value is the function name and get the associated ID.
+        if isinstance(function, str):
+            id = self.get_function_id(function)
+
+        # If the function value is an integer. We consider that the value is the function ID and use it accordingly.
+        elif isinstance(function, int):
+            id = function
+
+        # Otherwise, all other value types are considered invalid and an error/exception is raised.
+        else:
+            raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
 
         function_times = {}  # This will store all the functions times in a dictionary {key=id, value = name}
+
         for connection in all_connections.keys():
             seperated_connection = connection.split("|")
-            outputfn = seperated_connection[0]
-            tofn = seperated_connection[2]
+            outputfn = int(seperated_connection[0])  # Stored ID and user given ID are integers.
+            tofn = int(seperated_connection[2])  # Stored ID and user given ID are integers.
             aspect = seperated_connection[3]
 
-            if((tofn == id) and (aspect == "T")):
+            if (tofn == id) and (aspect == "T"):
                 outputfn_name = self.get_function_name(outputfn)
-                function_times.update({outputfn:outputfn_name})
+                function_times.update({outputfn: outputfn_name})
 
         return function_times
 
-    def visualize(self,backend=None):
+    def visualize(self, backend=None):
         """
         Visualizes the model by calling to the Visualizer class of FRAM_Visualizer.py. This generates the default model.
 
@@ -366,10 +423,12 @@ class FRAM:
         """
         Highlights the outputs of a function.
 
-        :param functionID: String value of the FunctionID to be used as the starting point.
+        :param functionID: Integer value of the FunctionID to be used as the starting point.
 
         :return: None. Highlights paths when the model is displayed.
         """
+        if isinstance(functionID, int) == False:
+            raise Exception("Invalid input. A integer value should be used.")
 
         self.fram_model.generate_function_output_paths(self._aspect_data, functionID)
 
@@ -377,14 +436,16 @@ class FRAM:
         """
         Highlights all the paths that are connected to a starting function.
 
-        :param functionID: String value of the FunctionID to be used as the starting point.
+        :param functionID: Integer value of the FunctionID to be used as the starting point.
 
         :return: None. Highlights paths when the model is displayed.
         """
+        if isinstance(functionID, int) == False:
+            raise Exception("Invalid input. A integer value should be used.")
 
         self.fram_model.generate_full_path_from_function(self._aspect_data, functionID)
 
-    def highlight_data(self, data, column_type = "functions", appearance="Pure"):
+    def highlight_data(self, data, column_type="functions", appearance="Pure"):
         """
         Highlights the connections of all bezier curves which data instances traverse.
         The color of the connection indicates the intensity of its usage.
@@ -402,7 +463,7 @@ class FRAM:
 
         :return: None. A highlighted FRAM model.
         """
-        plt.close(1) # Closes and clears old figure
+        plt.close(1)  # Closes and clears old figure
 
         # Makes new figure without the Bezier curves being produced.
         self.fram_model.generate(self._function_data, self._input_data, self._aspect_data, False)
@@ -420,8 +481,8 @@ class FRAM:
                 connection = i.split("|")
 
                 # Get output and input function ID's
-                outputFn = connection[0]
-                toFn = connection[2]
+                outputFn = int(connection[0])
+                toFn = int(connection[2])
 
                 # Stores the names of the functions.
                 outputFn_name = self.functions_by_id.get(outputFn)
@@ -439,7 +500,7 @@ class FRAM:
                 connection_value = len(data[(data[connection_name] == 1)])
                 self.connections.update({connection_name: connection_value})
 
-        # Begins updating the FRAM model so that connections are color coded based on the intensity of the connections use.
+    # Begins updating the FRAM model so that connections are color coded based on the intensity of the connections use.
         for connection in self.connections:
             value = self.connections.get(connection)
 
@@ -479,8 +540,8 @@ class FRAM:
             connection = i.split("|")
 
             # Get output and input function ID's
-            outputFn = connection[0]
-            toFn = connection[2]
+            outputFn = int(connection[0])
+            toFn = int(connection[2])
 
             # Stores the names of the functions.
             outputFn_name = self.functions_by_id.get(outputFn)
@@ -494,10 +555,10 @@ class FRAM:
 def main():
     # Initializes the Fram model by giving the associated ".xfmv" file.
 
-    #test = FRAM("FRAM model-Stroke care system.xfmv")
-    test = FRAM("Cup Noodles.xfmv")
-    #test = FRAM("prepare_work_example.xfmv")
-    #test = FRAM("leave_harbor_example.xfmv")
+    test = FRAM("FRAM model-Stroke care system.xfmv")
+    # test = FRAM("Cup Noodles.xfmv")
+    # test = FRAM("prepare_work_example.xfmv")
+    # test = FRAM("leave_harbor_example.xfmv")
 
     # Shows this is a FRAM object as desired
     # print(test)
@@ -506,45 +567,41 @@ def main():
 
     test.visualize("WebAgg")  # Displays the default FRAM model as desired.
 
-    # test.highlight_function_outputs("57")  # Shows the output connections of a specific function based on the function IDNr.
-    # test.highlight_full_path_from_function("57")  # Shows the entire path associated with a starting function (using IDNr).
-    # print(test.get_connections())  # Shows all connections between aspects and the number of times it's been traversed.
+    #test.highlight_function_outputs(57)  # Shows the output connections of a specific function based on the function IDNr.
+    #test.highlight_full_path_from_function(57)  # Shows the entire path associated with a starting function (using IDNr).
+    #print(test.get_connections())  # Shows all connections between aspects and the number of times it's been traversed.
 
     # Calls for testing functions
 
-    #print(test.get_functions())  # Returns a dictionary of all functions (key=FunctionID,value=Function Name)
+    # print(test.get_functions())  # Returns a dictionary of all functions (key=FunctionID,value=Function Name)
 
-    #test.number_of_edges()  #Prints and returns the total number of edges/connections/lines/bezier curves.
-    #test.number_of_functions()  #Prints and returns the total number of functions.
+    # print(test.number_of_edges())  # Prints and returns the total number of edges/connections/lines/bezier curves.
+    # print(test.number_of_functions())  # Prints and returns the total number of functions.
 
     # test.print_connections()  #Prints all connections neatly, row by row.
     # test.print_functions()  #Prints all functions neatly, row by row.
 
-    #print(test.get_function_id(name="Activate a code stroke"))  #Prints and returns the functionID of a given function name.
-    #print(test.get_function_name(id="57"))  # Prints and returns the name of a function for the given function ID.
+    # print(test.get_function_id(name="Activate a code stroke"))  #Prints and returns the functionID of a given function name.
+    # print(test.get_function_name(id=57))  # Prints and returns the name of a function for the given function ID.
 
-    #print(test.get_function_inputs(name="Do stroke assessment by a care paramedic"))
-    #print(test.get_function_outputs(name="Do stroke assessment by a care paramedic"))
-    #print(test.get_function_preconditions(name="Receive a call through the dispatch system"))
-    #print(test.get_function_resources(name="Receive a call through the dispatch system"))
-    #print(test.get_function_controls(name="Transport the patient by ambulance"))
-    #print(test.get_function_times(name="To wait until tender"))
+    #print(test.get_function_inputs("Do stroke assessment by a care paramedic"))
+    #print(test.get_function_outputs("Do stroke assessment by a care paramedic"))
+    #print(test.get_function_preconditions("Receive a call through the dispatch system"))
+    #print(test.get_function_resources("Receive a call through the dispatch system"))
+    #print(test.get_function_controls("Transport the patient by ambulance"))
+    # print(test.get_function_times("To wait until tender"))
 
-    # print(test.get_function_metadata())
-    # print(test.get_input_data())
-    # print(test.get_aspect_data())
+    #print(test.get_function_metadata())
+    #print(test.get_input_data())
+    #print(test.get_aspect_data())
 
-    # print(test.function_list)  # Prints a list of all function names
-    # print(test.connections_list)  # Prints a list of all connection names
+    #print(test.function_list)  # Prints a list of all function names
+    #print(test.connections_list)  # Prints a list of all connection names
 
-    # data = pd.read_csv("Insert dataframe.csv or directory to .csv file")
-    # test.highlight_data(data,"Functions","Traced")
-    #test.display()
-
-
+    # data = pd.read_csv("Directory to .csv")
+    # test.highlight_data(data, "Functions", "Pure")
+    # test.display()
 
 
 if __name__ == "__main__":
     main()
-
-
