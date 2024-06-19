@@ -1,4 +1,5 @@
 from FRAM_Visualizer import *
+import pandas as pd
 
 
 class FRAM:
@@ -35,9 +36,29 @@ class FRAM:
             self.functions_by_name.update({row.IDName: int(row.IDNr)})
             self.function_list.append(row.IDName)
 
+        # Each list store the designated data of all connections. Each index stores the data of a particular connection.
+        # For example, index 0 stores all the data of connection 1 over all 4 lists.
+        all_fromFn = []
+        all_toFn = []
+        all_toAspect = []
+        all_names = []
+
         for index, row in self._aspect_data.iterrows():
             self.connections.update({row.Name: 0})
             self.connections_list.append(row.Name)
+
+            # Parses the data so that the desired data of each connection goes to the designated list.
+            parsed_connection = row.Name.split("|")
+            all_fromFn.append(int(parsed_connection[0]))
+            all_names.append(parsed_connection[1])
+            all_toFn.append(int(parsed_connection[2]))
+            all_toAspect.append(parsed_connection[3])
+
+        # Generates the connections dataframe using the parsed data.
+        connection_dataframe = {'fromFn': all_fromFn, "toFn": all_toFn, "toAspect": all_toAspect, "Name": all_names}
+        self.connection_dataframe = pd.DataFrame(data=connection_dataframe)
+
+
 
     def get_function_metadata(self):
         """
@@ -77,12 +98,13 @@ class FRAM:
 
     def get_connections(self):
         """
-        Returns a list of all connections and the number of times that connection has been traversed.
+        Returns a pandas dataframe which consists of all the connections. Each instance/row is a connection and the
+        data is broken down into 4 columns. (fromFn, toFn, toAspect, Name).
 
-        :return: Dictionary of aspect connections (bezier curves).
+        :return: A pandas dataframe consisting of all connections.
         """
 
-        return self.connections
+        return self.connection_dataframe
 
     def number_of_edges(self):
         """
@@ -565,11 +587,12 @@ def main():
 
     # Shows that the fram.py displays the FRAM model by calling the functions of the FRAM_Visualizer.py
 
-    test.visualize("WebAgg")  # Displays the default FRAM model as desired.
+    # Displays the default FRAM model as desired. (Use WebAgg backend for Pycharm) (leave default for jupyter notebook)
+    test.visualize("WebAgg")
 
     #test.highlight_function_outputs(57)  # Shows the output connections of a specific function based on the function IDNr.
     #test.highlight_full_path_from_function(57)  # Shows the entire path associated with a starting function (using IDNr).
-    #print(test.get_connections())  # Shows all connections between aspects and the number of times it's been traversed.
+    #print(test.get_connections())  # Returns a connections dataframe where each row is a connection.
 
     # Calls for testing functions
 
