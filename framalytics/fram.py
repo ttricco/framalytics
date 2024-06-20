@@ -189,7 +189,6 @@ class FRAM:
         all_connections = self.get_connections()  # Gets all connections
 
         # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
-
         # If the function value given is a string. We consider the value is the function name and get the associated ID.
         if isinstance(function, str):
             id = self.get_function_id(function)
@@ -205,12 +204,11 @@ class FRAM:
         function_inputs = {}  # This will store all the functions inputs in a dictionary {key=id, value = name}
 
         # For every connection, we separate it into 4 parts. [output_function, name, to_function(input), aspect]
-
-        for connection in all_connections.keys():
-            seperated_connection = connection.split("|")
-            outputfn = int(seperated_connection[0])  # Stored ID and user given ID are integers.
-            tofn = int(seperated_connection[2])  # Stored ID and user given ID are integers.
-            aspect = seperated_connection[3]
+        for index, row in all_connections.iterrows():
+            name = row.Name
+            outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
+            tofn = int(row.toFn)  # Stored ID and user given ID are integers.
+            aspect = row.toAspect
 
         # If the connection links to the input aspect of the desired function, add the output_function id and name
         # to the dictionary of inputs.
@@ -250,11 +248,11 @@ class FRAM:
         function_outputs = {}
 
         # For every connection, we separate it into 4 parts. [output_function, name, to_function(input), aspect]
-        for connection in all_connections.keys():
-            seperated_connection = connection.split("|")
-            outputfn = int(seperated_connection[0])  # Stored ID and user given ID are integers.
-            tofn = int(seperated_connection[2])  # Stored ID and user given ID are integers.
-            aspect = seperated_connection[3]
+        for index, row in all_connections.iterrows():
+            name = row.Name
+            outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
+            tofn = int(row.toFn)  # Stored ID and user given ID are integers.
+            aspect = row.toAspect
 
             # If the connection uses the desired function as the output fn (means it uses it's output aspect), we
             # add it to the output_functions dictionary.
@@ -293,11 +291,11 @@ class FRAM:
         # This will store all the functions preconditions in a dictionary {key=id, value = name}
         function_preconditions = {}
 
-        for connection in all_connections.keys():
-            seperated_connection = connection.split("|")
-            outputfn = int(seperated_connection[0])  # Stored ID and user given ID are integers.
-            tofn = int(seperated_connection[2])  # Stored ID and user given ID are integers.
-            aspect = seperated_connection[3]
+        for index, row in all_connections.iterrows():
+            name = row.Name
+            outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
+            tofn = int(row.toFn)  # Stored ID and user given ID are integers.
+            aspect = row.toAspect
 
             if (tofn == id) and (aspect == "P"):
                 outputfn_name = self.get_function_name(outputfn)
@@ -332,11 +330,11 @@ class FRAM:
 
         function_resources = {}  # This will store all the functions resources in a dictionary {key=id, value = name}
 
-        for connection in all_connections.keys():
-            seperated_connection = connection.split("|")
-            outputfn = int(seperated_connection[0])  # Stored ID and user given ID are integers.
-            tofn = int(seperated_connection[2])  # Stored ID and user given ID are integers.
-            aspect = seperated_connection[3]
+        for index, row in all_connections.iterrows():
+            name = row.Name
+            outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
+            tofn = int(row.toFn)  # Stored ID and user given ID are integers.
+            aspect = row.toAspect
 
             if (tofn == id) and (aspect == "R"):
                 outputfn_name = self.get_function_name(outputfn)
@@ -371,11 +369,11 @@ class FRAM:
 
         function_controls = {}  # This will store all the functions controls in a dictionary {key=id, value = name}
 
-        for connection in all_connections.keys():
-            seperated_connection = connection.split("|")
-            outputfn = int(seperated_connection[0])  # Stored ID and user given ID are integers.
-            tofn = int(seperated_connection[2])  # Stored ID and user given ID are integers.
-            aspect = seperated_connection[3]
+        for index, row in all_connections.iterrows():
+            name = row.Name
+            outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
+            tofn = int(row.toFn)  # Stored ID and user given ID are integers.
+            aspect = row.toAspect
 
             if (tofn == id) and (aspect == "C"):
                 outputfn_name = self.get_function_name(outputfn)
@@ -410,11 +408,11 @@ class FRAM:
 
         function_times = {}  # This will store all the functions times in a dictionary {key=id, value = name}
 
-        for connection in all_connections.keys():
-            seperated_connection = connection.split("|")
-            outputfn = int(seperated_connection[0])  # Stored ID and user given ID are integers.
-            tofn = int(seperated_connection[2])  # Stored ID and user given ID are integers.
-            aspect = seperated_connection[3]
+        for index, row in all_connections.iterrows():
+            name = row.Name
+            outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
+            tofn = int(row.toFn)  # Stored ID and user given ID are integers.
+            aspect = row.toAspect
 
             if (tofn == id) and (aspect == "T"):
                 outputfn_name = self.get_function_name(outputfn)
@@ -607,19 +605,19 @@ def main():
     # print(test.get_function_id(name="Activate a code stroke"))  #Prints and returns the functionID of a given function name.
     # print(test.get_function_name(id=57))  # Prints and returns the name of a function for the given function ID.
 
-    #print(test.get_function_inputs("Do stroke assessment by a care paramedic"))
-    #print(test.get_function_outputs("Do stroke assessment by a care paramedic"))
-    #print(test.get_function_preconditions("Receive a call through the dispatch system"))
-    #print(test.get_function_resources("Receive a call through the dispatch system"))
-    #print(test.get_function_controls("Transport the patient by ambulance"))
+    # print(test.get_function_inputs("Do stroke assessment by a care paramedic"))
+    # print(test.get_function_outputs("Do stroke assessment by a care paramedic"))
+    # print(test.get_function_preconditions("Receive a call through the dispatch system"))
+    # print(test.get_function_resources("Receive a call through the dispatch system"))
+    # print(test.get_function_controls("Transport the patient by ambulance"))
     # print(test.get_function_times("To wait until tender"))
 
-    #print(test.get_function_metadata())
-    #print(test.get_input_data())
-    #print(test.get_aspect_data())
+    # print(test.get_function_metadata())
+    # print(test.get_input_data())
+    # print(test.get_aspect_data())
 
-    #print(test.function_list)  # Prints a list of all function names
-    #print(test.connections_list)  # Prints a list of all connection names
+    # print(test.function_list)  # Prints a list of all function names
+    # print(test.connections_list)  # Prints a list of all connection names
 
     # data = pd.read_csv("Directory to .csv")
     # test.highlight_data(data, "Functions", "Pure")
