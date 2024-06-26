@@ -424,6 +424,8 @@ class FRAM:
         """
         Visualizes the model by calling to the Visualizer class of FRAM_Visualizer.py. This generates the default model.
 
+        :param backend: The backend matplotlib will use to display the model through the Visualizer class.
+
         :return: None. Generates the FRAM model.
         """
 
@@ -493,7 +495,8 @@ class FRAM:
         column_type = column_type.lower()
         # If the dataframe uses function names for the column names.
         if column_type == "functions":
-            for i in self.get_connections():
+
+            for i in self.connections:
                 # Stores current connection name
                 connection_default = i
 
@@ -516,7 +519,7 @@ class FRAM:
 
         # If the dataframe uses connection_names for the column names.
         elif column_type == "connections":
-            for connection_name in self.get_connections():
+            for connection_name in self.connections:
                 connection_value = len(data[(data[connection_name] == 1)])
                 self.connections.update({connection_name: connection_value})
 
@@ -588,6 +591,8 @@ def main():
     # Displays the default FRAM model as desired. (Use WebAgg backend for Pycharm) (leave default for jupyter notebook)
     test.visualize("WebAgg")
 
+    #test.highlight_function_outputs(0)
+    # test.highlight_full_path_from_function(0)
     #test.highlight_function_outputs(57)  # Shows the output connections of a specific function based on the function IDNr.
     #test.highlight_full_path_from_function(57)  # Shows the entire path associated with a starting function (using IDNr).
     #print(test.get_connections())  # Returns a connections dataframe where each row is a connection.
@@ -619,9 +624,9 @@ def main():
     # print(test.function_list)  # Prints a list of all function names
     # print(test.connections_list)  # Prints a list of all connection names
 
-    # data = pd.read_csv("Directory to .csv")
-    # test.highlight_data(data, "Functions", "Pure")
-    # test.display()
+    #data = pd.read_csv("Insert .csv or directory")
+    #test.highlight_data(data, "Functions", "Traced")
+    #test.display()
 
 
 if __name__ == "__main__":
