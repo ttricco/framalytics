@@ -17,7 +17,6 @@ class FRAM:
         fram_data = parse_xfmv(filename)  # Gets all information from the .xfmv file
 
         self._function_data = fram_data[0]  # Function information (Hexagon nodes)
-        self._input_data = fram_data[1]  # Input information for input aspect of a function
         self._aspect_data = fram_data[2]  # Aspect connection data (bezier curves)
 
         self.fram_model = None  # Stores the default FRAM model for alterations before displaying.
@@ -68,15 +67,6 @@ class FRAM:
         """
 
         return self._function_data
-
-    def get_input_data(self):
-        """
-        Returns the input data of a function (input aspect) of the FRAM file.
-
-        :return: A list of input data. Each index is a different functions input.
-        """
-
-        return self._input_data
 
     def get_aspect_data(self):
         """
@@ -618,7 +608,6 @@ def main():
     # print(test.get_function_times("To wait until tender"))
 
     #print(test.get_function_metadata().iloc[0])
-    #print(test.get_input_data().iloc[0])
     #print(test.get_aspect_data().iloc[0])
 
     #print(test.function_list)  # Prints a list of all function names
