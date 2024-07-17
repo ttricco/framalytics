@@ -29,7 +29,7 @@ class Visualizer:
         Generates the Function Nodes based on the data given from the FRAM class.
 
         :param function_data: Function data from FRAM class
-        :param aspect_data:  Aspect data form FRAM class
+        :param aspect_data:  Aspect data from FRAM class
 
         :return: None. Used to plot Function nodes on scatterplot.
         """
@@ -229,12 +229,11 @@ class Visualizer:
 
 
 
-    def generate(self, function_data, input_data, aspect_data,curves = True):
+    def generate(self, function_data, aspect_data,curves = True):
         """
         Generates the default FRAM model using the data given from the FRAM class
 
         :param function_data: Function Data given by FRAM class (automatic).
-        :param input_data: Input Aspect Data given by FRAM class (automatic).
         :param aspect_data: Aspect Data given by FRAM class (automatic).
         :param curves: Determines if the bezier curves are drawn or not.
 
