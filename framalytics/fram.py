@@ -17,7 +17,6 @@ class FRAM:
         fram_data = parse_xfmv(filename)  # Gets all information from the .xfmv file
 
         self._function_data = fram_data[0]  # Function information (Hexagon nodes)
-        self._input_data = fram_data[1]  # Input information for input aspect of a function
         self._aspect_data = fram_data[2]  # Aspect connection data (bezier curves)
 
         self.fram_model = None  # Stores the default FRAM model for alterations before displaying.
@@ -68,15 +67,6 @@ class FRAM:
         """
 
         return self._function_data
-
-    def get_input_data(self):
-        """
-        Returns the input data of a function (input aspect) of the FRAM file.
-
-        :return: A list of input data. Each index is a different functions input.
-        """
-
-        return self._input_data
 
     def get_aspect_data(self):
         """
@@ -424,12 +414,14 @@ class FRAM:
         """
         Visualizes the model by calling to the Visualizer class of FRAM_Visualizer.py. This generates the default model.
 
+        :param backend: The backend matplotlib will use to display the model through the Visualizer class.
+
         :return: None. Generates the FRAM model.
         """
 
         self.backend = backend
         self.fram_model = Visualizer(backend=backend, dpi=150)
-        self.fram_model.generate(self._function_data, self._input_data, self._aspect_data)
+        self.fram_model.generate(self._function_data, self._aspect_data)
 
     def display(self):
         """
@@ -486,14 +478,15 @@ class FRAM:
         plt.close(1)  # Closes and clears old figure
 
         # Makes new figure without the Bezier curves being produced.
-        self.fram_model.generate(self._function_data, self._input_data, self._aspect_data, False)
+        self.fram_model.generate(self._function_data, self._aspect_data, False)
 
         total_instances = len(data)  # Total number of rows / instances from the dataframe.
 
         column_type = column_type.lower()
         # If the dataframe uses function names for the column names.
         if column_type == "functions":
-            for i in self.get_connections():
+
+            for i in self.connections:
                 # Stores current connection name
                 connection_default = i
 
@@ -516,7 +509,7 @@ class FRAM:
 
         # If the dataframe uses connection_names for the column names.
         elif column_type == "connections":
-            for connection_name in self.get_connections():
+            for connection_name in self.connections:
                 connection_value = len(data[(data[connection_name] == 1)])
                 self.connections.update({connection_name: connection_value})
 
@@ -575,10 +568,10 @@ class FRAM:
 def main():
     # Initializes the Fram model by giving the associated ".xfmv" file.
 
-    test = FRAM("FRAM model-Stroke care system.xfmv")
-    # test = FRAM("Cup Noodles.xfmv")
-    # test = FRAM("prepare_work_example.xfmv")
-    # test = FRAM("leave_harbor_example.xfmv")
+    #test = FRAM("FRAM model-Stroke care system.xfmv")
+    test = FRAM("Cup Noodles.xfmv")
+    #test = FRAM("prepare_work_example.xfmv")
+    #test = FRAM("leave_harbor_example.xfmv")
 
     # Shows this is a FRAM object as desired
     # print(test)
@@ -588,8 +581,10 @@ def main():
     # Displays the default FRAM model as desired. (Use WebAgg backend for Pycharm) (leave default for jupyter notebook)
     test.visualize("WebAgg")
 
-    #test.highlight_function_outputs(57)  # Shows the output connections of a specific function based on the function IDNr.
-    #test.highlight_full_path_from_function(57)  # Shows the entire path associated with a starting function (using IDNr).
+    #test.highlight_function_outputs(0)
+    #test.highlight_full_path_from_function(0)
+    # test.highlight_function_outputs(57)  # Shows the output connections of a specific function based on the function IDNr.
+    # test.highlight_full_path_from_function(57)  # Shows the entire path associated with a starting function (using IDNr).
     #print(test.get_connections())  # Returns a connections dataframe where each row is a connection.
 
     # Calls for testing functions
@@ -599,29 +594,31 @@ def main():
     # print(test.number_of_edges())  # Prints and returns the total number of edges/connections/lines/bezier curves.
     # print(test.number_of_functions())  # Prints and returns the total number of functions.
 
-    # test.print_connections()  #Prints all connections neatly, row by row.
-    # test.print_functions()  #Prints all functions neatly, row by row.
+    #test.print_connections()  #Prints all connections neatly, row by row.
+    #test.print_functions()  #Prints all functions neatly, row by row.
 
     # print(test.get_function_id(name="Activate a code stroke"))  #Prints and returns the functionID of a given function name.
     # print(test.get_function_name(id=57))  # Prints and returns the name of a function for the given function ID.
 
-    # print(test.get_function_inputs("Do stroke assessment by a care paramedic"))
+    #print(test.get_function_inputs("Do stroke assessment by a care paramedic"))
     # print(test.get_function_outputs("Do stroke assessment by a care paramedic"))
     # print(test.get_function_preconditions("Receive a call through the dispatch system"))
     # print(test.get_function_resources("Receive a call through the dispatch system"))
     # print(test.get_function_controls("Transport the patient by ambulance"))
     # print(test.get_function_times("To wait until tender"))
 
-    # print(test.get_function_metadata())
-    # print(test.get_input_data())
-    # print(test.get_aspect_data())
+    #print(test.get_function_metadata().iloc[0])
+    #print(test.get_aspect_data().iloc[0])
 
-    # print(test.function_list)  # Prints a list of all function names
-    # print(test.connections_list)  # Prints a list of all connection names
+    #print(test.function_list)  # Prints a list of all function names
+    #print(test.connections_list)  # Prints a list of all connection names
 
-    # data = pd.read_csv("Directory to .csv")
-    # test.highlight_data(data, "Functions", "Pure")
-    # test.display()
+    #data = pd.read_csv("Directory to .csv file")
+    #test.highlight_data(data, "Connections", "Traced")
+    #test.display()
+
+
+
 
 
 if __name__ == "__main__":
