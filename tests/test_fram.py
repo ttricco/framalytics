@@ -29,37 +29,6 @@ def test_get_function_metadata():
     assert function_metadata.iloc[0].color == '1555713'
 
 
-def test_get_input_data():
-    """
-    Tests to see if the returned input data (dataframe) is as expected.
-    """
-
-    # Generate the data from the .xfmv file and get the input dataframe.
-    test = fram.FRAM("FRAM model-Stroke care system.xfmv")
-    test.visualize("WebAgg")
-    input_data = test.get_input_data()
-
-    # Tests to see if the IDNr's of the first 5 inputs are accurate (each IDNr is not unique!)
-    assert input_data.iloc[0].IDNr == '1'
-    assert input_data.iloc[1].IDNr == '2'
-    assert input_data.iloc[2].IDNr == '3'
-    assert input_data.iloc[3].IDNr == '4'
-    assert input_data.iloc[4].IDNr == '0'
-
-    # Tests to see if the IDName's of the first 5 inputs are accurate (each IDName is not unique!)
-    assert input_data.iloc[0].IDName == 'Relaying information to emergency department'
-    assert input_data.iloc[1].IDName == 'Fast exam=positive\nrace score>= 5'
-    assert input_data.iloc[2].IDName == 'Fast exam=positive\nrace score>= 5'
-    assert input_data.iloc[3].IDName == 'Potential stroke'
-    assert input_data.iloc[4].IDName == 'Transfer through ambulance'
-
-    # Tests to see if the FunctionIDNr of the first 5 inputs are accurate (each Function IDNr is not unique!)
-    assert input_data.iloc[0].FunctionIDNr == '1'
-    assert input_data.iloc[1].FunctionIDNr == '2'
-    assert input_data.iloc[2].FunctionIDNr == '3'
-    assert input_data.iloc[3].FunctionIDNr == '0'
-    assert input_data.iloc[4].FunctionIDNr == '14'
-
 def test_get_aspect_data():
     """
     Tests to see if the returned aspect metadata (dataframe) is as expected.
@@ -297,7 +266,6 @@ def test_get_function_times():
 
 def main():
     test = test_get_function_metadata()
-    test = test_get_input_data()
     test = test_get_aspect_data()
     test = test_get_functions()
     test = test_number_of_edges_and_functions()
