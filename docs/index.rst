@@ -16,6 +16,11 @@ read the native .xfmv file format from the `FRAM Model Visualizer (FMV)
 Matplotlib, incorporate real data together with a FRAM model, and provides a general API for
 interacting with a FRAM.
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   api
 
 Indices and tables
 ==================

@@ -1,4 +1,3 @@
-from xfmv_parser import *
 import matplotlib
 import textwrap
 from matplotlib.bezier import BezierSegment

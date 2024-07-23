@@ -1,4 +1,4 @@
-from FRAM_Visualizer import *
+from .FRAM_Visualizer import *
 import pandas as pd
 
 

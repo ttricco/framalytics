@@ -23,7 +23,7 @@ sys.path.insert(0, str(PROJECT_PATH))
 
 # -- Project information -----------------------------------------------------
 
-project = 'sarracen'
+project = 'framalytics'
 copyright = '2024'
 author = 'Terrence Tricco'
 
