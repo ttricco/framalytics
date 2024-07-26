@@ -20,6 +20,8 @@ interacting with a FRAM.
    :maxdepth: 1
    :caption: Contents:
 
+   installation
+   example
    api
 
 Indices and tables

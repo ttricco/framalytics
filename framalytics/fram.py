@@ -1,4 +1,5 @@
 from .FRAM_Visualizer import *
+from .xfmv_parser import parse_xfmv
 import pandas as pd
 
 
@@ -258,8 +259,8 @@ class FRAM:
         precondition aspect of the desired function.
 
         :param function: The ID (integer) or name (String) of the desired function.
-        :return: A dictionary consisting of the functions that serve as preconditions to the precondition aspect of the
-        function.
+        :return: A dictionary consisting of the functions that serve as preconditions to
+            the precondition aspect of the function.
         """
 
         all_connections = self.get_connections()  # Gets all connections
@@ -463,15 +464,15 @@ class FRAM:
         The color of the connection indicates the intensity of its usage.
 
         :param data: A pandas dataframe where the columns are function names and rows are instances.
-        The values of each column should be 0 (absent) or 1 (present)
+            The values of each column should be 0 (absent) or 1 (present)
 
         :param column_type: Lets the program know if the user is using the function names, or connection names as the
-        column names in the given dataframe.
+            column names in the given dataframe.
 
         :param appearance: Determines the appearance the paths will take on when highlighted. "Pure" is for pure
-        color. "Traced" is similar to pure color, but traced in a black outline. "Expand" will have a black line,
-        but the outline of this black line will be the highlighted color, and will be wider or narrower depending on
-        how much that path is traversed.
+            color. "Traced" is similar to pure color, but traced in a black outline. "Expand" will have a black line,
+            but the outline of this black line will be the highlighted color, and will be wider or narrower depending on
+            how much that path is traversed.
 
         :return: None. A highlighted FRAM model.
         """
@@ -563,63 +564,3 @@ class FRAM:
             all_connections.append([outputFn_name, toFn_name])
 
         print(all_connections)
-
-
-def main():
-    # Initializes the Fram model by giving the associated ".xfmv" file.
-
-    #test = FRAM("FRAM model-Stroke care system.xfmv")
-    test = FRAM("Cup Noodles.xfmv")
-    #test = FRAM("prepare_work_example.xfmv")
-    #test = FRAM("leave_harbor_example.xfmv")
-
-    # Shows this is a FRAM object as desired
-    # print(test)
-
-    # Shows that the fram.py displays the FRAM model by calling the functions of the FRAM_Visualizer.py
-
-    # Displays the default FRAM model as desired. (Use WebAgg backend for Pycharm) (leave default for jupyter notebook)
-    test.visualize("WebAgg")
-
-    #test.highlight_function_outputs(0)
-    #test.highlight_full_path_from_function(0)
-    # test.highlight_function_outputs(57)  # Shows the output connections of a specific function based on the function IDNr.
-    # test.highlight_full_path_from_function(57)  # Shows the entire path associated with a starting function (using IDNr).
-    #print(test.get_connections())  # Returns a connections dataframe where each row is a connection.
-
-    # Calls for testing functions
-
-    # print(test.get_functions())  # Returns a dictionary of all functions (key=FunctionID,value=Function Name)
-
-    # print(test.number_of_edges())  # Prints and returns the total number of edges/connections/lines/bezier curves.
-    # print(test.number_of_functions())  # Prints and returns the total number of functions.
-
-    #test.print_connections()  #Prints all connections neatly, row by row.
-    #test.print_functions()  #Prints all functions neatly, row by row.
-
-    # print(test.get_function_id(name="Activate a code stroke"))  #Prints and returns the functionID of a given function name.
-    # print(test.get_function_name(id=57))  # Prints and returns the name of a function for the given function ID.
-
-    #print(test.get_function_inputs("Do stroke assessment by a care paramedic"))
-    # print(test.get_function_outputs("Do stroke assessment by a care paramedic"))
-    # print(test.get_function_preconditions("Receive a call through the dispatch system"))
-    # print(test.get_function_resources("Receive a call through the dispatch system"))
-    # print(test.get_function_controls("Transport the patient by ambulance"))
-    # print(test.get_function_times("To wait until tender"))
-
-    #print(test.get_function_metadata().iloc[0])
-    #print(test.get_aspect_data().iloc[0])
-
-    #print(test.function_list)  # Prints a list of all function names
-    #print(test.connections_list)  # Prints a list of all connection names
-
-    #data = pd.read_csv("Directory to .csv file")
-    #test.highlight_data(data, "Connections", "Traced")
-    #test.display()
-
-
-
-
-
-if __name__ == "__main__":
-    main()
