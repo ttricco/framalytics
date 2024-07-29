@@ -615,7 +615,7 @@ def main():
 
     #data = pd.read_csv("Directory to .csv file")
     #test.highlight_data(data, "Connections", "Traced")
-    #test.display()
+    test.display()
 
 
 
