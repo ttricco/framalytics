@@ -82,14 +82,15 @@ class Visualizer:
             if i != None:
                 node_outputFn[int(i)] = True
 
-        for i in range(len(node_toFn)):
-            # If a function/node has both an input and output, the face color is white.
-            if (node_toFn[i]) and (node_outputFn[i]):
+        # If the function type is 0, the facecolor is white
+        for index, row in functions.iterrows():
+            if row.FunctionType == "0":
                 node_facecolors.append('white')
 
-            # If a function/node does not have both an input and output, the face color is very light grey.
+            # Otherwise, the facecolor is grey.
             else:
                 node_facecolors.append('#F3F3F3')
+
 
         plot_x_border = (max(self.node_x_coords) - min(self.node_x_coords) + 100)/100
         plot_y_border = (max(self.node_y_coords) - min(self.node_y_coords) + 100)/100
