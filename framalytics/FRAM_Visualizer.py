@@ -82,7 +82,6 @@ class Visualizer:
             if i != None:
                 node_outputFn[int(i)] = True
 
-
         # If the function type is 0, the facecolor is white
         for index, row in functions.iterrows():
             if row.FunctionType == "0":

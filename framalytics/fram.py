@@ -1,4 +1,5 @@
 from FRAM_Visualizer import *
+from xfmv_parser import parse_xfmv
 import pandas as pd
 
 
