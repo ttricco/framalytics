@@ -54,15 +54,3 @@ def parse_xfmv(filename):
     df_input = pd.DataFrame(input_data)
     df_aspect = pd.DataFrame(aspect_data)
     return df_function, df_input, df_aspect
-
-"""
-# Display the DataFrames
-print("Function DataFrame:")
-print(df_function)
-
-print("\nInput DataFrame:")
-print(df_input)
-
-print("\nAspect DataFrame:")
-print(df_aspect)
-"""

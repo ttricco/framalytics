@@ -13,14 +13,13 @@ class FRAM:
         :param filename: The name of the .xfmv file being used.
         """
         self.filename = filename  # Name of ".xfmv" file.
-        self.backend = None
 
         fram_data = parse_xfmv(filename)  # Gets all information from the .xfmv file
 
         self._function_data = fram_data[0]  # Function information (Hexagon nodes)
         self._aspect_data = fram_data[2]  # Aspect connection data (bezier curves)
 
-        self.fram_model = None  # Stores the default FRAM model for alterations before displaying.
+        self.visualizer = Visualizer()
 
         self.given_data = None  # Given data from to user to run through the FRAM (Not implemented, pandas?)
 
@@ -411,7 +410,7 @@ class FRAM:
 
         return function_times
 
-    def visualize(self, backend=None):
+    def visualize(self, ax=None):
         """
         Visualizes the model by calling to the Visualizer class of FRAM_Visualizer.py. This generates the default model.
 
@@ -420,9 +419,7 @@ class FRAM:
         :return: None. Generates the FRAM model.
         """
 
-        self.backend = backend
-        self.fram_model = Visualizer(backend=backend, dpi=150)
-        self.fram_model.generate(self._function_data, self._aspect_data)
+        return self.visualizer.generate(self._function_data, self._aspect_data, ax=ax)
 
     def display(self):
         """
@@ -443,7 +440,7 @@ class FRAM:
         if isinstance(functionID, int) == False:
             raise Exception("Invalid input. A integer value should be used.")
 
-        self.fram_model.generate_function_output_paths(self._aspect_data, functionID)
+        self.visualizer.generate_function_output_paths(self._aspect_data, functionID)
 
     def highlight_full_path_from_function(self, functionID):
         """
@@ -456,7 +453,7 @@ class FRAM:
         if isinstance(functionID, int) == False:
             raise Exception("Invalid input. A integer value should be used.")
 
-        self.fram_model.generate_full_path_from_function(self._aspect_data, functionID)
+        self.visualizer.generate_full_path_from_function(self._aspect_data, functionID)
 
     def highlight_data(self, data, column_type="functions", appearance="Pure"):
         """
@@ -479,7 +476,7 @@ class FRAM:
         plt.close(1)  # Closes and clears old figure
 
         # Makes new figure without the Bezier curves being produced.
-        self.fram_model.generate(self._function_data, self._aspect_data, False)
+        self.visualizer.generate(self._function_data, self._aspect_data, False)
 
         total_instances = len(data)  # Total number of rows / instances from the dataframe.
 
@@ -536,7 +533,7 @@ class FRAM:
 
             for index, row in self._aspect_data.iterrows():
                 if (row.Name == connection):
-                    self.fram_model.bezier_curve_single(row.Curve, color, appearance, (value/total_instances)*4)
+                    self.visualizer.bezier_curve_single(row.Curve, color, appearance, (value / total_instances) * 4)
 
     def list_of_connections(self):
         """

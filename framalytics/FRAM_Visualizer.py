@@ -8,22 +8,53 @@ import matplotlib.pyplot as plt
 
 class Visualizer:
 
-    def __init__(self, figsize_x=1200, figsize_y=600, dpi=150, backend=None):
 
-        self.figsize_x = figsize_x  # Controls x-dimension of plot display
-        self.figsize_y = figsize_y  # Controls y-dimension of plot display
-        self.dpi = dpi  # Controls size of plot display.
+    def _get_function_style(self, function_data):
 
-        self.figure = None
+        style = function_data.iloc[0]["fnStyle"]
 
-        self.node_x_coords = []  # Stores the X-coordinates of functions (Hexagon nodes)
-        self.node_y_coords = []  # Stores the Y-coordinates of functions (Hexagon nodes)
-        self.backend = backend
+        px = 1.18  # Default; fnStyle = 0
+        if style == "1":
+            px = 1.0  # fnStyle = 1
 
-        if self.backend != None:
-            matplotlib.use(backend)
+        return px
 
-    def function_nodes(self, function_data, aspect_data):
+
+    def _create_figure(self, function_data):
+        """ Create a figure / axis of appropriate dimensions. """
+
+        style = function_data.iloc[0]["fnStyle"]
+
+        px = 1.18  # Default; fnStyle = 0
+        if style == "1":
+            px = 1.0  # fnStyle = 1
+
+        figsize_x = px * (max(function_data['x'].astype(float)) - min(function_data['x'].astype(float)) + 100)/100
+
+        figsize_y = px * (max(function_data['y'].astype(float)) - min(function_data['y'].astype(float)) + 100)/100
+
+        fig, ax = plt.subplots(figsize=(figsize_x, figsize_y), dpi=150)
+        return fig, ax
+
+
+    def _hex_to_color(self, hex_value):
+        """ Converts node 32bit integer color to hexadecimal. """
+
+        color = "black"
+        lw = 0.5
+
+        if hex_value is not None:
+            color = hex(int(hex_value))
+            color = color[2:]
+            while len(color) < 6:
+                color = "0" + color
+            color = "#" + color
+            lw = 3
+
+        return color, lw
+
+
+    def _draw_function_nodes(self, function_data, aspect_data, ax):
         """
         Generates the Function Nodes based on the data given from the FRAM class.
 
@@ -35,9 +66,6 @@ class Visualizer:
 
         functions = function_data  # Stores Function data from FRAM class.
         aspects = aspect_data  # Stores Aspect data from FRAM class
-
-        self.node_x_coords = []  # X & Y coordinates of Nodes and the color and labels.
-        self.node_y_coords = []
 
         # Gets the labels, colors, face colors and line width of each node
         node_labels = []
@@ -52,23 +80,11 @@ class Visualizer:
 
         # For loop that determines each node's x and y coordinates, label, and colors.
         for index, row in functions.iterrows():
-            self.node_x_coords.append(float(row.x))
-            self.node_y_coords.append(float(row.y))
             node_labels.append(row.IDName)
 
-            # Converts node 32bit integer color to hexadecimal
-            if type(row.color) == type(None):
-                node_colors.append("black")
-                node_lw.append(0.5)
-
-            else:
-                color = hex(int(row.color))
-                color = color[2:]
-                while len(color) < 6:
-                    color = "0"+color
-                color = "#"+color
-                node_colors.append(color)
-                node_lw.append(3)
+            color, lw = self._hex_to_color(row.color)
+            node_colors.append(color)
+            node_lw.append(lw)
 
             node_toFn.append(False)
             node_outputFn.append(False)
@@ -91,34 +107,16 @@ class Visualizer:
             else:
                 node_facecolors.append('#F3F3F3')
 
-
-        plot_x_border = (max(self.node_x_coords) - min(self.node_x_coords) + 100)/100
-        plot_y_border = (max(self.node_y_coords) - min(self.node_y_coords) + 100)/100
-
-        # Determines if aspects will be attached at the edges of a function, or by a distance.
-        style = functions.iloc[0]["fnStyle"]
-        px = 1.18  # Default (fnStyle = 0)
-
-        if (style == "0"):
-            px = 1.18  # For FnStyle = 0
-
-        elif (style == "1"):
-            px = 1.0  # For FnStyle = 1
-
-        else:
-            px = 1.18  # For circumstances where there is no style.
-
-
-
-
         # Creates the figure dimensions and size.
-        self.figure = plt.figure(figsize=(plot_x_border*px, plot_y_border*px), dpi=self.dpi)
-        plt.gca().invert_yaxis()
-        plt.axis("off")
+        ax.invert_yaxis()
+        ax.axis("off")
 
         # Plots function (Hexagon) nodes. (The second plot provides the black outline around the nodes).
-        plt.scatter(self.node_x_coords, self.node_y_coords, label=node_labels, marker='H', s=1500, facecolors=node_facecolors, edgecolors=node_colors, lw=node_lw, zorder=3)
-        plt.scatter(self.node_x_coords, self.node_y_coords, label=node_labels, marker='H', s=1600, facecolors=node_facecolors, edgecolors='black', lw=node_lw, zorder=2)
+        ax.scatter(function_data['x'].astype(float), function_data['y'].astype(float),
+                   label=node_labels, marker='H', s=1500, facecolors=node_facecolors, edgecolors=node_colors, lw=node_lw, zorder=3)
+        ax.scatter(function_data['x'].astype(float), function_data['y'].astype(float),
+                   label=node_labels, marker='H', s=1600, facecolors=node_facecolors, edgecolors='black', lw=node_lw, zorder=2)
+
         # Makes multi-line labels
         for index, row in functions.iterrows():
             wrapped_label = textwrap.fill(row.IDName, width=13)
@@ -126,7 +124,7 @@ class Visualizer:
 
 
 
-    def aspects(self):
+    def _draw_aspects(self, ax, node_x_coords, node_y_coords):
         """
         Generates the Aspects of each Function Node.
 
@@ -139,7 +137,7 @@ class Visualizer:
         aspects_per_function = []  # Stores aspect coordinates per function in order of FunctionID (Function IDNr).
 
         # Iterates through x and y location of each node to get aspect locations and connections (plus labelling)
-        for x, y in zip(self.node_x_coords, self.node_y_coords):
+        for x, y in zip(node_x_coords, node_y_coords):
             # T,C,I,O,P,R  coordinate ordering
             aspects_per_function.append([[x-23, y-35], [x+23, y-35], [x-44, y], [x+44, y], [x-23, y+35], [x+23, y+35]])
 
@@ -150,49 +148,49 @@ class Visualizer:
             aspects_y.append(y-35)
             aspect_labels.append("T")
             # Lower z-order prevents lines from going through nodes
-            plt.plot([x-23, x], [y-35, y], color='black', zorder=2, lw=0.5)
+            ax.plot([x-23, x], [y-35, y], color='black', zorder=2, lw=0.5)
 
             # Top right (C)
             aspects_x.append(x+23)
             aspects_y.append(y-35)
             aspect_labels.append("C")
-            plt.plot([x+23, x], [y-35, y], color='black', zorder=2, lw=0.5)
+            ax.plot([x+23, x], [y-35, y], color='black', zorder=2, lw=0.5)
 
             # Mid left (I)
             aspects_x.append(x-44)
             aspects_y.append(y)
             aspect_labels.append("I")
-            plt.plot([x-44, x], [y, y], color='black', zorder=2, lw=0.5)
+            ax.plot([x-44, x], [y, y], color='black', zorder=2, lw=0.5)
 
             # Mid right (O)
             aspects_x.append(x+44)
             aspects_y.append(y)
             aspect_labels.append("O")
-            plt.plot([x+44, x], [y, y], color='black', zorder=2, lw=0.5)
+            ax.plot([x+44, x], [y, y], color='black', zorder=2, lw=0.5)
 
             # Bottom left (P)
             aspects_x.append(x-23)
             aspects_y.append(y+35)
             aspect_labels.append("P")
-            plt.plot([x-23, x], [y+35, y], color='black', zorder=2, lw=0.5)
+            ax.plot([x-23, x], [y+35, y], color='black', zorder=2, lw=0.5)
 
             # Bottom right (R)
             aspects_x.append(x+23)
             aspects_y.append(y+35)
             aspect_labels.append("R")
-            plt.plot([x+23, x], [y+35, y], color='black', zorder=2, lw=0.5)
+            ax.plot([x+23, x], [y+35, y], color='black', zorder=2, lw=0.5)
 
         # Adds aspects to each node
-        plt.scatter(aspects_x, aspects_y, s=30, facecolors='white', edgecolors='black', lw=0.5, zorder=3)
+        ax.scatter(aspects_x, aspects_y, s=30, facecolors='white', edgecolors='black', lw=0.5, zorder=3)
 
         # Applies proper labels to scatter plot
         for label, x, y in zip(aspect_labels, aspects_x, aspects_y):
             wrapped_label = textwrap.fill(label, break_long_words=False, width=1)
-            plt.annotate(wrapped_label, (x, y), ha='center', va='center', fontsize=3.5)
+            ax.annotate(wrapped_label, (x, y), ha='center', va='center', fontsize=3.5)
 
 
 
-    def bezier_curves(self, aspect_data):
+    def _draw_bezier_curves(self, aspect_data, ax):
         """
         Generates the bezier curves (lines) between two aspects using the aspect data given
         from the FRAM class.
@@ -224,12 +222,16 @@ class Visualizer:
             for j in range(len(y_pts)):
                 y_pts[j] = y_pts[j] - 50
 
-            plt.plot(x_pts, y_pts, zorder=1, color='#999999', lw=1)
+            ax.plot(x_pts, y_pts, zorder=1, color='#999999', lw=1)
 
 
 
 
-    def generate(self, function_data, aspect_data,curves = True):
+    def generate(self,
+                 function_data,
+                 aspect_data,
+                 curves=True,
+                 ax=None):
         """
         Generates the default FRAM model using the data given from the FRAM class
 
@@ -239,20 +241,20 @@ class Visualizer:
 
         :return: None. Plots the default FRAM model which is displayed when called by "display()".
         """
-        self.function_nodes(function_data, aspect_data)
-        self.aspects()
+        px = self._get_function_style(function_data)
+
+        if ax is None:
+            fig, ax = self._create_figure(function_data)
+
+        self._draw_function_nodes(function_data, aspect_data, ax)
+        self._draw_aspects(ax, function_data['x'].astype(float),
+                           function_data['y'].astype(float),)
 
         # If curves == True, then we plot the bezier curves, otherwise, we don't.
-        if(curves == True):
-            self.bezier_curves(aspect_data)
+        if curves == True:
+            self._draw_bezier_curves(aspect_data, ax)
 
-    def display(self):
-        """
-        Displays the current FRAM model.
-
-        :return: None. Simply displays the FRAM model.
-        """
-        plt.show()
+        return ax
 
 
     def generate_function_output_paths(self,aspect_data, output_function, input_function=None):
