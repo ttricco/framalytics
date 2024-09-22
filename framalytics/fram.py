@@ -406,7 +406,7 @@ class FRAM:
         """
         plt.show()
 
-    def highlight_function_outputs(self, functionID, ax=None):
+    def highlight_function_outputs(self, function, ax=None):
         """
         Highlights the outputs of a function.
 
@@ -414,13 +414,17 @@ class FRAM:
 
         :return: None. Highlights paths when the model is displayed.
         """
-        if isinstance(functionID, int) == False:
-            raise Exception("Invalid input. A integer value should be used.")
+        if isinstance(function, str):
+            functionID = self.get_function_id(function)
+        elif isinstance(function, int):
+            functionID = function
+        else:
+            raise ValueError("Invalid input. A function ID (integer) or function name (string) is required.")
 
         self.visualizer.generate_function_output_paths(self._function_data,
                                                        self._aspect_data, functionID, ax=ax)
 
-    def highlight_full_path_from_function(self, functionID, ax=None):
+    def highlight_full_path_from_function(self, function, ax=None):
         """
         Highlights all the paths that are connected to a starting function.
 
@@ -428,8 +432,12 @@ class FRAM:
 
         :return: None. Highlights paths when the model is displayed.
         """
-        if isinstance(functionID, int) == False:
-            raise Exception("Invalid input. A integer value should be used.")
+        if isinstance(function, str):
+            functionID = self.get_function_id(function)
+        elif isinstance(function, int):
+            functionID = function
+        else:
+            raise ValueError("Invalid input. A function ID (integer) or function name (string) is required.")
 
         self.visualizer.generate_full_path_from_function(self._function_data,
                                                          self._aspect_data, functionID, ax=ax)
