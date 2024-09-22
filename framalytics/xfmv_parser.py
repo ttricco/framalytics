@@ -1,5 +1,7 @@
 import xml.etree.ElementTree as ET
 import pandas as pd
+
+
 def parse_xfmv(filename):
     # Parse the XML file
     tree = ET.parse(filename)
@@ -53,4 +55,12 @@ def parse_xfmv(filename):
     df_function = pd.DataFrame(function_data)
     df_input = pd.DataFrame(input_data)
     df_aspect = pd.DataFrame(aspect_data)
+
+    for index, row in df_aspect.iterrows():
+        name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
+        if row['outputFn'] is None:
+            row['outputFn'] = name_split[0]
+        if row['toFn'] is None:
+            row['toFn'] = name_split[2]
+
     return df_function, df_input, df_aspect
