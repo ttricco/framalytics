@@ -25,7 +25,6 @@ class FRAM:
 
         self.functions_by_id = {}  # Stores all functions in a dictionary. IDNr is the key, IDName is the value.
         self.functions_by_name = {}  # Stores all functions in a dictionary. IDName is the key, IDNr is the value.
-        self.connections = {}  # Stores the connections between two aspects and the number of times it's traversed.
 
         self.connections_list = []  # Stores all connection names
         self.function_list = []  # Stores all function names
@@ -43,7 +42,6 @@ class FRAM:
         all_names = []
 
         for index, row in self._aspect_data.iterrows():
-            self.connections.update({row.Name: 0})
             self.connections_list.append(row.Name)
 
             # Parses the data so that the desired data of each connection goes to the designated list.
@@ -56,8 +54,6 @@ class FRAM:
         # Generates the connections dataframe using the parsed data.
         connection_dataframe = {'fromFn': all_fromFn, "toFn": all_toFn, "toAspect": all_toAspect, "Name": all_names}
         self.connection_dataframe = pd.DataFrame(data=connection_dataframe)
-
-
 
     def get_function_metadata(self):
         """
@@ -102,11 +98,8 @@ class FRAM:
 
         :return: The number of edges (connections/lines) in a FRAM model.
         """
-        # Gets all the connection (key,value) pairs in the connections/edges dictionary as a list. Calls "len" to get
-        # the total number of edges.
-        number_of_edges = len(self.connections.items())
 
-        return number_of_edges
+        return len(self._aspect_data)
 
     def number_of_functions(self):
         """
@@ -117,16 +110,6 @@ class FRAM:
 
         number_of_functions = len(self.functions_by_id.items())
         return number_of_functions
-
-    def print_connections(self):
-        """
-        Prints the dictionary (key,value) items which are the connections of a FRAM model. The key is the name of a
-        connection, while the value is the number of times that connection has been traversed if data was integrated.
-
-        :return: None. Prints all connection names and associated traversal value (initially zero).
-        """
-        for connection in self.connections.items():
-            print(connection)
 
     def print_functions(self):
         """
@@ -455,7 +438,44 @@ class FRAM:
 
         self.visualizer.generate_full_path_from_function(self._aspect_data, functionID)
 
-    def highlight_data(self, data, column_type="functions", appearance="Pure"):
+    def _count_real_data_connections(self, real_data, column_type="functions"):
+
+        connections = {}  # Stores the connections between two aspects and the number of times it's traversed.
+        for index, row in self._aspect_data.iterrows():
+            connections.update({row.Name: 0})
+
+        total_instances = len(real_data)  # Total number of rows / instances from the dataframe.
+
+        column_type = column_type.lower()
+        # If the dataframe uses function names for the column names.
+        if column_type == "functions":
+            for connection_default in connections:
+                # Splits connection to get information
+                connection = connection_default.split("|")
+
+                # Get output and input function ID's
+                outputFn = int(connection[0])
+                toFn = int(connection[2])
+
+                # Stores the names of the functions.
+                outputFn_name = self.functions_by_id.get(outputFn)
+                toFn_name = self.functions_by_id.get(toFn)
+
+                # Finds all instances where both column values are 1 (this indicates the path/curve is traversed)
+                connection_value = len(real_data[(real_data[outputFn_name] == 1) & (real_data[toFn_name] == 1)])
+
+                # Updates the number of times this path is traversed.
+                connections.update({connection_default: connection_value})
+
+        # If the dataframe uses connection_names for the column names.
+        elif column_type == "connections":
+            for connection_name in connections:
+                connection_value = len(real_data[(real_data[connection_name] == 1)])
+                connections.update({connection_name: connection_value})
+
+        return connections
+
+    def highlight_data(self, data, column_type="functions", appearance="Pure", ax=None):
         """
         Highlights the connections of all bezier curves which data instances traverse.
         The color of the connection indicates the intensity of its usage.
@@ -473,67 +493,14 @@ class FRAM:
 
         :return: None. A highlighted FRAM model.
         """
-        plt.close(1)  # Closes and clears old figure
 
         # Makes new figure without the Bezier curves being produced.
-        self.visualizer.generate(self._function_data, self._aspect_data, False)
 
-        total_instances = len(data)  # Total number of rows / instances from the dataframe.
+        connections = self._count_real_data_connections(real_data=data, column_type=column_type)
 
-        column_type = column_type.lower()
-        # If the dataframe uses function names for the column names.
-        if column_type == "functions":
+        ax = self.visualizer.generate(self._function_data, self._aspect_data, real_connections=connections, ax=ax)
 
-            for i in self.connections:
-                # Stores current connection name
-                connection_default = i
-
-                # Splits connection to get information
-                connection = i.split("|")
-
-                # Get output and input function ID's
-                outputFn = int(connection[0])
-                toFn = int(connection[2])
-
-                # Stores the names of the functions.
-                outputFn_name = self.functions_by_id.get(outputFn)
-                toFn_name = self.functions_by_id.get(toFn)
-
-                # Finds all instances where both column values are 1 (this indicates the path/curve is traversed)
-                connection_value = len(data[(data[outputFn_name] == 1) & (data[toFn_name] == 1)])
-
-                # Updates the number of times this path is traversed.
-                self.connections.update({connection_default: connection_value})
-
-        # If the dataframe uses connection_names for the column names.
-        elif column_type == "connections":
-            for connection_name in self.connections:
-                connection_value = len(data[(data[connection_name] == 1)])
-                self.connections.update({connection_name: connection_value})
-
-    # Begins updating the FRAM model so that connections are color coded based on the intensity of the connections use.
-        for connection in self.connections:
-            value = self.connections.get(connection)
-
-            color = "grey"
-            if (value == 0):
-                color = "grey"
-
-            elif (value <= int(total_instances * 0.25)):
-                color = "green"
-
-            elif (value <= int(total_instances * 0.5)):
-                color = "yellow"
-
-            elif (value <= int(total_instances * 0.75)):
-                color = "orange"
-
-            elif (value <= total_instances):
-                color = "red"
-
-            for index, row in self._aspect_data.iterrows():
-                if (row.Name == connection):
-                    self.visualizer.bezier_curve_single(row.Curve, color, appearance, (value / total_instances) * 4)
+        return ax
 
     def list_of_connections(self):
         """

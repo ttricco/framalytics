@@ -4,21 +4,7 @@ from matplotlib.bezier import BezierSegment
 import matplotlib.pyplot as plt
 
 
-
-
 class Visualizer:
-
-
-    def _get_function_style(self, function_data):
-
-        style = function_data.iloc[0]["fnStyle"]
-
-        px = 1.18  # Default; fnStyle = 0
-        if style == "1":
-            px = 1.0  # fnStyle = 1
-
-        return px
-
 
     def _create_figure(self, function_data):
         """ Create a figure / axis of appropriate dimensions. """
@@ -30,12 +16,10 @@ class Visualizer:
             px = 1.0  # fnStyle = 1
 
         figsize_x = px * (max(function_data['x'].astype(float)) - min(function_data['x'].astype(float)) + 100)/100
-
         figsize_y = px * (max(function_data['y'].astype(float)) - min(function_data['y'].astype(float)) + 100)/100
 
         fig, ax = plt.subplots(figsize=(figsize_x, figsize_y), dpi=150)
         return fig, ax
-
 
     def _hex_to_color(self, hex_value):
         """ Converts node 32bit integer color to hexadecimal. """
@@ -52,7 +36,6 @@ class Visualizer:
             lw = 3
 
         return color, lw
-
 
     def _draw_function_nodes(self, function_data, aspect_data, ax):
         """
@@ -122,9 +105,7 @@ class Visualizer:
             wrapped_label = textwrap.fill(row.IDName, width=13)
             plt.annotate(wrapped_label, (float(row.x), float(row.y)), ha='center', va='center', fontsize=4)
 
-
-
-    def _draw_aspects(self, ax, node_x_coords, node_y_coords):
+    def _draw_aspects(self, node_x_coords, node_y_coords, ax):
         """
         Generates the Aspects of each Function Node.
 
@@ -188,9 +169,7 @@ class Visualizer:
             wrapped_label = textwrap.fill(label, break_long_words=False, width=1)
             ax.annotate(wrapped_label, (x, y), ha='center', va='center', fontsize=3.5)
 
-
-
-    def _draw_bezier_curves(self, aspect_data, ax):
+    def _draw_bezier_curves(self, aspect_data, real_connections=None, appearance=None, ax=None):
         """
         Generates the bezier curves (lines) between two aspects using the aspect data given
         from the FRAM class.
@@ -199,14 +178,29 @@ class Visualizer:
 
         :return: None. Adds the line connections between two aspects to the plot.
         """
-        aspects = aspect_data
 
-        for i in aspects.Curve:
+        if isinstance(appearance, str):
+            appearance = appearance.lower()
+
+        if appearance not in [None, 'pure', 'traced', 'expand']:
+            raise ValueError("Invalid highlighting appearance for connections.")
+
+        if appearance is None and real_connections is not None:
+            appearance = 'pure'
+
+        for index, row in aspect_data[['Name', 'Curve']].iterrows():
+            curve = row['Curve']
+            name = row['Name']
+
             # Curve coordinates
-            a = i.split("|")
+            a = curve.split("|")
 
             # Must be in this order!
-            control_points = [(float(a[2]), float(a[3])), (float(a[4]), float(a[5])), (float(a[8]), float(a[9])), (float(a[6]), float(a[7])), (float(a[0]), float(a[1]))]
+            control_points = [(float(a[2]), float(a[3])),
+                              (float(a[4]), float(a[5])),
+                              (float(a[8]), float(a[9])),
+                              (float(a[6]), float(a[7])),
+                              (float(a[0]), float(a[1]))]
             bezier_segment = BezierSegment(control_points)
 
             x_pts = []
@@ -222,15 +216,55 @@ class Visualizer:
             for j in range(len(y_pts)):
                 y_pts[j] = y_pts[j] - 50
 
-            ax.plot(x_pts, y_pts, zorder=1, color='#999999', lw=1)
+            if real_connections is None:
+                ax.plot(x_pts, y_pts, zorder=1, color='#999999', lw=1)
+            else:
 
+                value = real_connections[name]
+                total_instances = len(real_connections)
 
+                color = "grey"
+                if value == 0:
+                    color = "grey"
+                elif value <= int(total_instances * 0.25):
+                    color = "green"
+                elif value <= int(total_instances * 0.5):
+                    color = "yellow"
+                elif value <= int(total_instances * 0.75):
+                    color = "orange"
+                elif value <= total_instances:
+                    color = "red"
 
+                # Paths are purely color, no outline.
+                if appearance == "pure":
+                    if color == 'grey':
+                        ax.plot(x_pts, y_pts, zorder=0, color=color, lw=1, linestyle='--')
+                    else:
+                        ax.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
+
+                # Similar to pure color, but with a black outline.
+                elif appearance == "traced":
+                    if color == "grey":
+                        ax.plot(x_pts, y_pts, zorder=0, color=color, lw=1, linestyle='--')
+                    else:
+                        ax.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
+                        ax.plot(x_pts, y_pts, zorder=1, color='black', lw=2)
+
+                # A black line, but with the highlighted color being the outline.
+                # This outline expands or contracts depending on the value of "expand_value".
+                # This is usually between 0 - > 1.0 and is automated by the fram.py.
+                elif appearance == "expand":
+                    if color == "grey":
+                        ax.plot(x_pts, y_pts, zorder=0, color=color, lw=1, linestyle='--')
+                    else:
+                        ax.plot(x_pts, y_pts, zorder=2, color='black', lw=1)
+                        ax.plot(x_pts, y_pts, zorder=1, color= color, lw=2)
 
     def generate(self,
                  function_data,
                  aspect_data,
-                 curves=True,
+                 real_connections=None,
+                 appearance=None,
                  ax=None):
         """
         Generates the default FRAM model using the data given from the FRAM class
@@ -241,21 +275,18 @@ class Visualizer:
 
         :return: None. Plots the default FRAM model which is displayed when called by "display()".
         """
-        px = self._get_function_style(function_data)
 
         if ax is None:
             fig, ax = self._create_figure(function_data)
 
-        self._draw_function_nodes(function_data, aspect_data, ax)
-        self._draw_aspects(ax, function_data['x'].astype(float),
-                           function_data['y'].astype(float),)
-
-        # If curves == True, then we plot the bezier curves, otherwise, we don't.
-        if curves == True:
-            self._draw_bezier_curves(aspect_data, ax)
+        self._draw_function_nodes(function_data, aspect_data, ax=ax)
+        self._draw_aspects(function_data['x'].astype(float),
+                           function_data['y'].astype(float),
+                           ax=ax)
+        self._draw_bezier_curves(aspect_data, real_connections=real_connections,
+                                 appearance=appearance, ax=ax)
 
         return ax
-
 
     def generate_function_output_paths(self,aspect_data, output_function, input_function=None):
         """
@@ -267,7 +298,7 @@ class Visualizer:
         :return: None. Highlights a functions outputs on the model.
         """
 
-        if(input_function == None):
+        if input_function == None:
             for index, row in aspect_data.iterrows():
 
                 if ((row.outputFn == None) and (row.toFn == None)):
@@ -281,16 +312,14 @@ class Visualizer:
 
         else:
             for index, row in aspect_data.iterrows():
-                if ((row.outputFn == None) and (row.toFn == None)):
+                if (row.outputFn is None) and (row.toFn is None):
                     name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
 
-                    if ((int(name_split[0]) == output_function) and (int(name_split[2]) == input_function)):
+                    if (int(name_split[0]) == output_function) and (int(name_split[2]) == input_function):
                         self.bezier_curve_single(row.Curve)
                 else:
-                    if((int(row.outputFn) == output_function) and (int(row.toFn) == input_function)):
+                    if (int(row.outputFn) == output_function) and (int(row.toFn) == input_function):
                         self.bezier_curve_single(row.Curve)
-
-
 
     def generate_full_path_from_function(self, aspect_data, output_function):
         """
@@ -306,11 +335,10 @@ class Visualizer:
         already_pathed = []
         current_function = output_function
 
-
         for index, row in aspect_data.iterrows():
 
             # In the case the instance does not store the output and toFn Values, they seem to be stored in the name.
-            if((row.outputFn == None) and (row.toFn == None)):
+            if (row.outputFn is None) and (row.toFn is None):
                 name_split = row.Name.split("|") # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
                 if(int(name_split[0]) == current_function):
                     functions_in_path.append(int(name_split[2]))
@@ -318,7 +346,7 @@ class Visualizer:
 
             # For our Stroke Care System, this is used.
             else:
-                if (int(row.outputFn) == current_function):
+                if int(row.outputFn) == current_function:
                     functions_in_path.append(int(row.toFn))
                     self.bezier_curve_single(row.Curve)
 
@@ -326,96 +354,22 @@ class Visualizer:
         already_pathed.append(int(current_function))
 
         #While all paths have not been searched
-        while(len(functions_in_path) != 0):
+        while len(functions_in_path) != 0:
             current_function = functions_in_path.pop()
             if(current_function in already_pathed):
                 continue
 
             for index, row in aspect_data.iterrows():
-                if ((row.outputFn == None) and (row.toFn == None)):
+                if (row.outputFn is None) and (row.toFn is None):
                     name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
-                    if (int(name_split[0]) == current_function):
+                    if int(name_split[0]) == current_function:
                         functions_in_path.append(int(name_split[2]))
                         self.bezier_curve_single(row.Curve)
 
                     # For our Stroke Care System, this is used.
                 else:
-                    if (int(row.outputFn) == current_function):
+                    if int(row.outputFn) == current_function:
                         functions_in_path.append(int(row.toFn))
                         self.bezier_curve_single(row.Curve)
 
             already_pathed.append(current_function)
-
-
-    def bezier_curve_single(self,curve,color = "green", highlighting_appearance = "Pure", expand_value = 0):
-        """
-        :param curve: The curve string between two aspects which is given by the parser.
-
-        :param color: The color that the curve will display.
-
-        :param highlighting_appearance: Determines the appearance the paths will take on when highlighted. "Pure" is for
-        pure color. "Traced" is similar to pure color, but traced in a black outline. "Expand" will have a black line,
-        but the outline of this line will be the highlighted color, and will be wider or narrower depending on
-        how much that path is traversed.
-
-        :return: None. It plots the bezier curve of the given curve string.
-        """
-
-        # Curve coordinates
-        a = curve.split("|")
-
-        # Must be in this order!
-        control_points = [(float(a[2]), float(a[3])), (float(a[4]), float(a[5])), (float(a[8]), float(a[9])),
-                          (float(a[6]), float(a[7])), (float(a[0]), float(a[1]))]
-
-        bezier_segment = BezierSegment(control_points)
-
-        x_pts = []
-        y_pts = []
-
-        for j in range(0, 101):
-            x, y = bezier_segment.point_at_t(j / 100)
-            x_pts.append(x)
-            y_pts.append(y)
-
-        for j in range(len(x_pts)):
-            x_pts[j] = x_pts[j] - 48
-
-        for j in range(len(y_pts)):
-            y_pts[j] = y_pts[j] - 50
-
-        appearance = highlighting_appearance.lower()  # Makes string lowercase to avoid needing proper casing.
-
-        # Paths are purely color, no outline.
-        if (appearance == "pure"):
-            if (color == 'grey'):
-                plt.plot(x_pts, y_pts, zorder=0, color=color, lw=1, linestyle='--')
-            else:
-                plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
-
-        # Similar to pure color, but with a black outline.
-        elif (appearance == "traced"):
-            if (color == "grey"):
-                plt.plot(x_pts, y_pts, zorder=0, color=color, lw=1, linestyle='--')
-            else:
-                plt.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
-                plt.plot(x_pts, y_pts, zorder=1, color='black', lw=2)
-
-        # A black line, but with the highlighted color being the outline.
-        # This outline expands or contracts depending on the value of "expand_value".
-        # This is usually between 0 - > 1.0 and is automated by the fram.py.
-        elif (appearance == "expand"):
-            if (color == "grey"):
-                plt.plot(x_pts, y_pts, zorder=0, color=color, lw=1, linestyle='--')
-            else:
-                plt.plot(x_pts, y_pts, zorder=2, color='black', lw=1)
-                plt.plot(x_pts, y_pts, zorder=1, color= color, lw=(2+expand_value))
-
-        else:
-            print("Error! Appearance type not recognized")
-
-
-
-
-
-
