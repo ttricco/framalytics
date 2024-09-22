@@ -15,8 +15,8 @@ class Visualizer:
         if style == "1":
             px = 1.0  # fnStyle = 1
 
-        figsize_x = px * (max(function_data['x'].astype(float)) - min(function_data['x'].astype(float)) + 100)/100
-        figsize_y = px * (max(function_data['y'].astype(float)) - min(function_data['y'].astype(float)) + 100)/100
+        figsize_x = px * (max(function_data['x']) - min(function_data['x']) + 100)/100
+        figsize_y = px * (max(function_data['y']) - min(function_data['y']) + 100)/100
 
         fig, ax = plt.subplots(figsize=(figsize_x, figsize_y), dpi=150)
         return fig, ax
@@ -37,56 +37,47 @@ class Visualizer:
 
         return color, lw
 
-    def _draw_function_nodes(self, function_data, aspect_data, ax):
+    def _draw_function_nodes(self, function_data, connection_data, ax):
         """
         Generates the Function Nodes based on the data given from the FRAM class.
 
         :param function_data: Function data from FRAM class
-        :param aspect_data:  Aspect data from FRAM class
+        :param connection_data:  Aspect data from FRAM class
 
         :return: None. Used to plot Function nodes on scatterplot.
         """
 
-        functions = function_data  # Stores Function data from FRAM class.
-        aspects = aspect_data  # Stores Aspect data from FRAM class
-
         # Gets the labels, colors, face colors and line width of each node
-        node_labels = []
         node_colors = []
-        node_facecolors = []  # Array of face colors
         node_lw = []  # Array of line widths (borders)
 
-        # Will store true or false values for each feature (numbered by index) to determine if
-        # they have inputs and/or outputs. Will determine if the facecolor is 'white" or very light grey '#F3F3F3'
-        node_toFn = []
-        node_outputFn = []
-
         # For loop that determines each node's x and y coordinates, label, and colors.
-        for index, row in functions.iterrows():
-            node_labels.append(row.IDName)
-
+        for index, row in function_data.iterrows():
             color, lw = self._hex_to_color(row.color)
             node_colors.append(color)
             node_lw.append(lw)
 
-            node_toFn.append(False)
-            node_outputFn.append(False)
+        node_labels = function_data['IDName'].tolist()
+
+        # Will store true or false values for each feature (numbered by index) to determine if
+        # they have inputs and/or outputs. Will determine if the facecolor is 'white" or very light grey '#F3F3F3'
+        node_toFn = [False] * len(function_data)
+        node_outputFn = [False] * len(function_data)
 
         # Determines which nodes (ordered by the functions IDNr = index) have outputs and/or inputs.
-        for i in aspects.toFn:
-            if i != None:
-                node_toFn[int(i)] = True
+        for i in connection_data.toFn:
+            if i is not None:
+                node_toFn[i] = True
 
-        for i in aspects.outputFn:
-            if i != None:
-                node_outputFn[int(i)] = True
+        for i in connection_data.outputFn:
+            if i is not None:
+                node_outputFn[i] = True
 
+        node_facecolors = []  # Array of face colors
         # If the function type is 0, the facecolor is white
-        for index, row in functions.iterrows():
-            if row.FunctionType == "0":
+        for index, row in function_data.iterrows():
+            if row.FunctionType == 0:
                 node_facecolors.append('white')
-
-            # Otherwise, the facecolor is grey.
             else:
                 node_facecolors.append('#F3F3F3')
 
@@ -95,15 +86,15 @@ class Visualizer:
         ax.axis("off")
 
         # Plots function (Hexagon) nodes. (The second plot provides the black outline around the nodes).
-        ax.scatter(function_data['x'].astype(float), function_data['y'].astype(float),
+        ax.scatter(function_data['x'], function_data['y'],
                    label=node_labels, marker='H', s=1500, facecolors=node_facecolors, edgecolors=node_colors, lw=node_lw, zorder=3)
-        ax.scatter(function_data['x'].astype(float), function_data['y'].astype(float),
+        ax.scatter(function_data['x'], function_data['y'],
                    label=node_labels, marker='H', s=1600, facecolors=node_facecolors, edgecolors='black', lw=node_lw, zorder=2)
 
         # Makes multi-line labels
-        for index, row in functions.iterrows():
+        for index, row in function_data.iterrows():
             wrapped_label = textwrap.fill(row.IDName, width=13)
-            plt.annotate(wrapped_label, (float(row.x), float(row.y)), ha='center', va='center', fontsize=4)
+            plt.annotate(wrapped_label, (row.x, row.y), ha='center', va='center', fontsize=4)
 
     def _draw_aspects(self, node_x_coords, node_y_coords, ax):
         """
@@ -197,12 +188,12 @@ class Visualizer:
 
         return x_pts, y_pts
 
-    def _draw_bezier_curves(self, aspect_data, ax, real_connections=None, appearance=None):
+    def _draw_bezier_curves(self, connection_data, ax, real_connections=None, appearance=None):
         """
         Generates the bezier curves (lines) between two aspects using the aspect data given
         from the FRAM class.
 
-        :param aspect_data: Aspect data given from FRAM class (Automatically given by the class).
+        :param connection_data: Aspect data given from FRAM class (Automatically given by the class).
 
         :return: None. Adds the line connections between two aspects to the plot.
         """
@@ -216,7 +207,7 @@ class Visualizer:
         if appearance is None and real_connections is not None:
             appearance = 'pure'
 
-        for index, row in aspect_data[['Name', 'Curve']].iterrows():
+        for index, row in connection_data[['Name', 'Curve']].iterrows():
             curve = row['Curve']
             name = row['Name']
 
@@ -268,7 +259,7 @@ class Visualizer:
 
     def generate(self,
                  function_data,
-                 aspect_data,
+                 connection_data,
                  real_connections=None,
                  appearance=None,
                  ax=None):
@@ -276,7 +267,7 @@ class Visualizer:
         Generates the default FRAM model using the data given from the FRAM class
 
         :param function_data: Function Data given by FRAM class (automatic).
-        :param aspect_data: Aspect Data given by FRAM class (automatic).
+        :param connection_data: Aspect Data given by FRAM class (automatic).
         :param curves: Determines if the bezier curves are drawn or not.
 
         :return: None. Plots the default FRAM model which is displayed when called by "display()".
@@ -285,16 +276,16 @@ class Visualizer:
         if ax is None:
             fig, ax = self._create_figure(function_data)
 
-        self._draw_function_nodes(function_data, aspect_data, ax=ax)
-        self._draw_aspects(function_data['x'].astype(float),
-                           function_data['y'].astype(float),
+        self._draw_function_nodes(function_data, connection_data, ax=ax)
+        self._draw_aspects(function_data['x'],
+                           function_data['y'],
                            ax=ax)
-        self._draw_bezier_curves(aspect_data, real_connections=real_connections,
+        self._draw_bezier_curves(connection_data, real_connections=real_connections,
                                  appearance=appearance, ax=ax)
 
         return ax
 
-    def generate_function_output_paths(self, function_data, aspect_data,
+    def generate_function_output_paths(self, function_data, connection_data,
                                        output_function, input_function=None, ax=None):
         """
         Highlights the output paths of a function based on the given FunctionID.
@@ -305,23 +296,23 @@ class Visualizer:
         :return: None. Highlights a functions outputs on the model.
         """
 
-        connections = dict.fromkeys(aspect_data.Name.unique(), 0)
+        connections = dict.fromkeys(connection_data.Name.unique(), 0)
 
         if input_function is None:
-            for index, row in aspect_data.iterrows():
+            for index, row in connection_data.iterrows():
                 if int(row.outputFn) == output_function:
                     connections[row.Name] = 1
                     # self.bezier_curve_single(row.Curve)
         else:
-            for index, row in aspect_data.iterrows():
+            for index, row in connection_data.iterrows():
                 if (int(row.outputFn) == output_function) and (int(row.toFn) == input_function):
                     connections[row.Name] = 1
                     # self.bezier_curve_single(row.Curve)
 
-        return self.generate(function_data, aspect_data, real_connections=connections,
+        return self.generate(function_data, connection_data, real_connections=connections,
                              appearance="pure", ax=ax)
 
-    def generate_full_path_from_function(self, function_data, aspect_data,
+    def generate_full_path_from_function(self, function_data, connection_data,
                                          output_function, ax=None):
         """
         Generates the full path of a starting function from itself, to the end.
@@ -334,10 +325,10 @@ class Visualizer:
 
         function_stack = []
         already_pathed = [int(output_function)]
-        connections = dict.fromkeys(aspect_data.Name.unique(), 0)
+        connections = dict.fromkeys(connection_data.Name.unique(), 0)
 
         # Add all functions this function outputs to
-        for index, row in aspect_data.iterrows():
+        for index, row in connection_data.iterrows():
             if int(row.outputFn) == output_function:
                 function_stack.append(int(row.toFn))
                 connections[row.Name] = 1
@@ -349,14 +340,14 @@ class Visualizer:
             if current_function in already_pathed:
                 continue
 
-            for index, row in aspect_data.iterrows():
+            for index, row in connection_data.iterrows():
                 if int(row.outputFn) == current_function:
                     function_stack.append(int(row.toFn))
                     connections[row.Name] = 1
 
             already_pathed.append(current_function)
 
-        return self.generate(function_data, aspect_data, real_connections=connections,
+        return self.generate(function_data, connection_data, real_connections=connections,
                              appearance="pure", ax=ax)
 
 

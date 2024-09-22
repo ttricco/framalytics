@@ -36,7 +36,7 @@ def test_get_aspect_data():
     # Generate the aspect data from the .xfmv file.
     test = fram.FRAM("FRAM model-Stroke care system.xfmv")
     test.visualize("WebAgg")
-    aspect_data = test.get_aspect_data()
+    aspect_data = test.get_connection_data()
 
     # Each row is a single aspect connection. The name consist of "outputFn|Name|toFn|Aspect". We confirm the dataframe
     # stores the proper toFn and outputFn data that is associated with the name. The columns, x and y should be 0.

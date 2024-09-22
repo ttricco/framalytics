@@ -53,7 +53,12 @@ def parse_xfmv(filename):
 
     # Create Pandas DataFrames
     df_function = pd.DataFrame(function_data)
+    df_function['x'] = df_function['x'].astype(float)
+    df_function['y'] = df_function['y'].astype(float)
+    df_function['FunctionType'] = df_function['FunctionType'].astype(int)
+
     df_input = pd.DataFrame(input_data)
+
     df_aspect = pd.DataFrame(aspect_data)
 
     for index, row in df_aspect.iterrows():
@@ -62,5 +67,12 @@ def parse_xfmv(filename):
             row['outputFn'] = name_split[0]
         if row['toFn'] is None:
             row['toFn'] = name_split[2]
+
+    df_aspect['outputFn'] = df_aspect['outputFn'].astype(int)
+    df_aspect['toFn'] = df_aspect['toFn'].astype(int)
+
+    df_tmp = df_aspect['Name'].str.split('|', expand=True)
+    df_aspect['parsed_name'] = df_tmp[1]
+    df_aspect['toAspect'] = df_tmp[3]
 
     return df_function, df_input, df_aspect

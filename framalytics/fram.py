@@ -15,17 +15,13 @@ class FRAM:
         self.filename = filename  # Name of ".xfmv" file.
 
         fram_data = parse_xfmv(filename)  # Gets all information from the .xfmv file
-
         self._function_data = fram_data[0]  # Function information (Hexagon nodes)
-        self._aspect_data = fram_data[2]  # Aspect connection data (bezier curves)
+        self._connection_data = fram_data[2]  # Aspect connection data (bezier curves)
 
         self.visualizer = Visualizer()
-
         self.given_data = None  # Given data from to user to run through the FRAM (Not implemented, pandas?)
-
         self.functions_by_id = {}  # Stores all functions in a dictionary. IDNr is the key, IDName is the value.
         self.functions_by_name = {}  # Stores all functions in a dictionary. IDName is the key, IDNr is the value.
-
         self.connections_list = []  # Stores all connection names
         self.function_list = []  # Stores all function names
 
@@ -34,26 +30,8 @@ class FRAM:
             self.functions_by_name.update({row.IDName: int(row.IDNr)})
             self.function_list.append(row.IDName)
 
-        # Each list store the designated data of all connections. Each index stores the data of a particular connection.
-        # For example, index 0 stores all the data of connection 1 over all 4 lists.
-        all_fromFn = []
-        all_toFn = []
-        all_toAspect = []
-        all_names = []
-
-        for index, row in self._aspect_data.iterrows():
+        for index, row in self._connection_data.iterrows():
             self.connections_list.append(row.Name)
-
-            # Parses the data so that the desired data of each connection goes to the designated list.
-            parsed_connection = row.Name.split("|")
-            all_fromFn.append(int(parsed_connection[0]))
-            all_names.append(parsed_connection[1])
-            all_toFn.append(int(parsed_connection[2]))
-            all_toAspect.append(parsed_connection[3])
-
-        # Generates the connections dataframe using the parsed data.
-        connection_dataframe = {'fromFn': all_fromFn, "toFn": all_toFn, "toAspect": all_toAspect, "Name": all_names}
-        self.connection_dataframe = pd.DataFrame(data=connection_dataframe)
 
     def get_function_metadata(self):
         """
@@ -64,14 +42,14 @@ class FRAM:
 
         return self._function_data
 
-    def get_aspect_data(self):
+    def get_connection_data(self):
         """
         Returns the aspect connection data (Bezier curves) of the FRAM file
 
         :return: A list of aspect connection data. Each index is a different connection between two aspects.
         """
 
-        return self._aspect_data
+        return self._connection_data
 
     def get_functions(self):
         """
@@ -90,7 +68,9 @@ class FRAM:
         :return: A pandas dataframe consisting of all connections.
         """
 
-        return self.connection_dataframe
+        columns = ['outputFn', 'toFn', 'toAspect', 'parsed_name']
+        rename = {'outputFn' : 'fromFn', 'parsed_name': 'Name'}
+        return self._connection_data[columns].rename(columns=rename)
 
     def number_of_edges(self):
         """
@@ -99,7 +79,7 @@ class FRAM:
         :return: The number of edges (connections/lines) in a FRAM model.
         """
 
-        return len(self._aspect_data)
+        return len(self._connection_data)
 
     def number_of_functions(self):
         """
@@ -111,17 +91,6 @@ class FRAM:
         number_of_functions = len(self.functions_by_id.items())
         return number_of_functions
 
-    def print_functions(self):
-        """
-        Prints the dictionary (key,value) items which are the functions of a FRAM model. The key is the FunctionID of
-        the corresponding function, while the value is the name of the function.
-
-        :return: None. Prints all functions, row by row.
-        """
-
-        for function in self.functions_by_id.items():
-            print(function)
-
     def get_function_id(self, name=None):
         """
         Given the functions name, returns the corresponding functions ID.
@@ -130,7 +99,7 @@ class FRAM:
 
         :return: The FunctionID that corresponds to the given function name.
         """
-        if isinstance(name, str) == False:
+        if not isinstance(name, str):
             raise Exception("Invalid input. A string value should be used.")
 
         function_id = self.functions_by_name.get(name)
@@ -144,7 +113,7 @@ class FRAM:
 
         :return: The name of the function for the corresponding given ID.
         """
-        if isinstance(id, int) == False:
+        if not isinstance(id, int):
             raise Exception("Invalid input. A integer value should be used.")
 
         function_name = self.functions_by_id.get(id)
@@ -159,34 +128,21 @@ class FRAM:
         :return: A dictionary consisting of the functions that serve as inputs to the input aspect of the function.
         """
 
-        all_connections = self.get_connections()  # Gets all connections
-
         # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
         # If the function value given is a string. We consider the value is the function name and get the associated ID.
         if isinstance(function, str):
             id = self.get_function_id(function)
-
-        # If the function value is an integer. We consider that the value is the function ID and use it accordingly.
         elif isinstance(function, int):
             id = function
-
-        # Otherwise, all other value types are considered invalid and an error/exception is raised.
         else:
             raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
 
         function_inputs = {}  # This will store all the functions inputs in a dictionary {key=id, value = name}
 
-        # For every connection, we separate it into 4 parts. [output_function, name, to_function(input), aspect]
-        for index, row in all_connections.iterrows():
-            outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
-            tofn = int(row.toFn)  # Stored ID and user given ID are integers.
-            aspect = row.toAspect
-
-        # If the connection links to the input aspect of the desired function, add the output_function id and name
-        # to the dictionary of inputs.
-            if (tofn == id) and (aspect == "I"):
-                outputfn_name = self.get_function_name(outputfn)
-                function_inputs.update({outputfn: outputfn_name})
+        for index, row in self._connection_data.iterrows():
+            if row['toFn'] == id and row['toAspect'] == "I":
+                outputfn_name = self.get_function_name(row['outputFn'])
+                function_inputs.update({row['outputFn']: outputfn_name})
 
         return function_inputs
 
@@ -199,37 +155,21 @@ class FRAM:
         :return: A dictionary consisting of the functions that use the desired functions output aspect.
         """
 
-        all_connections = self.get_connections()  # Gets all connections
-
         # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
 
-        # If the function value given is a string. We consider the value is the function name and get the associated ID.
         if isinstance(function, str):
             id = self.get_function_id(function)
-
-        # If the function value is an integer. We consider that the value is the function ID and use it accordingly.
         elif isinstance(function, int):
             id = function
-
-        # Otherwise, all other value types are considered invalid and an error/exception is raised.
         else:
             raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
 
-        # This will store all the functions that use the desired function outputs aspect in a dictionary.
-        # {key=id, value = name}
         function_outputs = {}
 
-        # For every connection, we separate it into 4 parts. [output_function, name, to_function(input), aspect]
-        for index, row in all_connections.iterrows():
-            outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
-            tofn = int(row.toFn)  # Stored ID and user given ID are integers.
-            aspect = row.toAspect
-
-            # If the connection uses the desired function as the output fn (means it uses it's output aspect), we
-            # add it to the output_functions dictionary.
-            if outputfn == id:
-                tofn_name = self.get_function_name(tofn)
-                function_outputs.update({tofn: tofn_name})
+        for index, row in self._connection_data.iterrows():
+            if row['outputFn'] == id:
+                tofn_name = self.get_function_name(row['toFn'])
+                function_outputs.update({row['toFn']: tofn_name})
 
         return function_outputs
 
@@ -243,33 +183,23 @@ class FRAM:
             the precondition aspect of the function.
         """
 
-        all_connections = self.get_connections()  # Gets all connections
-
         # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
 
         # If the function value given is a string. We consider the value is the function name and get the associated ID.
         if isinstance(function, str):
             id = self.get_function_id(function)
-
-        # If the function value is an integer. We consider that the value is the function ID and use it accordingly.
         elif isinstance(function, int):
             id = function
-
-        # Otherwise, all other value types are considered invalid and an error/exception is raised.
         else:
             raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
 
         # This will store all the functions preconditions in a dictionary {key=id, value = name}
         function_preconditions = {}
 
-        for index, row in all_connections.iterrows():
-            outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
-            tofn = int(row.toFn)  # Stored ID and user given ID are integers.
-            aspect = row.toAspect
-
-            if (tofn == id) and (aspect == "P"):
-                outputfn_name = self.get_function_name(outputfn)
-                function_preconditions.update({outputfn: outputfn_name})
+        for index, row in self._connection_data.iterrows():
+            if row['toFn'] == id and row['toAspect'] == "P":
+                outputfn_name = self.get_function_name(row['outputFn'])
+                function_preconditions.update({row['outputFn']: outputfn_name})
 
         return function_preconditions
 
@@ -282,32 +212,22 @@ class FRAM:
         :return: A dictionary consisting of the functions that serve as resources to the resource aspect of the function.
         """
 
-        all_connections = self.get_connections()  # Gets all connections
-
         # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
 
         # If the function value given is a string. We consider the value is the function name and get the associated ID.
         if isinstance(function, str):
             id = self.get_function_id(function)
-
-        # If the function value is an integer. We consider that the value is the function ID and use it accordingly.
         elif isinstance(function, int):
             id = function
-
-        # Otherwise, all other value types are considered invalid and an error/exception is raised.
         else:
             raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
 
         function_resources = {}  # This will store all the functions resources in a dictionary {key=id, value = name}
 
-        for index, row in all_connections.iterrows():
-            outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
-            tofn = int(row.toFn)  # Stored ID and user given ID are integers.
-            aspect = row.toAspect
-
-            if (tofn == id) and (aspect == "R"):
-                outputfn_name = self.get_function_name(outputfn)
-                function_resources.update({outputfn: outputfn_name})
+        for index, row in self._connection_data.iterrows():
+            if row['toFn'] == id and row['toAspect'] == "R":
+                outputfn_name = self.get_function_name(row['outputFn'])
+                function_resources.update({row['outputFn']: outputfn_name})
 
         return function_resources
 
@@ -320,32 +240,22 @@ class FRAM:
         :return: A dictionary consisting of the functions that serve as controls to the control aspect of the function.
         """
 
-        all_connections = self.get_connections()  # Gets all connections
-
         # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
 
         # If the function value given is a string. We consider the value is the function name and get the associated ID.
         if isinstance(function, str):
             id = self.get_function_id(function)
-
-        # If the function value is an integer. We consider that the value is the function ID and use it accordingly.
         elif isinstance(function, int):
             id = function
-
-        # Otherwise, all other value types are considered invalid and an error/exception is raised.
         else:
             raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
 
         function_controls = {}  # This will store all the functions controls in a dictionary {key=id, value = name}
 
-        for index, row in all_connections.iterrows():
-            outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
-            tofn = int(row.toFn)  # Stored ID and user given ID are integers.
-            aspect = row.toAspect
-
-            if (tofn == id) and (aspect == "C"):
-                outputfn_name = self.get_function_name(outputfn)
-                function_controls.update({outputfn: outputfn_name})
+        for index, row in self._connection_data.iterrows():
+            if row['toFn'] == id and row['toAspect'] == "C":
+                outputfn_name = self.get_function_name(row['outputFn'])
+                function_controls.update({row['outputFn']: outputfn_name})
 
         return function_controls
 
@@ -358,32 +268,22 @@ class FRAM:
         :return: A dictionary consisting of the functions that serve as times to the time aspect of the function.
         """
 
-        all_connections = self.get_connections()  # Gets all connections
-
         # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
 
         # If the function value given is a string. We consider the value is the function name and get the associated ID.
         if isinstance(function, str):
             id = self.get_function_id(function)
-
-        # If the function value is an integer. We consider that the value is the function ID and use it accordingly.
         elif isinstance(function, int):
             id = function
-
-        # Otherwise, all other value types are considered invalid and an error/exception is raised.
         else:
             raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
 
         function_times = {}  # This will store all the functions times in a dictionary {key=id, value = name}
 
-        for index, row in all_connections.iterrows():
-            outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
-            tofn = int(row.toFn)  # Stored ID and user given ID are integers.
-            aspect = row.toAspect
-
-            if (tofn == id) and (aspect == "T"):
-                outputfn_name = self.get_function_name(outputfn)
-                function_times.update({outputfn: outputfn_name})
+        for index, row in self._connection_data.iterrows():
+            if row['toFn'] == id and row['toAspect'] == "T":
+                outputfn_name = self.get_function_name(row['outputFn'])
+                function_times.update({row['outputFn']: outputfn_name})
 
         return function_times
 
@@ -396,7 +296,7 @@ class FRAM:
         :return: None. Generates the FRAM model.
         """
 
-        return self.visualizer.generate(self._function_data, self._aspect_data, ax=ax)
+        return self.visualizer.generate(self._function_data, self._connection_data, ax=ax)
 
     def display(self):
         """
@@ -422,7 +322,7 @@ class FRAM:
             raise ValueError("Invalid input. A function ID (integer) or function name (string) is required.")
 
         self.visualizer.generate_function_output_paths(self._function_data,
-                                                       self._aspect_data, functionID, ax=ax)
+                                                       self._connection_data, functionID, ax=ax)
 
     def highlight_full_path_from_function(self, function, ax=None):
         """
@@ -440,12 +340,12 @@ class FRAM:
             raise ValueError("Invalid input. A function ID (integer) or function name (string) is required.")
 
         self.visualizer.generate_full_path_from_function(self._function_data,
-                                                         self._aspect_data, functionID, ax=ax)
+                                                         self._connection_data, functionID, ax=ax)
 
     def _count_real_data_connections(self, real_data, column_type="functions"):
 
         connections = {}  # Stores the connections between two aspects and the number of times it's traversed.
-        for index, row in self._aspect_data.iterrows():
+        for index, row in self._connection_data.iterrows():
             connections.update({row.Name: 0})
 
         column_type = column_type.lower()
@@ -500,33 +400,7 @@ class FRAM:
 
         connections = self._count_real_data_connections(real_data=data, column_type=column_type)
 
-        ax = self.visualizer.generate(self._function_data, self._aspect_data, real_connections=connections, ax=ax)
+        ax = self.visualizer.generate(self._function_data, self._connection_data, real_connections=connections, ax=ax)
 
         return ax
 
-    def list_of_connections(self):
-        """
-        Prints a list in which all indexes are also a list of two values. These values are the function names
-        of a connection. For example: [[OutputFn_name, toFn_name], OutputFn_name, toFn_name]].
-
-        :return: None. Prints all connections, in which the values are function names.
-        """
-        all_connections = []
-        for i in self.get_connections():
-            # Stores current connection name
-            connection_default = i
-
-            # Splits connection to get information
-            connection = i.split("|")
-
-            # Get output and input function ID's
-            outputFn = int(connection[0])
-            toFn = int(connection[2])
-
-            # Stores the names of the functions.
-            outputFn_name = self.functions_by_id.get(outputFn)
-            toFn_name = self.functions_by_id.get(toFn)
-
-            all_connections.append([outputFn_name, toFn_name])
-
-        print(all_connections)
