@@ -305,36 +305,21 @@ class Visualizer:
         :return: None. Highlights a functions outputs on the model.
         """
 
-        if ax is None:
-            fig, ax = self._create_figure(function_data)
-
-        self._draw_function_nodes(function_data, aspect_data, ax=ax)
-        self._draw_aspects(function_data['x'].astype(float),
-                           function_data['y'].astype(float),
-                           ax=ax)
+        connections = dict.fromkeys(aspect_data.Name.unique(), 0)
 
         if input_function is None:
             for index, row in aspect_data.iterrows():
-
-                if (row.outputFn is None) and (row.toFn is None):
-                    name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
-
-                    if int(name_split[0]) == output_function:
-                        self.bezier_curve_single(row.Curve)
-                else:
-                    if int(row.outputFn) == output_function:
-                        self.bezier_curve_single(row.Curve)
-
+                if int(row.outputFn) == output_function:
+                    connections[row.Name] = 1
+                    # self.bezier_curve_single(row.Curve)
         else:
             for index, row in aspect_data.iterrows():
-                if (row.outputFn is None) and (row.toFn is None):
-                    name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
+                if (int(row.outputFn) == output_function) and (int(row.toFn) == input_function):
+                    connections[row.Name] = 1
+                    # self.bezier_curve_single(row.Curve)
 
-                    if (int(name_split[0]) == output_function) and (int(name_split[2]) == input_function):
-                        self.bezier_curve_single(row.Curve)
-                else:
-                    if (int(row.outputFn) == output_function) and (int(row.toFn) == input_function):
-                        self.bezier_curve_single(row.Curve)
+        return self.generate(function_data, aspect_data, real_connections=connections,
+                             appearance="pure", ax=ax)
 
     def generate_full_path_from_function(self, function_data, aspect_data,
                                          output_function, ax=None):
@@ -347,48 +332,31 @@ class Visualizer:
         :return: None. Results are displayed in a plot when called.
         """
 
-        if ax is None:
-            fig, ax = self._create_figure(function_data)
+        function_stack = []
+        already_pathed = [int(output_function)]
+        connections = dict.fromkeys(aspect_data.Name.unique(), 0)
 
-        functions_in_path = []
-        already_pathed = []
-        current_function = output_function
-
+        # Add all functions this function outputs to
         for index, row in aspect_data.iterrows():
-
-            # In the case the instance does not store the output and toFn Values, they seem to be stored in the name.
-            if (row.outputFn is None) and (row.toFn is None):
-                name_split = row.Name.split("|") # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
-                if(int(name_split[0]) == current_function):
-                    functions_in_path.append(int(name_split[2]))
-                    self.bezier_curve_single(row.Curve)
-
-            # For our Stroke Care System, this is used.
-            else:
-                if int(row.outputFn) == current_function:
-                    functions_in_path.append(int(row.toFn))
-                    self.bezier_curve_single(row.Curve)
-
-        # Add this function to the path link, so that we don't repeat paths.
-        already_pathed.append(int(current_function))
+            if int(row.outputFn) == output_function:
+                function_stack.append(int(row.toFn))
+                connections[row.Name] = 1
 
         #While all paths have not been searched
-        while len(functions_in_path) != 0:
-            current_function = functions_in_path.pop()
-            if(current_function in already_pathed):
+        while len(function_stack) != 0:
+            current_function = function_stack.pop()
+
+            if current_function in already_pathed:
                 continue
 
             for index, row in aspect_data.iterrows():
-                if (row.outputFn is None) and (row.toFn is None):
-                    name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
-                    if int(name_split[0]) == current_function:
-                        functions_in_path.append(int(name_split[2]))
-                        self.bezier_curve_single(row.Curve)
-
-                    # For our Stroke Care System, this is used.
-                else:
-                    if int(row.outputFn) == current_function:
-                        functions_in_path.append(int(row.toFn))
-                        self.bezier_curve_single(row.Curve)
+                if int(row.outputFn) == current_function:
+                    function_stack.append(int(row.toFn))
+                    connections[row.Name] = 1
 
             already_pathed.append(current_function)
+
+        return self.generate(function_data, aspect_data, real_connections=connections,
+                             appearance="pure", ax=ax)
+
+
