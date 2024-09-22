@@ -178,7 +178,6 @@ class FRAM:
 
         # For every connection, we separate it into 4 parts. [output_function, name, to_function(input), aspect]
         for index, row in all_connections.iterrows():
-            name = row.Name
             outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
             tofn = int(row.toFn)  # Stored ID and user given ID are integers.
             aspect = row.toAspect
@@ -222,14 +221,13 @@ class FRAM:
 
         # For every connection, we separate it into 4 parts. [output_function, name, to_function(input), aspect]
         for index, row in all_connections.iterrows():
-            name = row.Name
             outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
             tofn = int(row.toFn)  # Stored ID and user given ID are integers.
             aspect = row.toAspect
 
             # If the connection uses the desired function as the output fn (means it uses it's output aspect), we
             # add it to the output_functions dictionary.
-            if (outputfn == id):
+            if outputfn == id:
                 tofn_name = self.get_function_name(tofn)
                 function_outputs.update({tofn: tofn_name})
 
@@ -265,7 +263,6 @@ class FRAM:
         function_preconditions = {}
 
         for index, row in all_connections.iterrows():
-            name = row.Name
             outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
             tofn = int(row.toFn)  # Stored ID and user given ID are integers.
             aspect = row.toAspect
@@ -304,7 +301,6 @@ class FRAM:
         function_resources = {}  # This will store all the functions resources in a dictionary {key=id, value = name}
 
         for index, row in all_connections.iterrows():
-            name = row.Name
             outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
             tofn = int(row.toFn)  # Stored ID and user given ID are integers.
             aspect = row.toAspect
@@ -343,7 +339,6 @@ class FRAM:
         function_controls = {}  # This will store all the functions controls in a dictionary {key=id, value = name}
 
         for index, row in all_connections.iterrows():
-            name = row.Name
             outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
             tofn = int(row.toFn)  # Stored ID and user given ID are integers.
             aspect = row.toAspect
@@ -382,7 +377,6 @@ class FRAM:
         function_times = {}  # This will store all the functions times in a dictionary {key=id, value = name}
 
         for index, row in all_connections.iterrows():
-            name = row.Name
             outputfn = int(row.fromFn)  # Stored ID and user given ID are integers.
             tofn = int(row.toFn)  # Stored ID and user given ID are integers.
             aspect = row.toAspect
@@ -412,7 +406,7 @@ class FRAM:
         """
         plt.show()
 
-    def highlight_function_outputs(self, functionID):
+    def highlight_function_outputs(self, functionID, ax=None):
         """
         Highlights the outputs of a function.
 
@@ -423,9 +417,10 @@ class FRAM:
         if isinstance(functionID, int) == False:
             raise Exception("Invalid input. A integer value should be used.")
 
-        self.visualizer.generate_function_output_paths(self._aspect_data, functionID)
+        self.visualizer.generate_function_output_paths(self._function_data,
+                                                       self._aspect_data, functionID, ax=ax)
 
-    def highlight_full_path_from_function(self, functionID):
+    def highlight_full_path_from_function(self, functionID, ax=None):
         """
         Highlights all the paths that are connected to a starting function.
 
@@ -436,15 +431,14 @@ class FRAM:
         if isinstance(functionID, int) == False:
             raise Exception("Invalid input. A integer value should be used.")
 
-        self.visualizer.generate_full_path_from_function(self._aspect_data, functionID)
+        self.visualizer.generate_full_path_from_function(self._function_data,
+                                                         self._aspect_data, functionID, ax=ax)
 
     def _count_real_data_connections(self, real_data, column_type="functions"):
 
         connections = {}  # Stores the connections between two aspects and the number of times it's traversed.
         for index, row in self._aspect_data.iterrows():
             connections.update({row.Name: 0})
-
-        total_instances = len(real_data)  # Total number of rows / instances from the dataframe.
 
         column_type = column_type.lower()
         # If the dataframe uses function names for the column names.

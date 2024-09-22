@@ -169,7 +169,35 @@ class Visualizer:
             wrapped_label = textwrap.fill(label, break_long_words=False, width=1)
             ax.annotate(wrapped_label, (x, y), ha='center', va='center', fontsize=3.5)
 
-    def _draw_bezier_curves(self, aspect_data, real_connections=None, appearance=None, ax=None):
+    def _get_bezier_points(self, curve):
+
+        # Curve coordinates
+        a = curve.split("|")
+
+        # Must be in this order!
+        control_points = [(float(a[2]), float(a[3])),
+                          (float(a[4]), float(a[5])),
+                          (float(a[8]), float(a[9])),
+                          (float(a[6]), float(a[7])),
+                          (float(a[0]), float(a[1]))]
+        bezier_segment = BezierSegment(control_points)
+
+        x_pts = []
+        y_pts = []
+        for j in range(0, 101):
+            x, y = bezier_segment.point_at_t(j / 100)
+            x_pts.append(x)
+            y_pts.append(y)
+
+        for j in range(len(x_pts)):
+            x_pts[j] = x_pts[j] - 48
+
+        for j in range(len(y_pts)):
+            y_pts[j] = y_pts[j] - 50
+
+        return x_pts, y_pts
+
+    def _draw_bezier_curves(self, aspect_data, ax, real_connections=None, appearance=None):
         """
         Generates the bezier curves (lines) between two aspects using the aspect data given
         from the FRAM class.
@@ -192,29 +220,7 @@ class Visualizer:
             curve = row['Curve']
             name = row['Name']
 
-            # Curve coordinates
-            a = curve.split("|")
-
-            # Must be in this order!
-            control_points = [(float(a[2]), float(a[3])),
-                              (float(a[4]), float(a[5])),
-                              (float(a[8]), float(a[9])),
-                              (float(a[6]), float(a[7])),
-                              (float(a[0]), float(a[1]))]
-            bezier_segment = BezierSegment(control_points)
-
-            x_pts = []
-            y_pts = []
-            for j in range(0, 101):
-                x, y = bezier_segment.point_at_t(j/100)
-                x_pts.append(x)
-                y_pts.append(y)
-
-            for j in range(len(x_pts)):
-                x_pts[j] = x_pts[j] - 48
-
-            for j in range(len(y_pts)):
-                y_pts[j] = y_pts[j] - 50
+            x_pts, y_pts = self._get_bezier_points(curve)
 
             if real_connections is None:
                 ax.plot(x_pts, y_pts, zorder=1, color='#999999', lw=1)
@@ -288,7 +294,8 @@ class Visualizer:
 
         return ax
 
-    def generate_function_output_paths(self,aspect_data, output_function, input_function=None):
+    def generate_function_output_paths(self, function_data, aspect_data,
+                                       output_function, input_function=None, ax=None):
         """
         Highlights the output paths of a function based on the given FunctionID.
 
@@ -298,16 +305,24 @@ class Visualizer:
         :return: None. Highlights a functions outputs on the model.
         """
 
-        if input_function == None:
+        if ax is None:
+            fig, ax = self._create_figure(function_data)
+
+        self._draw_function_nodes(function_data, aspect_data, ax=ax)
+        self._draw_aspects(function_data['x'].astype(float),
+                           function_data['y'].astype(float),
+                           ax=ax)
+
+        if input_function is None:
             for index, row in aspect_data.iterrows():
 
-                if ((row.outputFn == None) and (row.toFn == None)):
+                if (row.outputFn is None) and (row.toFn is None):
                     name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
 
-                    if (int(name_split[0]) == output_function):
+                    if int(name_split[0]) == output_function:
                         self.bezier_curve_single(row.Curve)
                 else:
-                    if (int(row.outputFn) == output_function):
+                    if int(row.outputFn) == output_function:
                         self.bezier_curve_single(row.Curve)
 
         else:
@@ -321,7 +336,8 @@ class Visualizer:
                     if (int(row.outputFn) == output_function) and (int(row.toFn) == input_function):
                         self.bezier_curve_single(row.Curve)
 
-    def generate_full_path_from_function(self, aspect_data, output_function):
+    def generate_full_path_from_function(self, function_data, aspect_data,
+                                         output_function, ax=None):
         """
         Generates the full path of a starting function from itself, to the end.
         This shows all the connections a function impacts.
@@ -330,6 +346,9 @@ class Visualizer:
 
         :return: None. Results are displayed in a plot when called.
         """
+
+        if ax is None:
+            fig, ax = self._create_figure(function_data)
 
         functions_in_path = []
         already_pathed = []
