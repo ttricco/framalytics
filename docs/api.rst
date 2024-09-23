@@ -34,11 +34,11 @@ Statistics
    :nosignatures:
 
    FRAM.number_of_functions
-   FRAM.number_of_edges
+   FRAM.number_of_connections
 
 
-Visualization
-"""""""""""""
+Rendering
+"""""""""
 .. autosummary::
    :toctree: api/
    :nosignatures:
@@ -55,8 +55,7 @@ Interface
    :toctree: api/
    :nosignatures:
 
-   FRAM.get_function_metadata
-   FRAM.get_aspect_data
+   FRAM.get_functions
    FRAM.get_connections
    FRAM.get_function_id
    FRAM.get_function_name

@@ -1,9 +1,6 @@
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    import pandas as pd
-    from matplotlib.axes import Axes
-    from matplotlib.figure import Figure
+import pandas as pd
+from matplotlib.axes import Axes
+from matplotlib.figure import Figure
 
 from matplotlib.bezier import BezierSegment
 import matplotlib.pyplot as plt
@@ -14,7 +11,7 @@ class Visualizer:
 
     def _create_figure(self,
                        function_data: pd.DataFrame) -> tuple[Figure, Axes]:
-        """ Create a figure / axis of appropriate dimensions. """
+        """ Create a figure and axes of appropriate dimensions. """
 
         style = function_data.iloc[0]["fnStyle"]
 
@@ -50,12 +47,16 @@ class Visualizer:
                              connection_data: pd.DataFrame,
                              ax: Axes):
         """
-        Generates the Function Nodes based on the data given from the FRAM class.
+        Draw FRAM functions onto a Matplotlib axes.
 
-        :param function_data: Function data from FRAM class
-        :param connection_data:  Aspect data from FRAM class
-
-        :return: None. Used to plot Function nodes on scatterplot.
+        Parameters
+        ----------
+        function_data : pd.DataFrame
+            The function data from the FRAM model.
+        connection_data : pd.DataFrame
+            The connection data from the FRAM model.
+        ax : Axes
+            The Matplotlib axes.
         """
 
         # Gets the labels, colors, face colors and line width of each node
@@ -112,9 +113,16 @@ class Visualizer:
                       node_y_coords: pd.Series | list,
                       ax: Axes):
         """
-        Generates the Aspects of each Function Node.
+        Draw the six aspects around each function.
 
-        :return: None. Adds the aspects of function nodes to the plot.
+        Parameters
+        ----------
+        node_x_coords : pd.Series
+            The x-coordinates of each function
+        node_y_coords : pd.Series
+            The y-coordinates of each function.
+        ax : Axes
+            The Matplotlib axes.
         """
         # Aspect creation
         aspects_x = []
@@ -175,7 +183,8 @@ class Visualizer:
             ax.annotate(wrapped_label, (x, y), ha='center', va='center', fontsize=3.5)
 
     def _get_bezier_points(self,
-                           curve: str):
+                           curve: str) -> tuple[list, list]:
+        """ Return a set (x, y) positions along each Bezier curve. """
 
         # Curve coordinates
         a = curve.split("|")
@@ -209,12 +218,19 @@ class Visualizer:
                             real_connections: dict | None = None,
                             appearance: str | None = None):
         """
-        Generates the bezier curves (lines) between two aspects using the aspect data given
-        from the FRAM class.
+        Draw connections between functions.
 
-        :param connection_data: Aspect data given from FRAM class (Automatically given by the class).
-
-        :return: None. Adds the line connections between two aspects to the plot.
+        Parameters
+        ----------
+        connection_data : pd.DataFrame
+            The connection data from the FRAM model.
+        ax : Axes
+            The Matplotlib axes.
+        real_connections : dict, optional
+            A dictionary with the weighting of each connection. The keys
+            of the dictionary are the raw string representing the connection.
+        appearance : {'pure', 'traced', 'expand'}, optional
+            The visual appearance of highlighted data. Defaults to 'pure'.
         """
 
         if isinstance(appearance, str):
@@ -283,13 +299,27 @@ class Visualizer:
                  appearance: str | None = None,
                  ax: Axes | None = None) -> Axes:
         """
-        Generates the default FRAM model using the data given from the FRAM class
+        Draw the FRAM model onto a Matplotlib axes.
 
-        :param function_data: Function Data given by FRAM class (automatic).
-        :param connection_data: Aspect Data given by FRAM class (automatic).
-        :param curves: Determines if the bezier curves are drawn or not.
+        Parameters
+        ----------
+        function_data : pd.DataFrame
+            The function data from the FRAM model.
+        connection_data : pd.DataFrame
+            The connection data from the FRAM model.
+        real_connections : dict, optional
+            A dictionary with the weighting of each connection. Used for
+            highlighting connections based on a set of observations. The keys
+            of the dictionary are the raw string representing the connection.
+        appearance : {'pure', 'traced', 'expand'}, optional
+            The visual appearance of highlighted data. Defaults to 'pure'.
+        ax : Axes, optional
+            The Matplotlib axes. If None, then a new Axes is created.
 
-        :return: None. Plots the default FRAM model which is displayed when called by "display()".
+        Returns
+        -------
+        Axes
+            Returns the Matplotlib Axes the FRAM model was rendered onto.
         """
 
         if ax is None:
@@ -311,12 +341,25 @@ class Visualizer:
                                        input_function: int | None = None,
                                        ax: Axes | None = None) -> Axes:
         """
-        Highlights the output paths of a function based on the given FunctionID.
+        Highlights the output connections of a given function ID.
 
-        :param output_function: Output functionID number. (Integer).
-        :param input_function: Input functionID number (Optional) (Integer).
+        Parameters
+        ----------
+        function_data : pd.DataFrame
+            The function data from the FRAM model.
+        connection_data : pd.DataFrame
+            The connection data from the FRAM model.
+        output_function : int
+            The output function ID.
+        input_function : int, optional
+            The input function ID.
+        ax : Axes, optional
+            The Matplotlib axes. If None, then a new Axes is created.
 
-        :return: None. Highlights a functions outputs on the model.
+        Returns
+        -------
+        Axes
+            Returns the Matplotlib Axes the FRAM model was rendered onto.
         """
 
         connections = dict.fromkeys(connection_data.Name.unique(), 0)
@@ -341,12 +384,23 @@ class Visualizer:
                                          output_function: int,
                                          ax: Axes | None = None) -> Axes:
         """
-        Generates the full path of a starting function from itself, to the end.
-        This shows all the connections a function impacts.
+        Highlight all functions downstream of the specified function.
 
-        :param output_function: The integer value IDNr for the starting function.
+        Parameters
+        ----------
+        function_data : pd.DataFrame
+            The function data from the FRAM model.
+        connection_data : pd.DataFrame
+            The connection data from the FRAM model.
+        output_function : int
+            The output function ID.
+        ax : Axes, optional
+            The Matplotlib axes. If None, then a new Axes is created.
 
-        :return: None. Results are displayed in a plot when called.
+        Returns
+        -------
+        Axes
+            Returns the Matplotlib Axes the FRAM model was rendered onto.
         """
 
         function_stack = []

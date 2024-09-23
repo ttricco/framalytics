@@ -263,20 +263,3 @@ def test_get_function_times():
 
         for id in times:
             assert function_times.get(id) != None
-
-def main():
-    test = test_get_function_metadata()
-    test = test_get_aspect_data()
-    test = test_get_functions()
-    test = test_number_of_edges_and_functions()
-    test = test_get_function_inputs()
-    test = test_get_function_outputs()
-    test = test_get_function_preconditions()
-    test = test_get_function_resources()
-    test = test_get_function_controls()
-    test = test_get_function_times()
-
-
-
-if __name__ == "__main__":
-    main()

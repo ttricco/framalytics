@@ -13,10 +13,10 @@ FRAM models can be loaded from `.xfmv` files. A FRAM object holds the model.
 Simple aggregate information about the model can be obtained.
 
 >>> fram.number_of_functions()
-10
+ 10
 
->>> fram.number_of_edges()
-12
+>>> fram.number_of_connections()
+ 12
 
 The model can be visualized using the characteristics stored in the `.xfmv` file.
 
@@ -31,16 +31,16 @@ Extracting Information
 All components of the FRAM model can be extracted, such as the list of functions or connections.
 
 >>> fram.get_functions()
-{0: 'To partially open lid',
- 1: 'To make preparations',
- 2: 'To boil water',
- 3: 'To read instructions',
- 4: 'To add boiling water until fill mark',
- 5: 'To close and weigh down lid',
- 6: 'To wait until tender',
- 7: 'To remove lid',
- 8: 'To stir carefuly',
- 9: 'To enjoy cup noodles'}
+ {0: 'To partially open lid',
+  1: 'To make preparations',
+  2: 'To boil water',
+  3: 'To read instructions',
+  4: 'To add boiling water until fill mark',
+  5: 'To close and weigh down lid',
+  6: 'To wait until tender',
+  7: 'To remove lid',
+  8: 'To stir carefuly',
+  9: 'To enjoy cup noodles'}
 
 >>> fram.get_connections()
 
@@ -53,14 +53,14 @@ There are a variety of getter methods to retrieve information on individual func
 example, a list of functions connected to a particular aspect of the specified function.
 
 >>> fram.get_function_outputs('To read instructions')
-{4: 'To add boiling water until fill mark',
- 5: 'To close and weigh down lid',
- 6: 'To wait until tender'}
+ {4: 'To add boiling water until fill mark',
+  5: 'To close and weigh down lid',
+  6: 'To wait until tender'}
 
 Functions can be referred to by their name or id.
 
 >>> fram.get_function_preconditions(4)
-{0: 'To partially open lid'}
+ {0: 'To partially open lid'}
 
 For a full list of methods, consult the :ref:`api`.
 

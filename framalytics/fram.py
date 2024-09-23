@@ -1,10 +1,7 @@
-from typing import TYPE_CHECKING
+import pandas as pd
+from matplotlib.axes import Axes
 
-if TYPE_CHECKING:
-    import pandas as pd
-    from matplotlib.axes import Axes
-
-from .FRAM_Visualizer import *
+from .FRAM_Visualizer import Visualizer
 from .xfmv_parser import parse_xfmv
 
 
@@ -16,12 +13,24 @@ class FRAM:
     FRAM models. They can be created by reading FRAM models specified by an
     .xfmv file created by the FRAM Model Visualizer.
     """
-    def __init__(self, filename):
+
+    def __init__(self,
+                 filename: str):
         """
         Initialize a FRAM object from an .xfmv file.
 
-        :param filename: The name of the .xfmv file being used.
+        Parameters
+        ----------
+        filename : str
+            The name of the .xfmv file to read.
+
+        Examples
+        --------
+        >>> import framalytics
+        >>>
+        >>> fram = framalytics.FRAM('my-fram-model.xfmv')
         """
+
         self.filename = filename
 
         fram_data = parse_xfmv(filename)
@@ -36,12 +45,15 @@ class FRAM:
             self.functions_by_id.update({int(row.IDNr): row.IDName})
             self.functions_by_name.update({row.IDName: int(row.IDNr)})
 
-
     def get_function_metadata(self) -> pd.DataFrame:
         """
         Returns the function data of the FRAM model.
 
-        :return: A list of function data. Each index is a different function
+        Returns
+        -------
+        pd.DataFrame
+            A pandas DataFrame containing the raw function data from the .xfmv
+            file. Each row is one function.
         """
 
         return self._function_data
@@ -50,8 +62,11 @@ class FRAM:
         """
         Returns the aspect connection data of the FRAM model.
 
-        :return: A list of aspect connection data. Each index is a different
-        connection between two aspects.
+        Returns
+        -------
+        pd.DataFrame
+            A pandas DataFrame containing the raw connection data from the
+            .xfmv file. Each row is one connection between two aspects.
         """
 
         return self._connection_data
@@ -63,7 +78,11 @@ class FRAM:
         The keys of the dictionary are the function IDs and the values are the
         function names.
 
-        :return: A dictionary of functions (keys = ID, values = name).
+        Returns
+        -------
+        dict
+            A dictionary of functions, with (key, value) pairs the (ID, name)
+            of each function.
         """
         return self.functions_by_id
 
@@ -77,27 +96,49 @@ class FRAM:
         function (toFn), the aspect on the destination function (toAspect),
         and the name of the function (toName).
 
-        :return: A pandas DataFrame consisting of all connections.
+        Returns
+        -------
+        pd.DataFrame
+            A pandas DataFrame of all the connections.
         """
 
         columns = ['outputFn', 'toFn', 'toAspect', 'parsed_name']
-        rename = {'outputFn' : 'fromFn', 'parsed_name': 'Name'}
+        rename = {'outputFn': 'fromFn', 'parsed_name': 'Name'}
         return self._connection_data[columns].rename(columns=rename)
 
     def number_of_edges(self) -> int:
         """
         Returns the number of connections (edges) in the FRAM model.
 
-        :return: The number of connections (edges/lines) in the FRAM model.
+        Returns
+        -------
+        int
+            The number of connections (edges) in the FRAM model.
         """
 
         return len(self._connection_data)
+
+    def number_of_connections(self) -> int:
+        """
+        Returns the number of connections (edges) in the FRAM model.
+
+        Returns
+        -------
+        int
+            The number of connections (edges) in the FRAM model.
+        """
+
+        return self.number_of_edges()
+
 
     def number_of_functions(self) -> int:
         """
         Returns the number of functions in the FRAM model.
 
-        :return: The total number of functions in a FRAM model.
+        Returns
+        -------
+        int
+            The number of functions in the FRAM model.
         """
 
         number_of_functions = len(self.functions_by_id.items())
@@ -108,14 +149,24 @@ class FRAM:
         """
         Return the corresponding function ID given a function name.
 
-        :param name: The exact name of a function.
+        Parameters
+        ----------
+        name : str
+            The exact name of a function.
 
-        :return: The FunctionID that corresponds to the given function name.
+        Returns
+        -------
+        int
+            The function ID that corresponds to the given function name.
         """
         if not isinstance(name, str):
             raise Exception("Invalid input. A string value should be used.")
 
         function_id = self.functions_by_name.get(name)
+
+        if function_id is None:
+            raise Exception("No such function exists.")
+
         return function_id
 
     def get_function_name(self,
@@ -123,24 +174,45 @@ class FRAM:
         """
         Return the corresponding function name given a function ID.
 
-        :param id: The ID (integer) of a function.
+        Parameters
+        ----------
+        id : int
+            The ID (integer) of a function.
 
-        :return: The name of the function for the corresponding given ID.
+        Returns
+        -------
+        str
+            The function name that corresponds to the given function ID.
         """
         if not isinstance(id, int):
             raise Exception("Invalid input. A integer value should be used.")
 
         function_name = self.functions_by_id.get(id)
+
+        if function_name is None:
+            raise Exception("No such function exists.")
+
         return function_name
 
     def get_function_inputs(self,
                             function: str | int) -> dict:
         """
-        Gets a dictionary of key/value pairs that consist of the functions that serve as inputs to the input aspect
-        of the desired function.
+        Get all functions connected to the given function's input aspect.
 
-        :param function: The ID (integer) or name (string) of the desired function.
-        :return: A dictionary consisting of the functions that serve as inputs to the input aspect of the function.
+        A dictionary is returned where the keys/values are function IDs/names
+        of all functions that connect to the input aspect of the given
+        function.
+
+        Parameters
+        ----------
+        function : str | int
+            The ID (int) or name (str) of the desired function.
+
+        Returns
+        -------
+        dict
+            A dictionary consisting of the functions that connect to the input
+            aspect of the specified function.
         """
 
         # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
@@ -164,11 +236,22 @@ class FRAM:
     def get_function_outputs(self,
                              function: str | int) -> dict:
         """
-        Gets a dictionary of key/value pairs that consist of the functions that use the output aspect of the desired
+        Get all functions connected to the given function's output aspect.
+
+        A dictionary is returned where the keys/values are function IDs/names
+        of all functions that connect to the output aspect of the given
         function.
 
-        :param function: The ID (integer) or name (String) of the desired function.
-        :return: A dictionary consisting of the functions that use the desired functions output aspect.
+        Parameters
+        ----------
+        function : str | int
+            The ID (int) or name (str) of the desired function.
+
+        Returns
+        -------
+        dict
+            A dictionary consisting of the functions that connect to the output
+            aspect of the specified function.
         """
 
         # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
@@ -192,12 +275,23 @@ class FRAM:
     def get_function_preconditions(self,
                                    function: str | int) -> dict:
         """
-        Gets a dictionary of key/value pairs that consist of the functions that serve as preconditions to the
-        precondition aspect of the desired function.
+        Get all functions connected to the given function's precondition
+        aspect.
 
-        :param function: The ID (integer) or name (String) of the desired function.
-        :return: A dictionary consisting of the functions that serve as preconditions to
-            the precondition aspect of the function.
+        A dictionary is returned where the keys/values are function IDs/names
+        of all functions that connect to the precondition aspect of the given
+        function.
+
+        Parameters
+        ----------
+        function : str | int
+            The ID (int) or name (str) of the desired function.
+
+        Returns
+        -------
+        dict
+            A dictionary consisting of the functions that connect to the
+            precondition aspect of the specified function.
         """
 
         # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
@@ -223,11 +317,22 @@ class FRAM:
     def get_function_resources(self,
                                function: str | int) -> dict:
         """
-        Gets a dictionary of key/value pairs that consist of the functions that serve as resources to the
-        resource aspect of the desired function.
+        Get all functions connected to the given function's resource aspect.
 
-        :param function: The ID (integer) or name (String) of the desired function.
-        :return: A dictionary consisting of the functions that serve as resources to the resource aspect of the function.
+        A dictionary is returned where the keys/values are function IDs/names
+        of all functions that connect to the resource aspect of the given
+        function.
+
+        Parameters
+        ----------
+        function : str | int
+            The ID (int) or name (str) of the desired function.
+
+        Returns
+        -------
+        dict
+            A dictionary consisting of the functions that connect to the
+            resource aspect of the specified function.
         """
 
         # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
@@ -252,11 +357,22 @@ class FRAM:
     def get_function_controls(self,
                               function: str | int) -> dict:
         """
-        Gets a dictionary of key/value pairs that consist of the functions that serve as controls to the
-        time aspect of the desired function.
+        Get all functions connected to the given function's controls aspect.
 
-        :param function: The ID (integer) or name (String) of the desired function.
-        :return: A dictionary consisting of the functions that serve as controls to the control aspect of the function.
+        A dictionary is returned where the keys/values are function IDs/names
+        of all functions that connect to the control aspect of the given
+        function.
+
+        Parameters
+        ----------
+        function : str | int
+            The ID (int) or name (str) of the desired function.
+
+        Returns
+        -------
+        dict
+            A dictionary consisting of the functions that connect to the
+            control aspect of the specified function.
         """
 
         # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
@@ -281,11 +397,21 @@ class FRAM:
     def get_function_times(self,
                            function: str | int) -> dict:
         """
-        Gets a dictionary of key/value pairs that consist of the functions that serve as times to the
-        time aspect of the desired function.
+        Get all functions connected to the given function's time aspect.
 
-        :param function: The ID (integer) or name (String) of the desired function.
-        :return: A dictionary consisting of the functions that serve as times to the time aspect of the function.
+        A dictionary is returned where the keys/values are function IDs/names
+        of all functions that connect to the time aspect of the given function.
+
+        Parameters
+        ----------
+        function : str | int
+            The ID (int) or name (str) of the desired function.
+
+        Returns
+        -------
+        dict
+            A dictionary consisting of the functions that connect to the
+            time aspect of the specified function.
         """
 
         # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
@@ -310,32 +436,52 @@ class FRAM:
     def visualize(self,
                   ax: Axes | None = None) -> Axes:
         """
-        Visualizes the model by calling to the Visualizer class of FRAM_Visualizer.py. This generates the default model.
+        Visualize the FRAM model.
 
-        :param backend: The backend matplotlib will use to display the model through the Visualizer class.
+        This uses Matplotlib to display the model. Colours are chosen based on
+        the colours specified in the .xfmv file. Connections between functions
+        use the Bezier curves specified in the .xfmv file.
 
-        :return: None. Generates the FRAM model.
+        Parameters
+        ----------
+        ax : Axes, optional
+            The Matplotlib Axes on which to render the FRAM model. If None,
+            then a new Matplotlib Axes will be created. Defaults to None.
+
+        Returns
+        -------
+        Axes
+            Returns the Matplotlib Axes the FRAM model was rendered onto.
+
+        Examples
+        --------
+        >>> import framalytics
+        >>>
+        >>> fram = framalytics.FRAM('my-fram-model.xfmv')
+        >>> fram.visualize()
         """
 
         return self.visualizer.generate(self._function_data, self._connection_data, ax=ax)
-
-    def display(self):
-        """
-        Simply displays the current FRAM Model plot.
-
-        :return: None. Displays the FRAM plot.
-        """
-        plt.show()
 
     def highlight_function_outputs(self,
                                    function: str | int,
                                    ax: Axes | None = None) -> Axes:
         """
-        Highlights the outputs of a function.
+        Visualize the FRAM model, with the output connections of a function
+        highlighted.
 
-        :param functionID: Integer value of the FunctionID to be used as the starting point.
+        Parameters
+        ----------
+        function : str | int
+            The ID (int) or name (str) of the desired function.
+        ax : Axes, optional
+            The Matplotlib Axes on which to render the FRAM model. If None,
+            then a new Matplotlib Axes will be created. Defaults to None.
 
-        :return: None. Highlights paths when the model is displayed.
+        Returns
+        -------
+        Axes
+            Returns the Matplotlib Axes the FRAM model was rendered onto.
         """
         if isinstance(function, str):
             functionID = self.get_function_id(function)
@@ -351,11 +497,21 @@ class FRAM:
                                           function: str | int,
                                           ax: Axes | None = None) -> Axes:
         """
-        Highlights all the paths that are connected to a starting function.
+        Visualize the FRAM model, highlighting all functions downstream of the
+        specified function.
 
-        :param functionID: Integer value of the FunctionID to be used as the starting point.
+        Parameters
+        ----------
+        function : str | int
+            The ID (int) or name (str) of the desired function.
+        ax : Axes, optional
+            The Matplotlib Axes on which to render the FRAM model. If None,
+            then a new Matplotlib Axes will be created. Defaults to None.
 
-        :return: None. Highlights paths when the model is displayed.
+        Returns
+        -------
+        Axes
+            Returns the Matplotlib Axes the FRAM model was rendered onto.
         """
         if isinstance(function, str):
             functionID = self.get_function_id(function)
@@ -370,7 +526,28 @@ class FRAM:
     def _count_real_data_connections(self,
                                      real_data: pd.DataFrame,
                                      column_type: str = "functions") -> dict:
+        """
+        Count the number of connections in the given DataFrame.
 
+        The DataFrame is a set of observations. Each row is a single
+        observation of "real" data for the system specified by the FRAM model,
+        which specifies either the functions or the connections that are
+        present for each observation. The columns are either the set of
+        functions or the set of connections, selected by the "column_type"
+        parameter.
+
+        Paramters
+        ---------
+        real_data : pd.DataFrame
+            The DataFrame containing the data to be counted.
+        column_type : {'functions', 'connections'}
+            Whether the columns of the data represent functions or connections.
+
+        Returns
+        -------
+        dict
+            The number of times each connection is present in the data.
+        """
         connections = {}  # Stores the connections between two aspects and the number of times it's traversed.
         for index, row in self._connection_data.iterrows():
             connections.update({row.Name: 0})
@@ -407,28 +584,78 @@ class FRAM:
     def highlight_data(self,
                        data: pd.DataFrame,
                        column_type: str = "functions",
+                       appearance: str = "pure",
                        ax: Axes | None = None) -> Axes:
         """
-        Highlights the connections of all bezier curves which data instances traverse.
-        The color of the connection indicates the intensity of its usage.
+        Visualize the FRAM model, highlighting connections based on a set of
+        observations.
 
-        :param data: A pandas dataframe where the columns are function names and rows are instances.
-            The values of each column should be 0 (absent) or 1 (present)
+        The observations are "real" data of the system modeled by the FRAM.
+        Each row is a single observation that specifies either the functions
+        or the connections that are present. The columns of the DataFrame are
+        either the set of functions or the set of connections, which must be
+        specified in the "column_type" parameter.
 
-        :param column_type: Lets the program know if the user is using the function names, or connection names as the
-            column names in the given dataframe.
+        Connections are highlighted based on their occurrence rate in the data.
+        They are coloured green if less than 25% of the observations contain
+        the connection, yellow if 25-50% of the data contains the connection,
+        orange if 50-75% of the data, and red if the connection is in more than
+        75% of the observations.
 
-        :param appearance: Determines the appearance the paths will take on when highlighted. "Pure" is for pure
-            color. "Traced" is similar to pure color, but traced in a black outline. "Expand" will have a black line,
-            but the outline of this black line will be the highlighted color, and will be wider or narrower depending on
-            how much that path is traversed.
+        This colour scheme is the "pure" default style. The "traced" style
+        adds a black outline to each connection, and "expand" changes the
+        thickness of the connection based on how frequently the connection
+        appears in the data.
 
-        :return: None. A highlighted FRAM model.
+        Paramters
+        ---------
+        data : pd.DataFrame
+            A DataFrame containing the observations.
+        column_type : {'functions', 'connections'}
+            Whether the columns of the data represent functions or connections.
+            Defaults to 'functions'.
+        appearance : {'pure', 'traced', 'expand'}
+            Select the visual representation of the connection highlight.
+            Defaults to 'pure'.
+        ax : Axes, optional
+            The Matplotlib Axes on which to render the FRAM model. If None,
+            then a new Matplotlib Axes will be created. Defaults to None.
+
+        Returns
+        -------
+        Axes
+            Returns the Matplotlib Axes the FRAM model was rendered onto.
+
+        Examples
+        --------
+
+        The set of functions are:
+
+        >>> fram.get_functions()
+        {0: 'Step A',
+         1: 'Step B',
+         2: 'Step C',
+         3: 'Last Step'}
+
+         >>> data
+            	Step A 	Step B 	Step C 	Last Step
+            0 	0 	    0 	    1 	    1
+            1 	0 	    0 	    0 	    1
+            2 	1 	    1 	    1 	    0
+            3 	0 	    1 	    1 	    1
+            4 	1 	    0 	    0 	    1
+
+        >>> fram.highlight_data(data, column_type='functions')
+
         """
 
         # Makes new figure without the Bezier curves being produced.
 
         connections = self._count_real_data_connections(real_data=data, column_type=column_type)
 
-        return self.visualizer.generate(self._function_data, self._connection_data, real_connections=connections, ax=ax)
+        return self.visualizer.generate(self._function_data,
+                                        self._connection_data,
+                                        real_connections=connections,
+                                        appearance=appearance,
+                                        ax=ax)
 
