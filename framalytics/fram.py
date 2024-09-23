@@ -1,101 +1,114 @@
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import pandas as pd
+    from matplotlib.axes import Axes
+
 from .FRAM_Visualizer import *
 from .xfmv_parser import parse_xfmv
-import pandas as pd
 
 
 class FRAM:
+    """
+    FRAM objects hold FRAM models.
 
+    FRAM objects can render FRAM models and act as a general interface for
+    FRAM models. They can be created by reading FRAM models specified by an
+    .xfmv file created by the FRAM Model Visualizer.
+    """
     def __init__(self, filename):
         """
-        Initializer for the FRAM class. This focuses on reading and storing all data from a given .xfmv file.
-        Additionally, it is also used to call methods and functions from the FRAM_Visualizer class.
+        Initialize a FRAM object from an .xfmv file.
 
         :param filename: The name of the .xfmv file being used.
         """
-        self.filename = filename  # Name of ".xfmv" file.
+        self.filename = filename
 
-        fram_data = parse_xfmv(filename)  # Gets all information from the .xfmv file
-        self._function_data = fram_data[0]  # Function information (Hexagon nodes)
-        self._connection_data = fram_data[2]  # Aspect connection data (bezier curves)
+        fram_data = parse_xfmv(filename)
+        self._function_data = fram_data[0]
+        self._connection_data = fram_data[2]
 
         self.visualizer = Visualizer()
-        self.given_data = None  # Given data from to user to run through the FRAM (Not implemented, pandas?)
-        self.functions_by_id = {}  # Stores all functions in a dictionary. IDNr is the key, IDName is the value.
-        self.functions_by_name = {}  # Stores all functions in a dictionary. IDName is the key, IDNr is the value.
-        self.connections_list = []  # Stores all connection names
-        self.function_list = []  # Stores all function names
+        self.functions_by_id = {}
+        self.functions_by_name = {}
 
         for index, row in self._function_data.iterrows():
             self.functions_by_id.update({int(row.IDNr): row.IDName})
             self.functions_by_name.update({row.IDName: int(row.IDNr)})
-            self.function_list.append(row.IDName)
 
-        for index, row in self._connection_data.iterrows():
-            self.connections_list.append(row.Name)
 
-    def get_function_metadata(self):
+    def get_function_metadata(self) -> pd.DataFrame:
         """
-        Returns the function data of the FRAM file.
+        Returns the function data of the FRAM model.
 
         :return: A list of function data. Each index is a different function
         """
 
         return self._function_data
 
-    def get_connection_data(self):
+    def get_connection_data(self) -> pd.DataFrame:
         """
-        Returns the aspect connection data (Bezier curves) of the FRAM file
+        Returns the aspect connection data of the FRAM model.
 
-        :return: A list of aspect connection data. Each index is a different connection between two aspects.
+        :return: A list of aspect connection data. Each index is a different
+        connection between two aspects.
         """
 
         return self._connection_data
 
-    def get_functions(self):
+    def get_functions(self) -> dict:
         """
-        Returns the dictionary of functions in which the keys are the functionID's and the values
-        are the function names.
+        Returns the dictionary of functions.
+
+        The keys of the dictionary are the function IDs and the values are the
+        function names.
 
         :return: A dictionary of functions (keys = ID, values = name).
         """
         return self.functions_by_id
 
-    def get_connections(self):
+    def get_connections(self) -> pd.DataFrame:
         """
-        Returns a pandas dataframe which consists of all the connections. Each instance/row is a connection and the
-        data is broken down into 4 columns. (fromFn, toFn, toAspect, Name).
+        Returns a pandas DataFrame of all the connections.
 
-        :return: A pandas dataframe consisting of all connections.
+        Each row of the DataFrame is a connection. Connections all start from
+        the output aspect of one function and connect to an aspect of another
+        function. Each row has the source function (fromFn), the destination
+        function (toFn), the aspect on the destination function (toAspect),
+        and the name of the function (toName).
+
+        :return: A pandas DataFrame consisting of all connections.
         """
 
         columns = ['outputFn', 'toFn', 'toAspect', 'parsed_name']
         rename = {'outputFn' : 'fromFn', 'parsed_name': 'Name'}
         return self._connection_data[columns].rename(columns=rename)
 
-    def number_of_edges(self):
+    def number_of_edges(self) -> int:
         """
-        Returns the number of edges (connections) in a FRAM model.
+        Returns the number of connections (edges) in the FRAM model.
 
-        :return: The number of edges (connections/lines) in a FRAM model.
+        :return: The number of connections (edges/lines) in the FRAM model.
         """
 
         return len(self._connection_data)
 
-    def number_of_functions(self):
+    def number_of_functions(self) -> int:
         """
-        Returns the number of functions (Hexagon nodes) in a FRAM model.
+        Returns the number of functions in the FRAM model.
 
-        :return: The total number of features in a FRAM model.
+        :return: The total number of functions in a FRAM model.
         """
 
         number_of_functions = len(self.functions_by_id.items())
         return number_of_functions
 
-    def get_function_id(self, name=None):
+    def get_function_id(self,
+                        name: str) -> int:
         """
-        Given the functions name, returns the corresponding functions ID.
+        Return the corresponding function ID given a function name.
 
-        :param name: The exact name of the function the user wants the ID for.
+        :param name: The exact name of a function.
 
         :return: The FunctionID that corresponds to the given function name.
         """
@@ -105,11 +118,12 @@ class FRAM:
         function_id = self.functions_by_name.get(name)
         return function_id
 
-    def get_function_name(self, id=None):
+    def get_function_name(self,
+                          id: int) -> str:
         """
-        Given the functions ID, returns the corresponding functions name.
+        Return the corresponding function name given a function ID.
 
-        :param id: The ID (integer) of the function we want the name of.
+        :param id: The ID (integer) of a function.
 
         :return: The name of the function for the corresponding given ID.
         """
@@ -119,7 +133,8 @@ class FRAM:
         function_name = self.functions_by_id.get(id)
         return function_name
 
-    def get_function_inputs(self, function=None):
+    def get_function_inputs(self,
+                            function: str | int) -> dict:
         """
         Gets a dictionary of key/value pairs that consist of the functions that serve as inputs to the input aspect
         of the desired function.
@@ -146,7 +161,8 @@ class FRAM:
 
         return function_inputs
 
-    def get_function_outputs(self, function=None):
+    def get_function_outputs(self,
+                             function: str | int) -> dict:
         """
         Gets a dictionary of key/value pairs that consist of the functions that use the output aspect of the desired
         function.
@@ -173,7 +189,8 @@ class FRAM:
 
         return function_outputs
 
-    def get_function_preconditions(self, function=None):
+    def get_function_preconditions(self,
+                                   function: str | int) -> dict:
         """
         Gets a dictionary of key/value pairs that consist of the functions that serve as preconditions to the
         precondition aspect of the desired function.
@@ -203,7 +220,8 @@ class FRAM:
 
         return function_preconditions
 
-    def get_function_resources(self, function=None):
+    def get_function_resources(self,
+                               function: str | int) -> dict:
         """
         Gets a dictionary of key/value pairs that consist of the functions that serve as resources to the
         resource aspect of the desired function.
@@ -231,7 +249,8 @@ class FRAM:
 
         return function_resources
 
-    def get_function_controls(self, function=None):
+    def get_function_controls(self,
+                              function: str | int) -> dict:
         """
         Gets a dictionary of key/value pairs that consist of the functions that serve as controls to the
         time aspect of the desired function.
@@ -259,7 +278,8 @@ class FRAM:
 
         return function_controls
 
-    def get_function_times(self, function=None):
+    def get_function_times(self,
+                           function: str | int) -> dict:
         """
         Gets a dictionary of key/value pairs that consist of the functions that serve as times to the
         time aspect of the desired function.
@@ -287,7 +307,8 @@ class FRAM:
 
         return function_times
 
-    def visualize(self, ax=None):
+    def visualize(self,
+                  ax: Axes | None = None) -> Axes:
         """
         Visualizes the model by calling to the Visualizer class of FRAM_Visualizer.py. This generates the default model.
 
@@ -306,7 +327,9 @@ class FRAM:
         """
         plt.show()
 
-    def highlight_function_outputs(self, function, ax=None):
+    def highlight_function_outputs(self,
+                                   function: str | int,
+                                   ax: Axes | None = None) -> Axes:
         """
         Highlights the outputs of a function.
 
@@ -321,10 +344,12 @@ class FRAM:
         else:
             raise ValueError("Invalid input. A function ID (integer) or function name (string) is required.")
 
-        self.visualizer.generate_function_output_paths(self._function_data,
+        return self.visualizer.generate_function_output_paths(self._function_data,
                                                        self._connection_data, functionID, ax=ax)
 
-    def highlight_full_path_from_function(self, function, ax=None):
+    def highlight_full_path_from_function(self,
+                                          function: str | int,
+                                          ax: Axes | None = None) -> Axes:
         """
         Highlights all the paths that are connected to a starting function.
 
@@ -339,10 +364,12 @@ class FRAM:
         else:
             raise ValueError("Invalid input. A function ID (integer) or function name (string) is required.")
 
-        self.visualizer.generate_full_path_from_function(self._function_data,
+        return self.visualizer.generate_full_path_from_function(self._function_data,
                                                          self._connection_data, functionID, ax=ax)
 
-    def _count_real_data_connections(self, real_data, column_type="functions"):
+    def _count_real_data_connections(self,
+                                     real_data: pd.DataFrame,
+                                     column_type: str = "functions") -> dict:
 
         connections = {}  # Stores the connections between two aspects and the number of times it's traversed.
         for index, row in self._connection_data.iterrows():
@@ -377,7 +404,10 @@ class FRAM:
 
         return connections
 
-    def highlight_data(self, data, column_type="functions", appearance="Pure", ax=None):
+    def highlight_data(self,
+                       data: pd.DataFrame,
+                       column_type: str = "functions",
+                       ax: Axes | None = None) -> Axes:
         """
         Highlights the connections of all bezier curves which data instances traverse.
         The color of the connection indicates the intensity of its usage.
@@ -400,7 +430,5 @@ class FRAM:
 
         connections = self._count_real_data_connections(real_data=data, column_type=column_type)
 
-        ax = self.visualizer.generate(self._function_data, self._connection_data, real_connections=connections, ax=ax)
-
-        return ax
+        return self.visualizer.generate(self._function_data, self._connection_data, real_connections=connections, ax=ax)
 

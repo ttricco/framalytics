@@ -1,12 +1,19 @@
-import matplotlib
-import textwrap
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import pandas as pd
+    from matplotlib.axes import Axes
+    from matplotlib.figure import Figure
+
 from matplotlib.bezier import BezierSegment
 import matplotlib.pyplot as plt
+import textwrap
 
 
 class Visualizer:
 
-    def _create_figure(self, function_data):
+    def _create_figure(self,
+                       function_data: pd.DataFrame) -> tuple[Figure, Axes]:
         """ Create a figure / axis of appropriate dimensions. """
 
         style = function_data.iloc[0]["fnStyle"]
@@ -21,7 +28,8 @@ class Visualizer:
         fig, ax = plt.subplots(figsize=(figsize_x, figsize_y), dpi=150)
         return fig, ax
 
-    def _hex_to_color(self, hex_value):
+    def _hex_to_color(self,
+                      hex_value: str) -> tuple[str, float]:
         """ Converts node 32bit integer color to hexadecimal. """
 
         color = "black"
@@ -37,7 +45,10 @@ class Visualizer:
 
         return color, lw
 
-    def _draw_function_nodes(self, function_data, connection_data, ax):
+    def _draw_function_nodes(self,
+                             function_data: pd.DataFrame,
+                             connection_data: pd.DataFrame,
+                             ax: Axes):
         """
         Generates the Function Nodes based on the data given from the FRAM class.
 
@@ -96,7 +107,10 @@ class Visualizer:
             wrapped_label = textwrap.fill(row.IDName, width=13)
             plt.annotate(wrapped_label, (row.x, row.y), ha='center', va='center', fontsize=4)
 
-    def _draw_aspects(self, node_x_coords, node_y_coords, ax):
+    def _draw_aspects(self,
+                      node_x_coords: pd.Series | list,
+                      node_y_coords: pd.Series | list,
+                      ax: Axes):
         """
         Generates the Aspects of each Function Node.
 
@@ -160,7 +174,8 @@ class Visualizer:
             wrapped_label = textwrap.fill(label, break_long_words=False, width=1)
             ax.annotate(wrapped_label, (x, y), ha='center', va='center', fontsize=3.5)
 
-    def _get_bezier_points(self, curve):
+    def _get_bezier_points(self,
+                           curve: str):
 
         # Curve coordinates
         a = curve.split("|")
@@ -188,7 +203,11 @@ class Visualizer:
 
         return x_pts, y_pts
 
-    def _draw_bezier_curves(self, connection_data, ax, real_connections=None, appearance=None):
+    def _draw_bezier_curves(self,
+                            connection_data: pd.DataFrame,
+                            ax: Axes,
+                            real_connections: dict | None = None,
+                            appearance: str | None = None):
         """
         Generates the bezier curves (lines) between two aspects using the aspect data given
         from the FRAM class.
@@ -258,11 +277,11 @@ class Visualizer:
                         ax.plot(x_pts, y_pts, zorder=1, color= color, lw=2)
 
     def generate(self,
-                 function_data,
-                 connection_data,
-                 real_connections=None,
-                 appearance=None,
-                 ax=None):
+                 function_data: pd.DataFrame,
+                 connection_data: pd.DataFrame,
+                 real_connections: dict | None = None,
+                 appearance: str | None = None,
+                 ax: Axes | None = None) -> Axes:
         """
         Generates the default FRAM model using the data given from the FRAM class
 
@@ -285,8 +304,12 @@ class Visualizer:
 
         return ax
 
-    def generate_function_output_paths(self, function_data, connection_data,
-                                       output_function, input_function=None, ax=None):
+    def generate_function_output_paths(self,
+                                       function_data: pd.DataFrame,
+                                       connection_data: pd.DataFrame,
+                                       output_function: int,
+                                       input_function: int | None = None,
+                                       ax: Axes | None = None) -> Axes:
         """
         Highlights the output paths of a function based on the given FunctionID.
 
@@ -312,8 +335,11 @@ class Visualizer:
         return self.generate(function_data, connection_data, real_connections=connections,
                              appearance="pure", ax=ax)
 
-    def generate_full_path_from_function(self, function_data, connection_data,
-                                         output_function, ax=None):
+    def generate_full_path_from_function(self,
+                                         function_data: pd.DataFrame,
+                                         connection_data: pd.DataFrame,
+                                         output_function: int,
+                                         ax: Axes | None = None) -> Axes:
         """
         Generates the full path of a starting function from itself, to the end.
         This shows all the connections a function impacts.

@@ -2,7 +2,8 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 
 
-def parse_xfmv(filename):
+def parse_xfmv(filename: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+
     # Parse the XML file
     tree = ET.parse(filename)
     root = tree.getroot()
