@@ -375,7 +375,7 @@ class Visualizer:
             Returns the Matplotlib Axes the FRAM model was rendered onto.
         """
 
-        connections = dict.fromkeys(connection_data.Name.unique(), 0)
+        connections = dict.fromkeys(connection_data['Name'].unique(), 0)
 
         if input_function is None:
             for index, row in connection_data.iterrows():
@@ -418,7 +418,7 @@ class Visualizer:
 
         function_stack = []
         already_pathed = [output_function]
-        connections = dict.fromkeys(connection_data.Name.unique(), 0)
+        connections = dict.fromkeys(connection_data['Name'].unique(), 0)
 
         # Add all functions this function outputs to
         for index, row in connection_data.iterrows():

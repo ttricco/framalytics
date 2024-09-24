@@ -56,9 +56,10 @@ def parse_xfmv(filename: str) -> tuple[pd.DataFrame,
 
     # Create Pandas DataFrames
     df_function = pd.DataFrame(function_data)
+    df_function['IDNr'] = df_function['IDNr'].astype(int)
+    df_function['FunctionType'] = df_function['FunctionType'].astype(int)
     df_function['x'] = df_function['x'].astype(float)
     df_function['y'] = df_function['y'].astype(float)
-    df_function['FunctionType'] = df_function['FunctionType'].astype(int)
 
     df_input = pd.DataFrame(input_data)
 
