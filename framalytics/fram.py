@@ -537,7 +537,7 @@ class FRAM:
         connections = {}
 
         for index, row in self._connection_data.iterrows():
-            connections.update({row.Name: 0})
+            connections.update({row.Name: 0.0})
 
         column_type = column_type.lower()
         # If the dataframe uses function names for the column names.
