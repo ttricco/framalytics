@@ -45,7 +45,7 @@ class FRAM:
             self.functions_by_id.update({int(row.IDNr): row.IDName})
             self.functions_by_name.update({row.IDName: int(row.IDNr)})
 
-    def get_function_metadata(self) -> pd.DataFrame:
+    def _get_function_metadata(self) -> pd.DataFrame:
         """
         Returns the function data of the FRAM model.
 
@@ -58,7 +58,7 @@ class FRAM:
 
         return self._function_data
 
-    def get_connection_data(self) -> pd.DataFrame:
+    def _get_connection_data(self) -> pd.DataFrame:
         """
         Returns the aspect connection data of the FRAM model.
 
@@ -130,7 +130,6 @@ class FRAM:
 
         return self.number_of_edges()
 
-
     def number_of_functions(self) -> int:
         """
         Returns the number of functions in the FRAM model.
@@ -160,12 +159,12 @@ class FRAM:
             The function ID that corresponds to the given function name.
         """
         if not isinstance(name, str):
-            raise Exception("Invalid input. A string value should be used.")
+            raise ValueError("The string function name should be used.")
 
         function_id = self.functions_by_name.get(name)
 
         if function_id is None:
-            raise Exception("No such function exists.")
+            raise Exception("No such function name exists.")
 
         return function_id
 
@@ -185,12 +184,12 @@ class FRAM:
             The function name that corresponds to the given function ID.
         """
         if not isinstance(id, int):
-            raise Exception("Invalid input. A integer value should be used.")
+            raise ValueError("The integer function ID should be used.")
 
         function_name = self.functions_by_id.get(id)
 
         if function_name is None:
-            raise Exception("No such function exists.")
+            raise ValueError("No such function ID exists.")
 
         return function_name
 
@@ -215,16 +214,14 @@ class FRAM:
             aspect of the specified function.
         """
 
-        # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
-        # If the function value given is a string. We consider the value is the function name and get the associated ID.
         if isinstance(function, str):
             id = self.get_function_id(function)
         elif isinstance(function, int):
             id = function
         else:
-            raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
+            raise ValueError("A function ID or name is required.")
 
-        function_inputs = {}  # This will store all the functions inputs in a dictionary {key=id, value = name}
+        function_inputs = {}  # {key=id, value=name}
 
         for index, row in self._connection_data.iterrows():
             if row['toFn'] == id and row['toAspect'] == "I":
@@ -254,16 +251,14 @@ class FRAM:
             aspect of the specified function.
         """
 
-        # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
-
         if isinstance(function, str):
             id = self.get_function_id(function)
         elif isinstance(function, int):
             id = function
         else:
-            raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
+            raise ValueError("A function ID or name is required.")
 
-        function_outputs = {}
+        function_outputs = {}  # {key=id, value=name}
 
         for index, row in self._connection_data.iterrows():
             if row['outputFn'] == id:
@@ -294,18 +289,14 @@ class FRAM:
             precondition aspect of the specified function.
         """
 
-        # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
-
-        # If the function value given is a string. We consider the value is the function name and get the associated ID.
         if isinstance(function, str):
             id = self.get_function_id(function)
         elif isinstance(function, int):
             id = function
         else:
-            raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
+            raise ValueError("A function ID or name is required.")
 
-        # This will store all the functions preconditions in a dictionary {key=id, value = name}
-        function_preconditions = {}
+        function_preconditions = {}  # {key=id, value=name}
 
         for index, row in self._connection_data.iterrows():
             if row['toFn'] == id and row['toAspect'] == "P":
@@ -335,17 +326,14 @@ class FRAM:
             resource aspect of the specified function.
         """
 
-        # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
-
-        # If the function value given is a string. We consider the value is the function name and get the associated ID.
         if isinstance(function, str):
             id = self.get_function_id(function)
         elif isinstance(function, int):
             id = function
         else:
-            raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
+            raise ValueError("A function ID or name is required.")
 
-        function_resources = {}  # This will store all the functions resources in a dictionary {key=id, value = name}
+        function_resources = {}  # {key=id, value=name}
 
         for index, row in self._connection_data.iterrows():
             if row['toFn'] == id and row['toAspect'] == "R":
@@ -375,17 +363,14 @@ class FRAM:
             control aspect of the specified function.
         """
 
-        # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
-
-        # If the function value given is a string. We consider the value is the function name and get the associated ID.
         if isinstance(function, str):
             id = self.get_function_id(function)
         elif isinstance(function, int):
             id = function
         else:
-            raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
+            raise ValueError("A function ID or name is required.")
 
-        function_controls = {}  # This will store all the functions controls in a dictionary {key=id, value = name}
+        function_controls = {}  # {key=id, value=name}
 
         for index, row in self._connection_data.iterrows():
             if row['toFn'] == id and row['toAspect'] == "C":
@@ -414,17 +399,14 @@ class FRAM:
             time aspect of the specified function.
         """
 
-        # ID is used to get all functions that act as inputs for the given function ID or name, we use the functions ID.
-
-        # If the function value given is a string. We consider the value is the function name and get the associated ID.
         if isinstance(function, str):
             id = self.get_function_id(function)
         elif isinstance(function, int):
             id = function
         else:
-            raise Exception("Invalid input. A function ID (integer) or function name (string) is required")
+            raise ValueError("A function ID or name is required.")
 
-        function_times = {}  # This will store all the functions times in a dictionary {key=id, value = name}
+        function_times = {}  # {key=id, value=name}
 
         for index, row in self._connection_data.iterrows():
             if row['toFn'] == id and row['toAspect'] == "T":
@@ -461,7 +443,8 @@ class FRAM:
         >>> fram.visualize()
         """
 
-        return self.visualizer.generate(self._function_data, self._connection_data, ax=ax)
+        return self.visualizer.render(self._function_data,
+                                      self._connection_data, ax=ax)
 
     def highlight_function_outputs(self,
                                    function: str | int,
@@ -488,10 +471,11 @@ class FRAM:
         elif isinstance(function, int):
             functionID = function
         else:
-            raise ValueError("Invalid input. A function ID (integer) or function name (string) is required.")
+            raise ValueError("A function ID or name is required.")
 
-        return self.visualizer.generate_function_output_paths(self._function_data,
-                                                       self._connection_data, functionID, ax=ax)
+        return self.visualizer.render_output_paths(self._function_data,
+                                                   self._connection_data,
+                                                   functionID, ax=ax)
 
     def highlight_full_path_from_function(self,
                                           function: str | int,
@@ -518,14 +502,16 @@ class FRAM:
         elif isinstance(function, int):
             functionID = function
         else:
-            raise ValueError("Invalid input. A function ID (integer) or function name (string) is required.")
+            raise ValueError("A function ID name (string) is required.")
 
-        return self.visualizer.generate_full_path_from_function(self._function_data,
-                                                         self._connection_data, functionID, ax=ax)
+        return self.visualizer.render_path_from_function(self._function_data,
+                                                         self._connection_data,
+                                                         functionID,
+                                                         ax=ax)
 
-    def _count_real_data_connections(self,
-                                     real_data: pd.DataFrame,
-                                     column_type: str = "functions") -> dict:
+    def _count_data_connections(self,
+                                data: pd.DataFrame,
+                                column_type: str = "functions") -> dict:
         """
         Count the number of connections in the given DataFrame.
 
@@ -538,7 +524,7 @@ class FRAM:
 
         Paramters
         ---------
-        real_data : pd.DataFrame
+        data : pd.DataFrame
             The DataFrame containing the data to be counted.
         column_type : {'functions', 'connections'}
             Whether the columns of the data represent functions or connections.
@@ -548,7 +534,8 @@ class FRAM:
         dict
             The number of times each connection is present in the data.
         """
-        connections = {}  # Stores the connections between two aspects and the number of times it's traversed.
+        connections = {}
+
         for index, row in self._connection_data.iterrows():
             connections.update({row.Name: 0})
 
@@ -567,8 +554,9 @@ class FRAM:
                 outputFn_name = self.functions_by_id.get(outputFn)
                 toFn_name = self.functions_by_id.get(toFn)
 
-                # Finds all instances where both column values are 1 (this indicates the path/curve is traversed)
-                connection_value = len(real_data[(real_data[outputFn_name] == 1) & (real_data[toFn_name] == 1)])
+                # Finds all instances where both column values are 1
+                connection_value = len(data[(data[outputFn_name] == 1) &
+                                            (data[toFn_name] == 1)])
 
                 # Updates the number of times this path is traversed.
                 connections.update({connection_default: connection_value})
@@ -576,7 +564,7 @@ class FRAM:
         # If the dataframe uses connection_names for the column names.
         elif column_type == "connections":
             for connection_name in connections:
-                connection_value = len(real_data[(real_data[connection_name] == 1)])
+                connection_value = len(data[(data[connection_name] == 1)])
                 connections.update({connection_name: connection_value})
 
         return connections
@@ -638,7 +626,7 @@ class FRAM:
          3: 'Last Step'}
 
          >>> data
-            	Step A 	Step B 	Step C 	Last Step
+                Step A  Step B  Step C  Last Step
             0 	0 	    0 	    1 	    1
             1 	0 	    0 	    0 	    1
             2 	1 	    1 	    1 	    0
@@ -651,11 +639,11 @@ class FRAM:
 
         # Makes new figure without the Bezier curves being produced.
 
-        connections = self._count_real_data_connections(real_data=data, column_type=column_type)
+        connections = self._count_data_connections(data=data,
+                                                   column_type=column_type)
 
-        return self.visualizer.generate(self._function_data,
-                                        self._connection_data,
-                                        real_connections=connections,
-                                        appearance=appearance,
-                                        ax=ax)
-
+        return self.visualizer.render(self._function_data,
+                                      self._connection_data,
+                                      real_connections=connections,
+                                      appearance=appearance,
+                                      ax=ax)

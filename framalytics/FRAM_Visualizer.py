@@ -19,8 +19,10 @@ class Visualizer:
         if style == "1":
             px = 1.0  # fnStyle = 1
 
-        figsize_x = px * (max(function_data['x']) - min(function_data['x']) + 100)/100
-        figsize_y = px * (max(function_data['y']) - min(function_data['y']) + 100)/100
+        dx = max(function_data['x']) - min(function_data['x'])
+        dy = max(function_data['y']) - min(function_data['y'])
+        figsize_x = px * (dx + 100)/100
+        figsize_y = px * (dy + 100)/100
 
         fig, ax = plt.subplots(figsize=(figsize_x, figsize_y), dpi=150)
         return fig, ax
@@ -63,7 +65,8 @@ class Visualizer:
         node_colors = []
         node_lw = []  # Array of line widths (borders)
 
-        # For loop that determines each node's x and y coordinates, label, and colors.
+        # For loop that determines each node's x and y coordinates, label,
+        # and colors.
         for index, row in function_data.iterrows():
             color, lw = self._hex_to_color(row.color)
             node_colors.append(color)
@@ -71,12 +74,14 @@ class Visualizer:
 
         node_labels = function_data['IDName'].tolist()
 
-        # Will store true or false values for each feature (numbered by index) to determine if
-        # they have inputs and/or outputs. Will determine if the facecolor is 'white" or very light grey '#F3F3F3'
+        # Will store true or false values for each feature (numbered by index)
+        # to determine if they have inputs and/or outputs. Will determine if
+        # the facecolor is 'white" or very light grey '#F3F3F3'
         node_toFn = [False] * len(function_data)
         node_outputFn = [False] * len(function_data)
 
-        # Determines which nodes (ordered by the functions IDNr = index) have outputs and/or inputs.
+        # Determines which nodes (ordered by the functions IDNr = index)
+        # have outputs and/or inputs.
         for i in connection_data.toFn:
             if i is not None:
                 node_toFn[i] = True
@@ -97,16 +102,22 @@ class Visualizer:
         ax.invert_yaxis()
         ax.axis("off")
 
-        # Plots function (Hexagon) nodes. (The second plot provides the black outline around the nodes).
+        # Plots function (Hexagon) nodes.
+        # (The second plot provides the black outline around the nodes).
         ax.scatter(function_data['x'], function_data['y'],
-                   label=node_labels, marker='H', s=1500, facecolors=node_facecolors, edgecolors=node_colors, lw=node_lw, zorder=3)
+                   label=node_labels, marker='H', s=1500,
+                   facecolors=node_facecolors, edgecolors=node_colors,
+                   lw=node_lw, zorder=3)
         ax.scatter(function_data['x'], function_data['y'],
-                   label=node_labels, marker='H', s=1600, facecolors=node_facecolors, edgecolors='black', lw=node_lw, zorder=2)
+                   label=node_labels, marker='H', s=1600,
+                   facecolors=node_facecolors, edgecolors='black',
+                   lw=node_lw, zorder=2)
 
         # Makes multi-line labels
         for index, row in function_data.iterrows():
             wrapped_label = textwrap.fill(row.IDName, width=13)
-            plt.annotate(wrapped_label, (row.x, row.y), ha='center', va='center', fontsize=4)
+            plt.annotate(wrapped_label, (row.x, row.y), ha='center',
+                         va='center', fontsize=4)
 
     def _draw_aspects(self,
                       node_x_coords: pd.Series | list,
@@ -128,14 +139,18 @@ class Visualizer:
         aspects_x = []
         aspects_y = []
         aspect_labels = []
-        aspects_per_function = []  # Stores aspect coordinates per function in order of FunctionID (Function IDNr).
+        aspects_per_function = []
 
-        # Iterates through x and y location of each node to get aspect locations and connections (plus labelling)
+        # Iterates through x and y location of each node to get aspect
+        # locations and connections (plus labelling)
         for x, y in zip(node_x_coords, node_y_coords):
             # T,C,I,O,P,R  coordinate ordering
-            aspects_per_function.append([[x-23, y-35], [x+23, y-35], [x-44, y], [x+44, y], [x-23, y+35], [x+23, y+35]])
-
-            # EACH ASPECT IS INDIVIDUALLY PLOTTED TO GENERATE A LINE BETWEEN ITSELF AND ITS ASSOCIATED FUNCTION NODE.
+            aspects_per_function.append([[x-23, y-35],
+                                         [x+23, y-35],
+                                         [x-44, y],
+                                         [x+44, y],
+                                         [x-23, y+35],
+                                         [x+23, y+35]])
 
             # Top left (Note, y-axis is inverted) (T)
             aspects_x.append(x-23)
@@ -175,12 +190,15 @@ class Visualizer:
             ax.plot([x+23, x], [y+35, y], color='black', zorder=2, lw=0.5)
 
         # Adds aspects to each node
-        ax.scatter(aspects_x, aspects_y, s=30, facecolors='white', edgecolors='black', lw=0.5, zorder=3)
+        ax.scatter(aspects_x, aspects_y, s=30, facecolors='white',
+                   edgecolors='black', lw=0.5, zorder=3)
 
         # Applies proper labels to scatter plot
         for label, x, y in zip(aspect_labels, aspects_x, aspects_y):
-            wrapped_label = textwrap.fill(label, break_long_words=False, width=1)
-            ax.annotate(wrapped_label, (x, y), ha='center', va='center', fontsize=3.5)
+            wrapped_label = textwrap.fill(label, break_long_words=False,
+                                          width=1)
+            ax.annotate(wrapped_label, (x, y), ha='center', va='center',
+                        fontsize=3.5)
 
     def _get_bezier_points(self,
                            curve: str) -> tuple[list, list]:
@@ -237,7 +255,7 @@ class Visualizer:
             appearance = appearance.lower()
 
         if appearance not in [None, 'pure', 'traced', 'expand']:
-            raise ValueError("Invalid highlighting appearance for connections.")
+            raise ValueError("Invalid highlighting appearance.")
 
         if appearance is None and real_connections is not None:
             appearance = 'pure'
@@ -267,37 +285,31 @@ class Visualizer:
                 elif value <= total_instances:
                     color = "red"
 
-                # Paths are purely color, no outline.
-                if appearance == "pure":
-                    if color == 'grey':
-                        ax.plot(x_pts, y_pts, zorder=0, color=color, lw=1, linestyle='--')
-                    else:
-                        ax.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
+                if color == 'grey':
+                    ax.plot(x_pts, y_pts, zorder=0, color=color,
+                            lw=1, ls='--')
 
+                # Paths are purely color, no outline.
+                elif appearance == "pure":
+                    ax.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
                 # Similar to pure color, but with a black outline.
                 elif appearance == "traced":
-                    if color == "grey":
-                        ax.plot(x_pts, y_pts, zorder=0, color=color, lw=1, linestyle='--')
-                    else:
-                        ax.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
-                        ax.plot(x_pts, y_pts, zorder=1, color='black', lw=2)
-
-                # A black line, but with the highlighted color being the outline.
-                # This outline expands or contracts depending on the value of "expand_value".
-                # This is usually between 0 - > 1.0 and is automated by the fram.py.
+                    ax.plot(x_pts, y_pts, zorder=2, color=color, lw=1)
+                    ax.plot(x_pts, y_pts, zorder=1, color='black', lw=2)
+                # A black line, but with the highlighted color being the
+                # outline. This outline expands or contracts depending on the
+                # value of "expand_value". This is usually between 0 - > 1.0
+                # and is automated by the fram.py.
                 elif appearance == "expand":
-                    if color == "grey":
-                        ax.plot(x_pts, y_pts, zorder=0, color=color, lw=1, linestyle='--')
-                    else:
-                        ax.plot(x_pts, y_pts, zorder=2, color='black', lw=1)
-                        ax.plot(x_pts, y_pts, zorder=1, color= color, lw=2)
+                    ax.plot(x_pts, y_pts, zorder=2, color='black', lw=1)
+                    ax.plot(x_pts, y_pts, zorder=1, color=color, lw=2)
 
-    def generate(self,
-                 function_data: pd.DataFrame,
-                 connection_data: pd.DataFrame,
-                 real_connections: dict | None = None,
-                 appearance: str | None = None,
-                 ax: Axes | None = None) -> Axes:
+    def render(self,
+               function_data: pd.DataFrame,
+               connection_data: pd.DataFrame,
+               real_connections: dict | None = None,
+               appearance: str | None = None,
+               ax: Axes | None = None) -> Axes:
         """
         Draw the FRAM model onto a Matplotlib axes.
 
@@ -329,17 +341,18 @@ class Visualizer:
         self._draw_aspects(function_data['x'],
                            function_data['y'],
                            ax=ax)
-        self._draw_bezier_curves(connection_data, real_connections=real_connections,
+        self._draw_bezier_curves(connection_data,
+                                 real_connections=real_connections,
                                  appearance=appearance, ax=ax)
 
         return ax
 
-    def generate_function_output_paths(self,
-                                       function_data: pd.DataFrame,
-                                       connection_data: pd.DataFrame,
-                                       output_function: int,
-                                       input_function: int | None = None,
-                                       ax: Axes | None = None) -> Axes:
+    def render_output_paths(self,
+                            function_data: pd.DataFrame,
+                            connection_data: pd.DataFrame,
+                            output_function: int,
+                            input_function: int | None = None,
+                            ax: Axes | None = None) -> Axes:
         """
         Highlights the output connections of a given function ID.
 
@@ -366,23 +379,23 @@ class Visualizer:
 
         if input_function is None:
             for index, row in connection_data.iterrows():
-                if int(row.outputFn) == output_function:
+                if row.outputFn == output_function:
                     connections[row.Name] = 1
-                    # self.bezier_curve_single(row.Curve)
         else:
             for index, row in connection_data.iterrows():
-                if (int(row.outputFn) == output_function) and (int(row.toFn) == input_function):
+                if (row.outputFn == output_function
+                        and row.toFn == input_function):
                     connections[row.Name] = 1
-                    # self.bezier_curve_single(row.Curve)
 
-        return self.generate(function_data, connection_data, real_connections=connections,
-                             appearance="pure", ax=ax)
+        return self.render(function_data, connection_data,
+                           real_connections=connections,
+                           appearance="pure", ax=ax)
 
-    def generate_full_path_from_function(self,
-                                         function_data: pd.DataFrame,
-                                         connection_data: pd.DataFrame,
-                                         output_function: int,
-                                         ax: Axes | None = None) -> Axes:
+    def render_path_from_function(self,
+                                  function_data: pd.DataFrame,
+                                  connection_data: pd.DataFrame,
+                                  output_function: int,
+                                  ax: Axes | None = None) -> Axes:
         """
         Highlight all functions downstream of the specified function.
 
@@ -404,16 +417,16 @@ class Visualizer:
         """
 
         function_stack = []
-        already_pathed = [int(output_function)]
+        already_pathed = [output_function]
         connections = dict.fromkeys(connection_data.Name.unique(), 0)
 
         # Add all functions this function outputs to
         for index, row in connection_data.iterrows():
-            if int(row.outputFn) == output_function:
-                function_stack.append(int(row.toFn))
+            if row.outputFn == output_function:
+                function_stack.append(row.toFn)
                 connections[row.Name] = 1
 
-        #While all paths have not been searched
+        # While all paths have not been searched
         while len(function_stack) != 0:
             current_function = function_stack.pop()
 
@@ -421,13 +434,12 @@ class Visualizer:
                 continue
 
             for index, row in connection_data.iterrows():
-                if int(row.outputFn) == current_function:
-                    function_stack.append(int(row.toFn))
+                if row.outputFn == current_function:
+                    function_stack.append(row.toFn)
                     connections[row.Name] = 1
 
             already_pathed.append(current_function)
 
-        return self.generate(function_data, connection_data, real_connections=connections,
-                             appearance="pure", ax=ax)
-
-
+        return self.render(function_data, connection_data,
+                           real_connections=connections,
+                           appearance="pure", ax=ax)

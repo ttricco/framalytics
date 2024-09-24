@@ -2,7 +2,8 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 
 
-def parse_xfmv(filename: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def parse_xfmv(filename: str) -> tuple[pd.DataFrame,
+                                       pd.DataFrame, pd.DataFrame]:
 
     # Parse the XML file
     tree = ET.parse(filename)
@@ -12,15 +13,16 @@ def parse_xfmv(filename: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]
     function_data = []
 
     for function_elem in root.findall('.//Function'):
-        element_data = {'IDNr': function_elem.findtext('IDNr'),
-        'FunctionType': function_elem.findtext('FunctionType'),
-        'IDName': function_elem.findtext('IDName'),
-        'Description': function_elem.findtext('Description'),
-        'x': function_elem.attrib.get('x', None),
-        'y': function_elem.attrib.get('y', None),
-        'style': function_elem.attrib.get('style', None),
-        'color': function_elem.attrib.get('color', None),
-        'fnStyle': function_elem.attrib.get('fnStyle', None),
+        element_data = {
+            'IDNr': function_elem.findtext('IDNr'),
+            'FunctionType': function_elem.findtext('FunctionType'),
+            'IDName': function_elem.findtext('IDName'),
+            'Description': function_elem.findtext('Description'),
+            'x': function_elem.attrib.get('x', None),
+            'y': function_elem.attrib.get('y', None),
+            'style': function_elem.attrib.get('style', None),
+            'color': function_elem.attrib.get('color', None),
+            'fnStyle': function_elem.attrib.get('fnStyle', None)
         }
         function_data.append(element_data)
 
@@ -63,7 +65,8 @@ def parse_xfmv(filename: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]
     df_aspect = pd.DataFrame(aspect_data)
 
     for index, row in df_aspect.iterrows():
-        name_split = row.Name.split("|")  # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
+        # 0 = OutputFn, 1 = Name, 2 = toFn, 3 = Aspect (R,C,I,O,T,P)
+        name_split = row.Name.split("|")
         if row['outputFn'] is None:
             row['outputFn'] = name_split[0]
         if row['toFn'] is None:
