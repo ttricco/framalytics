@@ -1,10 +1,14 @@
 name: Lint
 
 on:  # yamllint disable-line rule:truthy
-  pull_request: null
+  pull_request:
+    paths:
+      - '**.py'
   push:  # This triggers the workflow on any commit to the repository
     branches:
       - main
+    paths:
+      - '**.py'
 
 permissions: { }
 
