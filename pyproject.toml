@@ -1,0 +1,19 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "framalytics"
+description = "Python tools for the Function Resonance Analysis Method"
+authors = [{name = "Terrence S. Tricco", email = "tstricco@mun.ca"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Intended Audience :: Science/Research"]
+dynamic = ["version"]
+requires_python = ">=3.10"
+
+[project.urls]
+Source = "https://github.com/ttricco/framalytics"
+Docs = "https://framalytics.readthedocs.io"
