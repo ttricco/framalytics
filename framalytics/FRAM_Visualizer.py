@@ -276,11 +276,11 @@ class Visualizer:
                 color = "grey"
                 if value == 0:
                     color = "grey"
-                elif value <= int(total_instances * 0.25):
+                elif value <= 0.25:
                     color = "green"
-                elif value <= int(total_instances * 0.5):
+                elif value <= 0.5:
                     color = "yellow"
-                elif value <= int(total_instances * 0.75):
+                elif value <= 0.75:
                     color = "orange"
                 elif value <= total_instances:
                     color = "red"
@@ -380,12 +380,12 @@ class Visualizer:
         if input_function is None:
             for index, row in connection_data.iterrows():
                 if row.outputFn == output_function:
-                    connections[row.Name] = 1
+                    connections[row.Name] = 0.1
         else:
             for index, row in connection_data.iterrows():
                 if (row.outputFn == output_function
                         and row.toFn == input_function):
-                    connections[row.Name] = 1
+                    connections[row.Name] = 0.1
 
         return self.render(function_data, connection_data,
                            real_connections=connections,
@@ -424,7 +424,7 @@ class Visualizer:
         for index, row in connection_data.iterrows():
             if row.outputFn == output_function:
                 function_stack.append(row.toFn)
-                connections[row.Name] = 1
+                connections[row.Name] = 0.1
 
         # While all paths have not been searched
         while len(function_stack) != 0:
@@ -436,7 +436,7 @@ class Visualizer:
             for index, row in connection_data.iterrows():
                 if row.outputFn == current_function:
                     function_stack.append(row.toFn)
-                    connections[row.Name] = 1
+                    connections[row.Name] = 0.1
 
             already_pathed.append(current_function)
 

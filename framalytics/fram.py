@@ -567,6 +567,10 @@ class FRAM:
                 connection_value = len(data[(data[connection_name] == 1)])
                 connections.update({connection_name: connection_value})
 
+        # Normalize connections
+        for key, value in connections.items():
+            connections[key] = value / len(data)
+
         return connections
 
     def highlight_data(self,
