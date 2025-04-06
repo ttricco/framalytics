@@ -5,3 +5,9 @@
 *.pdf
 docs/_build
 docs/api
+
+# Virtual environment
+.venv
+venv
+.env
+env
