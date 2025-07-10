@@ -20,17 +20,16 @@ def parsed_xfmv(simple_xfmv):
 def test_return_types(parsed_xfmv):
     """ Parsing xfmv should return 3 DataFrames. """
 
-    functions, inputs, connections = parsed_xfmv
+    functions, connections = parsed_xfmv
 
     assert isinstance(functions, pd.DataFrame)
-    assert isinstance(inputs, pd.DataFrame)
     assert isinstance(connections, pd.DataFrame)
 
 
 def test_function_data(parsed_xfmv):
     """ Test that function names, ids and types were parsed correctly. """
 
-    functions, inputs, connections = parsed_xfmv
+    functions, connections = parsed_xfmv
 
     expected_names = ['Function A', 'Function B', 'Function C',
                       'Function D', 'Function E', 'Function F']
@@ -56,7 +55,7 @@ def test_function_data(parsed_xfmv):
 def test_function_positions(parsed_xfmv):
     """ Test that function positions were parsed correctly. """
 
-    functions, inputs, connections = parsed_xfmv
+    functions, connections = parsed_xfmv
 
     x, y = functions[functions.IDName == 'Function A'][['x', 'y']].values[0]
     assert x == pytest.approx(88.67, abs=1e-2)
@@ -86,7 +85,7 @@ def test_function_positions(parsed_xfmv):
 def test_connection_raw_name(parsed_xfmv):
     """ Test that the raw connection name was parsed correctly. """
 
-    functions, inputs, connections = parsed_xfmv
+    functions, connections = parsed_xfmv
 
     connection_raw_names = ['2|Connection CB|1|C', '1|Connection BA|0|I',
                             '1|Connection BD|3|I', '2|Connection CD|3|T',
@@ -100,7 +99,7 @@ def test_connection_raw_name(parsed_xfmv):
 def test_connection_names(parsed_xfmv):
     """ Test that connection data was parsed correctly. """
 
-    functions, inputs, connections = parsed_xfmv
+    functions, connections = parsed_xfmv
 
     connection_raw_names = ['2|Connection CB|1|C', '1|Connection BA|0|I',
                             '1|Connection BD|3|I', '2|Connection CD|3|T',

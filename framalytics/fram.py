@@ -35,7 +35,7 @@ class FRAM:
 
         fram_data = parse_xfmv(filename)
         self._function_data = fram_data[0]
-        self._connection_data = fram_data[2]
+        self._connection_data = fram_data[1]
 
         self.visualizer = Visualizer()
         self.functions_by_id = {}
