@@ -250,8 +250,8 @@ def parse_xfmv(filename: str) -> tuple[pd.DataFrame, pd.DataFrame]:
         }
         connection_data.append(connection_element_data)
 
-    # if len(aspect_data) == 0:
-    connection_data = synthesize_connections(root, df_function)
+    if len(connection_data) == 0:
+        connection_data = synthesize_connections(root, df_function)
 
     df_connection = pd.DataFrame(connection_data)
 
