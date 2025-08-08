@@ -5,9 +5,8 @@ import pytest
 
 from framalytics.xfmv_parser import parse_xfmv
 
-
 @pytest.fixture
-def simple_xfmv() -> str:
+def simple_xfmv():
     file = Path(__file__).parent / 'resources/simple_fram.xfmv'
     return str(file)
 

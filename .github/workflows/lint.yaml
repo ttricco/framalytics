@@ -50,8 +50,10 @@ jobs:
 
       - name: flake8
         run: |
+          flake8 --version
           flake8 --config .github/linters/.flake8 framalytics/
 
       - name: mypy
         run: |
+          mypy --version
           mypy --config-file .github/linters/.mypy.ini framalytics/
