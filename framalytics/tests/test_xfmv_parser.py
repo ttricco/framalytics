@@ -142,7 +142,7 @@ def test_connection_names(parsed_xfmv: tuple[pd.DataFrame,
 
     assert outputs == expected_outputs
 
-    tpm = connection_data[['Name', 'toFn']]
+    tmp = connection_data[['Name', 'toFn']]
     expected_toFns = tmp.set_index('Name')['toFn'].to_dict()
     tmp = connections[['Name', 'toFn']]
     toFns = tmp.set_index('Name')['toFn'].to_dict()

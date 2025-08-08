@@ -36,6 +36,7 @@ jobs:
         env:
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PYTHON_PIP_REQUIREMENTS: requirements-dev.txt
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_PYTHON_FLAKE8: true
           VALIDATE_PYTHON_MYPY: true
