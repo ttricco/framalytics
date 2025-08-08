@@ -36,7 +36,7 @@ jobs:
         env:
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PYTHON_PIP_INSTALL: >
+          PYTHON_MYPY_PIP_INSTALL: >
             pytest matplotlib
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_PYTHON_FLAKE8: true
