@@ -47,7 +47,7 @@ class Visualizer:
     def _draw_function_nodes(self,
                              function_data: pd.DataFrame,
                              connection_data: pd.DataFrame,
-                             ax: Axes):
+                             ax: Axes) -> None:
         """
         Draw FRAM functions onto a Matplotlib axes.
 
@@ -122,7 +122,7 @@ class Visualizer:
     def _draw_aspects(self,
                       node_x_coords: pd.Series | list,
                       node_y_coords: pd.Series | list,
-                      ax: Axes):
+                      ax: Axes) -> None:
         """
         Draw the six aspects around each function.
 
@@ -234,7 +234,7 @@ class Visualizer:
                             connection_data: pd.DataFrame,
                             ax: Axes,
                             real_connections: dict | None = None,
-                            appearance: str | None = None):
+                            appearance: str | None = None) -> None:
         """
         Draw connections between functions.
 

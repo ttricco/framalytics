@@ -7,32 +7,32 @@ import framalytics
 
 
 @pytest.fixture
-def simple_xfmv():
+def simple_xfmv() -> str:
     file = Path(__file__).parent / 'resources/simple_fram.xfmv'
     return str(file)
 
 
 @pytest.fixture
-def fram(simple_xfmv):
+def fram(simple_xfmv: str) -> framalytics.FRAM:
     return framalytics.FRAM(simple_xfmv)
 
 
-def test_number_of_connections(fram):
+def test_number_of_connections(fram: framalytics.FRAM) -> None:
     assert fram.number_of_connections() == 8
 
 
-def test_number_of_functions(fram):
+def test_number_of_functions(fram: framalytics.FRAM) -> None:
     assert fram.number_of_functions() == 6
 
 
-def test_get_functions(fram):
+def test_get_functions(fram: framalytics.FRAM) -> None:
     functions = {0: 'Function A', 1: 'Function B', 2: 'Function C',
                  3: 'Function D', 4: 'Function E', 5: 'Function F'}
 
     assert fram.get_functions() == functions
 
 
-def test_get_connections(fram):
+def test_get_connections(fram: framalytics.FRAM) -> None:
     expected_names = ['Connection CB', 'Connection BA', 'Connection BD',
                       'Connection CD', 'Connection CE', 'Connection AB',
                       'Connection FE', 'Connection DE']
@@ -47,29 +47,29 @@ def test_get_connections(fram):
 
     assert set(connections.Name) == set(expected_names)
 
-    expected_fromFns = expected_connections[['Name', 'fromFn']]
-    expected_fromFns = expected_fromFns.set_index('Name')['fromFn'].to_dict()
-    fromFns = connections[['Name', 'fromFn']]
-    fromFns = fromFns.set_index('Name')['fromFn'].to_dict()
+    tmp = expected_connections[['Name', 'fromFn']]
+    expected_fromFns = tmp.set_index('Name')['fromFn'].to_dict()
+    tmp = connections[['Name', 'fromFn']]
+    fromFns = tmp.set_index('Name')['fromFn'].to_dict()
 
     assert fromFns == expected_fromFns
 
-    expected_toFns = expected_connections[['Name', 'toFn']]
-    expected_toFns = expected_toFns.set_index('Name')['toFn'].to_dict()
-    toFns = connections[['Name', 'toFn']]
-    toFns = toFns.set_index('Name')['toFn'].to_dict()
+    tmp = expected_connections[['Name', 'toFn']]
+    expected_toFns = tmp.set_index('Name')['toFn'].to_dict()
+    tmp = connections[['Name', 'toFn']]
+    toFns = tmp.set_index('Name')['toFn'].to_dict()
 
     assert toFns == expected_toFns
 
-    expected_aspects = expected_connections[['Name', 'toAspect']]
-    expected_aspects = expected_aspects.set_index('Name')['toAspect'].to_dict()
-    aspects = connections[['Name', 'toAspect']]
-    aspects = aspects.set_index('Name')['toAspect'].to_dict()
+    tmp = expected_connections[['Name', 'toAspect']]
+    expected_aspects = tmp.set_index('Name')['toAspect'].to_dict()
+    tmp = connections[['Name', 'toAspect']]
+    aspects = tmp.set_index('Name')['toAspect'].to_dict()
 
     assert aspects == expected_aspects
 
 
-def test_get_function_name(fram):
+def test_get_function_name(fram: framalytics.FRAM) -> None:
     assert fram.get_function_name(0) == 'Function A'
     assert fram.get_function_name(1) == 'Function B'
     assert fram.get_function_name(2) == 'Function C'
@@ -78,7 +78,7 @@ def test_get_function_name(fram):
     assert fram.get_function_name(5) == 'Function F'
 
 
-def test_get_function_id(fram):
+def test_get_function_id(fram: framalytics.FRAM) -> None:
     assert fram.get_function_id('Function A') == 0
     assert fram.get_function_id('Function B') == 1
     assert fram.get_function_id('Function C') == 2
@@ -94,7 +94,9 @@ def test_get_function_id(fram):
                           ('C', 'get_function_controls'),
                           ('P', 'get_function_preconditions'),
                           ('R', 'get_function_resources')])
-def test_get_connection_sources(fram, aspect, get_function):
+def test_get_connection_sources(fram: framalytics.FRAM,
+                                aspect: str,
+                                get_function: str) -> None:
     """
     get_function_* correctly return the functions connected to each aspect.
 

@@ -7,17 +7,17 @@ from framalytics.xfmv_parser import parse_xfmv
 
 
 @pytest.fixture
-def simple_xfmv():
+def simple_xfmv() -> str:
     file = Path(__file__).parent / 'resources/simple_fram.xfmv'
     return str(file)
 
 
 @pytest.fixture()
-def parsed_xfmv(simple_xfmv):
+def parsed_xfmv(simple_xfmv: str) -> tuple[pd.DataFrame, pd.DataFrame]:
     return parse_xfmv(simple_xfmv)
 
 
-def test_return_types(parsed_xfmv):
+def test_return_types(parsed_xfmv: tuple[pd.DataFrame, pd.DataFrame]) -> None:
     """ Parsing xfmv should return 3 DataFrames. """
 
     functions, connections = parsed_xfmv
@@ -26,7 +26,7 @@ def test_return_types(parsed_xfmv):
     assert isinstance(connections, pd.DataFrame)
 
 
-def test_function_data(parsed_xfmv):
+def test_function_data(parsed_xfmv: tuple[pd.DataFrame, pd.DataFrame]) -> None:
     """ Test that function names, ids and types were parsed correctly. """
 
     functions, connections = parsed_xfmv
@@ -41,18 +41,19 @@ def test_function_data(parsed_xfmv):
     assert len(functions) == 6
     assert set(functions.IDName.unique()) == set(expected_names)
 
-    ids = functions[['IDName', 'IDNr']]
-    ids = ids.set_index('IDName')['IDNr'].to_dict()
+    tmp = functions[['IDName', 'IDNr']]
+    ids = tmp.set_index('IDName')['IDNr'].to_dict()
 
     assert ids == expected_ids
 
-    types = functions[['IDName', 'FunctionType']]
-    types = types.set_index('IDName')['FunctionType'].to_dict()
+    tmp = functions[['IDName', 'FunctionType']]
+    types = tmp.set_index('IDName')['FunctionType'].to_dict()
 
     assert types == expected_types
 
 
-def test_function_positions(parsed_xfmv):
+def test_function_positions(parsed_xfmv: tuple[pd.DataFrame,
+                                               pd.DataFrame]) -> None:
     """ Test that function positions were parsed correctly. """
 
     functions, connections = parsed_xfmv
@@ -82,7 +83,8 @@ def test_function_positions(parsed_xfmv):
     assert y == pytest.approx(186.66, abs=1e-2)
 
 
-def test_connection_raw_name(parsed_xfmv):
+def test_connection_raw_name(parsed_xfmv: tuple[pd.DataFrame,
+                                                pd.DataFrame]) -> None:
     """ Test that the raw connection name was parsed correctly. """
 
     functions, connections = parsed_xfmv
@@ -93,10 +95,11 @@ def test_connection_raw_name(parsed_xfmv):
                             '5|Connection FE|4|R', '3|Connection DE|4|P']
 
     assert len(connections) == 8
-    assert set(connections.Name.unique()) == set(connection_raw_names)
+    assert set(connections['Name'].unique()) == set(connection_raw_names)
 
 
-def test_connection_names(parsed_xfmv):
+def test_connection_names(parsed_xfmv: tuple[pd.DataFrame,
+                                             pd.DataFrame]) -> None:
     """ Test that connection data was parsed correctly. """
 
     functions, connections = parsed_xfmv
@@ -118,30 +121,30 @@ def test_connection_names(parsed_xfmv):
                                     'outputFn': connection_outputFns,
                                     'toFn': connection_toFns})
 
-    expected_names = connection_data[['Name', 'parsed_name']]
-    expected_names = expected_names.set_index('Name')['parsed_name'].to_dict()
-    names = connections[['Name', 'parsed_name']]
-    names = names.set_index('Name')['parsed_name'].to_dict()
+    tmp = connection_data[['Name', 'parsed_name']]
+    expected_names = tmp.set_index('Name')['parsed_name'].to_dict()
+    tmp = connections[['Name', 'parsed_name']]
+    names = tmp.set_index('Name')['parsed_name'].to_dict()
 
     assert names == expected_names
 
-    expected_aspects = connection_data[['Name', 'toAspect']]
-    expected_aspects = expected_aspects.set_index('Name')['toAspect'].to_dict()
-    aspects = connections[['Name', 'toAspect']]
-    aspects = aspects.set_index('Name')['toAspect'].to_dict()
+    tmp = connection_data[['Name', 'toAspect']]
+    expected_aspects = tmp.set_index('Name')['toAspect'].to_dict()
+    tmp = connections[['Name', 'toAspect']]
+    aspects = tmp.set_index('Name')['toAspect'].to_dict()
 
     assert aspects == expected_aspects
 
-    expected_outputs = connection_data[['Name', 'outputFn']]
-    expected_outputs = expected_outputs.set_index('Name')['outputFn'].to_dict()
-    outputs = connections[['Name', 'outputFn']]
-    outputs = outputs.set_index('Name')['outputFn'].to_dict()
+    tmp = connection_data[['Name', 'outputFn']]
+    expected_outputs = tmp.set_index('Name')['outputFn'].to_dict()
+    tmp = connections[['Name', 'outputFn']]
+    outputs = tmp.set_index('Name')['outputFn'].to_dict()
 
     assert outputs == expected_outputs
 
-    expected_toFns = connection_data[['Name', 'toFn']]
-    expected_toFns = expected_toFns.set_index('Name')['toFn'].to_dict()
-    toFns = connections[['Name', 'toFn']]
-    toFns = toFns.set_index('Name')['toFn'].to_dict()
+    tmp = connection_data[['Name', 'toFn']]
+    expected_toFns = tmp.set_index('Name')['toFn'].to_dict()
+    tmp = connections[['Name', 'toFn']]
+    toFns = tmp.set_index('Name')['toFn'].to_dict()
 
     assert toFns == expected_toFns
