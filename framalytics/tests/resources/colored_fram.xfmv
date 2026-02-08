@@ -1,0 +1,259 @@
+<?xml version='1.0' encoding='utf-8'?>
+<FM Version="0,0,2,0">
+  <Functions colour_t0="-1" colour_t1="0" colour_t2="0.5" colour_t3="1" colour_t4="2" c_t0_value="0x40cfff" c_t2_value="0xffff00" c_t4_value="0xf00000" colour_p0="-1" colour_p1="0" colour_p2="0.5" colour_p3="1" colour_p4="2" c_p0_value="0x40cfff" c_p2_value="0xffff00" c_p4_value="0xf00000" tracer_t="" tracer_p="">
+    <Function fnStyle="2" Tp="-1" Pp="-1" x="414.65" y="249.8" fnType="2" Kt="" Kp="">
+      <IDNr>0</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>B4</IDName>
+      <Description>Description of B4</Description>
+    </Function>
+    <Function fnStyle="2" Tp="-1" Pp="-1" x="136.6" y="159.7" fnType="2" Kt="" Kp="">
+      <IDNr>1</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>B1</IDName>
+      <Description></Description>
+    </Function>
+    <Function fnStyle="2" Tp="-1" Pp="-1" x="31.55" y="59.05" fnType="1" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>2</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>H1</IDName>
+      <Description></Description>
+    </Function>
+    <Function fnStyle="2" Tp="-1" Pp="-1" x="24.5" y="254.15" fnType="1" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>3</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>H2</IDName>
+      <Description></Description>
+    </Function>
+    <Function fnStyle="2" Tp="-1" Pp="-1" x="22.3" y="389.95" fnType="1" Kt="" Kp="" style="blue" color="108251">
+      <IDNr>4</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>H3</IDName>
+      <Description></Description>
+    </Function>
+    <Function fnStyle="2" Tp="-1" Pp="-1" x="512.800048828125" y="197.5" Kt="" Kp="" style="yellow" color="12236583">
+      <IDNr>5</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>TOP</IDName>
+      <Description></Description>
+    </Function>
+    <Function fnStyle="2" Tp="-1" Pp="-1" x="194.25" y="379.9" Kt="" Kp="">
+      <IDNr>6</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>B5</IDName>
+      <Description></Description>
+    </Function>
+    <Function fnStyle="2" Tp="-1" Pp="-1" x="238.75" y="97.1" Kt="" Kp="">
+      <IDNr>7</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>B2</IDName>
+      <Description></Description>
+    </Function>
+    <Function fnStyle="2" Tp="-1" Pp="-1" x="303.2" y="194.85" Kt="" Kp="">
+      <IDNr>8</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>B3</IDName>
+      <Description></Description>
+    </Function>
+    <Function fnStyle="2" Tp="-1" Pp="-1" x="829.1499633789063" y="69.90003967285159" Kt="" Kp="" style="red" color="15007744">
+      <IDNr>9</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>C1</IDName>
+      <Description></Description>
+    </Function>
+    <Function fnStyle="2" Tp="-1" Pp="-1" x="853.1499633789063" y="280.90008544921875" style="red" color="15007744" Kt="" Kp="">
+      <IDNr>10</IDNr>
+      <FunctionType>2</FunctionType>
+      <IDName>C2</IDName>
+      <Description></Description>
+    </Function>
+    <Function fnStyle="2" Tp="-1" Pp="-1" x="727.15" y="281" Kt="" Kp="">
+      <IDNr>11</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>B7</IDName>
+      <Description></Description>
+    </Function>
+    <Function fnStyle="2" Tp="-1" Pp="-1" x="628.15" y="173.05" Kt="" Kp="">
+      <IDNr>12</IDNr>
+      <FunctionType>0</FunctionType>
+      <IDName>B6</IDName>
+      <Description></Description>
+    </Function>
+  </Functions>
+  <Controls />
+  <Inputs>
+    <Input orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Output H1</IDName>
+      <FunctionIDNr>1</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>9</IDNr>
+      <IDName>Output B5</IDName>
+      <FunctionIDNr>0</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>10</IDNr>
+      <IDName>Output H2</IDName>
+      <FunctionIDNr>1</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>11</IDNr>
+      <IDName>Output B4</IDName>
+      <FunctionIDNr>5</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>12</IDNr>
+      <IDName>Output H3</IDName>
+      <FunctionIDNr>6</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>13</IDNr>
+      <IDName>Output B1</IDName>
+      <FunctionIDNr>7</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>14</IDNr>
+      <IDName>Output B3</IDName>
+      <FunctionIDNr>0</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>15</IDNr>
+      <IDName>Output B2</IDName>
+      <FunctionIDNr>8</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>16</IDNr>
+      <IDName>Output B6</IDName>
+      <FunctionIDNr>9</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>17</IDNr>
+      <IDName>Output B7</IDName>
+      <FunctionIDNr>10</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>18</IDNr>
+      <IDName>Output TOP 1</IDName>
+      <FunctionIDNr>12</FunctionIDNr>
+    </Input>
+    <Input orphan="">
+      <IDNr>19</IDNr>
+      <IDName>Output B6</IDName>
+      <FunctionIDNr>11</FunctionIDNr>
+    </Input>
+  </Inputs>
+  <Outputs>
+    <Output orphan="">
+      <IDNr>6</IDNr>
+      <IDName>Output H1</IDName>
+      <FunctionIDNr>2</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>0</IDNr>
+      <IDName>Output H2</IDName>
+      <FunctionIDNr>3</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>1</IDNr>
+      <IDName>Output B1</IDName>
+      <FunctionIDNr>1</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>2</IDNr>
+      <IDName>Output H3</IDName>
+      <FunctionIDNr>4</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>3</IDNr>
+      <IDName>Output B4</IDName>
+      <FunctionIDNr>0</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>4</IDNr>
+      <IDName>Output B5</IDName>
+      <FunctionIDNr>6</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>5</IDNr>
+      <IDName>Output B2</IDName>
+      <FunctionIDNr>7</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>6</IDNr>
+      <IDName>Output B3</IDName>
+      <FunctionIDNr>8</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>7</IDNr>
+      <IDName>Output TOP 1</IDName>
+      <FunctionIDNr>5</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>9</IDNr>
+      <IDName>Output B6</IDName>
+      <FunctionIDNr>12</FunctionIDNr>
+    </Output>
+    <Output orphan="">
+      <IDNr>10</IDNr>
+      <IDName>Output B7</IDName>
+      <FunctionIDNr>11</FunctionIDNr>
+    </Output>
+  </Outputs>
+  <Preconditions />
+  <Resources />
+  <Times />
+  <Playbacks>
+    <Playback type="2">END</Playback>
+  </Playbacks>
+  <Aspects scaleFunction="1" scaleAspect="1" scaleZoom="0.9">
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="0" toFn="5">
+      <Name>0|Output B4|5|I</Name>
+      <Curve>508.150|299.800|518.800|247.500|516.138|247.500|510.813|299.800|513.475|273.650</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="1" toFn="7">
+      <Name>1|Output B1|7|I</Name>
+      <Curve>230.100|209.700|244.750|147.100|241.088|147.100|233.762|209.700|237.425|178.400</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="2" toFn="1">
+      <Name>2|Output H1|1|I</Name>
+      <Curve>125.050|109.050|142.600|209.700|138.212|209.700|129.437|109.050|133.825|159.375</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="3" toFn="1">
+      <Name>3|Output H2|1|I</Name>
+      <Curve>118.000|304.150|142.600|209.700|136.450|209.700|124.150|304.150|130.300|256.925</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="4" toFn="6">
+      <Name>4|Output H3|6|I</Name>
+      <Curve>115.800|439.950|200.250|429.900|179.138|429.900|136.913|439.950|158.025|434.925</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="5" toFn="12">
+      <Name>5|Output TOP 1|12|I</Name>
+      <Curve>606.300|247.500|634.150|223.050|627.188|223.050|613.263|247.500|620.225|235.275</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="6" toFn="0">
+      <Name>6|Output B5|0|I</Name>
+      <Curve>287.750|429.900|420.650|299.800|387.425|299.800|320.975|429.900|354.200|364.850</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="7" toFn="8">
+      <Name>7|Output B2|8|I</Name>
+      <Curve>332.250|147.100|309.200|244.850|289.200|195.975|352.250|195.975|320.725|195.975</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="8" toFn="0">
+      <Name>8|Output B3|0|I</Name>
+      <Curve>396.700|244.850|420.650|299.800|414.662|299.800|402.688|244.850|408.675|272.325</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="11" toFn="10">
+      <Name>11|Output B7|10|I</Name>
+      <Curve>820.650|331.000|859.100|330.900|849.487|330.900|830.263|331.000|839.875|330.950</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="12" toFn="9">
+      <Name>12|Output B6|9|I</Name>
+      <Curve>721.650|223.050|835.100|119.900|806.737|119.900|750.013|223.050|778.375|171.475</Curve>
+    </Aspect>
+    <Aspect x="0" y="0" directionX="from" directionY="to" notGroup="true" outputFn="12" toFn="11">
+      <Name>12|Output B6|11|I</Name>
+      <Curve>721.650|223.050|733.150|331.000|730.275|331.000|724.525|223.050|727.400|277.025</Curve>
+    </Aspect>
+  </Aspects>
+</FM>

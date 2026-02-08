@@ -18,3 +18,18 @@ Real data can also be integrated with the FRAM model visualizations.
 
 Framalytics documentation is hosted on 
 [https://framalytics.readthedocs.io](https://framalytics.readthedocs.io).
+
+## Tests
+
+Install test dependencies and run the test suite:
+
+```bash
+python -m venv .venv
+# On macOS/Linux
+source .venv/bin/activate
+# On Windows
+# .venv\Scripts\activate
+
+pip install -r test-requirements.txt
+pytest
+```

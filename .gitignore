@@ -11,3 +11,8 @@ docs/api
 venv
 .env
 env
+
+# Pytest cache
+.pytest_cache
+tests/__pycache__
+*.pyc
