@@ -40,10 +40,14 @@ class FRAM:
         self.visualizer = Visualizer()
         self.functions_by_id = {}
         self.functions_by_name = {}
+        self.functions_descriptions_by_id = {}
 
         for index, row in self._function_data.iterrows():
             self.functions_by_id.update({int(row.IDNr): row.IDName})
             self.functions_by_name.update({row.IDName: int(row.IDNr)})
+            self.functions_descriptions_by_id.update(
+                {int(row.IDNr): row.Description}
+            )
 
     def _get_function_metadata(self) -> pd.DataFrame:
         """
@@ -192,6 +196,31 @@ class FRAM:
             raise ValueError("No such function ID exists.")
 
         return function_name
+
+    def get_function_description(self,
+                                 id: int) -> str:
+        """
+        Return the corresponding function description given a function ID.
+
+        Parameters
+        ----------
+        id : int
+            The ID (integer) of a function.
+
+        Returns
+        -------
+        str
+            The function description that corresponds to the given function ID.
+        """
+        if not isinstance(id, int):
+            raise ValueError("The integer function ID should be used.")
+
+        function_description = self.functions_descriptions_by_id.get(id)
+
+        if function_description is None:
+            raise ValueError("No such function ID exists.")
+
+        return function_description
 
     def get_function_inputs(self,
                             function: str | int) -> dict:

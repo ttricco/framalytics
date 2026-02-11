@@ -12,6 +12,12 @@ def simple_xfmv() -> str:
     return str(file)
 
 
+@pytest.fixture
+def colored_xfmv() -> str:
+    file = Path(__file__).parent / 'resources/colored_fram.xfmv'
+    return str(file)
+
+
 @pytest.fixture()
 def parsed_xfmv(simple_xfmv: str) -> tuple[pd.DataFrame, pd.DataFrame]:
     return parse_xfmv(simple_xfmv)
@@ -148,3 +154,20 @@ def test_connection_names(parsed_xfmv: tuple[pd.DataFrame,
     toFns = tmp.set_index('Name')['toFn'].to_dict()
 
     assert toFns == expected_toFns
+
+
+def test_function_description(colored_xfmv: str) -> None:
+    """Test that function descriptions are parsed correctly."""
+    
+    functions, connections = parse_xfmv(colored_xfmv)
+    
+    # Check that Description column exists
+    assert 'Description' in functions.columns
+    
+    # Check that function with IDNr 0 has the correct description
+    function_0 = functions[functions['IDNr'] == 0]
+    assert len(function_0) == 1
+    assert function_0['Description'].values[0] == "Description of B4"
+    
+    # Verify the function name is correct
+    assert function_0['IDName'].values[0] == "B4"

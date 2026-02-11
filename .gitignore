@@ -5,3 +5,14 @@
 *.pdf
 docs/_build
 docs/api
+
+# Virtual environment
+.venv
+venv
+.env
+env
+
+# Pytest cache
+.pytest_cache
+tests/__pycache__
+*.pyc
