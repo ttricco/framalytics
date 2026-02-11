@@ -14,7 +14,7 @@ def simple_xfmv() -> str:
 
 @pytest.fixture
 def colored_xfmv() -> str:
-    file = Path(__file__).parent / 'resources/colored_fram.xfmv'
+    file = Path(__file__).parent / 'resources/coloured_fram.xfmv'
     return str(file)
 
 

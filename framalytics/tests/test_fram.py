@@ -13,8 +13,19 @@ def simple_xfmv() -> str:
 
 
 @pytest.fixture
+def coloured_xfmv() -> str:
+    file = Path(__file__).parent / 'resources/coloured_fram.xfmv'
+    return str(file)
+
+
+@pytest.fixture
 def fram(simple_xfmv: str) -> framalytics.FRAM:
     return framalytics.FRAM(simple_xfmv)
+
+
+@pytest.fixture
+def colored_fram(coloured_xfmv: str) -> framalytics.FRAM:
+    return framalytics.FRAM(coloured_xfmv)
 
 
 def test_number_of_connections(fram: framalytics.FRAM) -> None:
@@ -87,6 +98,10 @@ def test_get_function_id(fram: framalytics.FRAM) -> None:
     assert fram.get_function_id('Function F') == 5
 
 
+@pytest.mark.parametrize(
+    "fram_fixture",
+    ["fram", "colored_fram"]
+)
 @pytest.mark.parametrize("aspect, get_function",
                          [('I', 'get_function_inputs'),
                           ('O', 'get_function_outputs'),
@@ -94,7 +109,8 @@ def test_get_function_id(fram: framalytics.FRAM) -> None:
                           ('C', 'get_function_controls'),
                           ('P', 'get_function_preconditions'),
                           ('R', 'get_function_resources')])
-def test_get_connection_sources(fram: framalytics.FRAM,
+def test_get_connection_sources(request: pytest.FixtureRequest,
+                                fram_fixture: str,
                                 aspect: str,
                                 get_function: str) -> None:
     """
@@ -104,6 +120,7 @@ def test_get_connection_sources(fram: framalytics.FRAM,
     is parametrized so that it runs per aspect. The getattr() calls the
     associated get_function_* method.
     """
+    fram = request.getfixturevalue(fram_fixture)
 
     functions = fram.get_functions()
     connections = fram.get_connections()
@@ -119,24 +136,17 @@ def test_get_connection_sources(fram: framalytics.FRAM,
             assert fns.get(expected_fn) is not None
 
 
-def test_visualize(fram: framalytics.FRAM) -> None:
+@pytest.mark.parametrize(
+    "fram_fixture",
+    ["fram", "colored_fram"]
+)
+def test_visualize(request: pytest.FixtureRequest,
+                   fram_fixture: str) -> None:
     """Test that visualize method executes without errors."""
+
+    fram = request.getfixturevalue(fram_fixture)
+
     # Should not raise any exceptions
     ax = fram.visualize()
     # Verify it returns a matplotlib axes object
-    assert ax is not None
-
-
-def test_visualize_colored_fram() -> None:
-    """Test visualization of colored_fram.xfmv file with color attributes."""
-    xfmv_file = Path(__file__).parent / 'resources' / 'colored_fram.xfmv'
-
-    model = framalytics.FRAM(str(xfmv_file))
-
-    # Verify model loads correctly
-    assert model.number_of_functions() > 0
-    assert model.number_of_connections() >= 0
-
-    # Visualize should not raise any exceptions (handles NaN color values)
-    ax = model.visualize()
     assert ax is not None
