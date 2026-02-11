@@ -34,7 +34,7 @@ class Visualizer:
         color = "black"
         lw = 0.5
 
-        # Check for both None and NaN values (NaN can occur on Windows when attribute is missing)
+        # Check for both None and NaN values (NaN can occur on Windows)
         if hex_value is not None and not pd.isna(hex_value):
             color = hex(int(hex_value))
             color = color[2:]

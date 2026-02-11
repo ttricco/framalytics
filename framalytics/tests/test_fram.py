@@ -130,36 +130,13 @@ def test_visualize(fram: framalytics.FRAM) -> None:
 def test_visualize_colored_fram() -> None:
     """Test visualization of colored_fram.xfmv file with color attributes."""
     xfmv_file = Path(__file__).parent / 'resources' / 'colored_fram.xfmv'
-    
+
     model = framalytics.FRAM(str(xfmv_file))
-    
+
     # Verify model loads correctly
     assert model.number_of_functions() > 0
     assert model.number_of_connections() >= 0
-    
+
     # Visualize should not raise any exceptions (handles NaN color values)
-    ax = model.visualize()
-    assert ax is not None
-
-
-def test_visualize(fram: framalytics.FRAM) -> None:
-    """Test that visualize method executes without errors."""
-    # Should not raise any exceptions
-    ax = fram.visualize()
-    # Verify it returns a matplotlib axes object
-    assert ax is not None
-
-
-def test_visualize_colored_fram() -> None:
-    """Test visualization of colored_fram.xfmv file."""
-    xfmv_file = Path(__file__).parent / 'resources' / 'colored_fram.xfmv'
-    
-    model = framalytics.FRAM(str(xfmv_file))
-    
-    # Verify model loads correctly
-    assert model.number_of_functions() > 0
-    assert model.number_of_connections() >= 0
-    
-    # Visualize should not raise any exceptions
     ax = model.visualize()
     assert ax is not None
